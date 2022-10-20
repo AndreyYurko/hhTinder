@@ -21,3 +21,16 @@ def get_next_user(conn):
     user_data = execute_sql_query(conn, message_template_select_user.format(id = random_id))
     user = User(user_data[0])
     return user
+
+def post_like_from_job(job_id, worker_id):
+    # Здесь точно так же надо написать sql запрос в бд который бы поставил лайк в соответствующую таблицу,
+    # пока что здесь будет стоять заглушка
+    return True
+
+def post_like_from_worker(job_id, worker_id):
+    # аналогично
+    return True
+
+def get_liked_workers(job_id):
+    # это уже второстепенная задача, сперва надо создать таблицы для лайков от работников к работам и наоборот
+    return None

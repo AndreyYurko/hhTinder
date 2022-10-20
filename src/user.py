@@ -10,3 +10,7 @@ class User():
         self.cr_user = user_data[7]
         self.cr_date = user_data[8]
         self.upd_date = user_data[9]
+
+    def to_json(self):
+        # потом можно будет больше полей дописать, пока не знаю как это будет смотреться на стороны мобилки
+        return {self.id, self.email, self.name, self.passwd}
