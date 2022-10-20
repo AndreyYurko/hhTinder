@@ -1,6 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/registred_user_nav_graph">
+    android:id="@+id/registered_user_nav_graph"
+    app:startDestination="@id/mainFragment">
+
+    <fragment
+        android:id="@+id/mainFragment"
+        android:name="com.andreyyurko.hhtinder.ui.main.MainFragment"
+        android:label="MainFragment">
+        <action
+            android:id="@+id/action_mainFragment_to_backsideMainPage"
+            app:destination="@id/backsideMainPage" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/backsideMainPage"
+        android:name="com.andreyyurko.hhtinder.ui.backsidemainpage.BacksideMainPageFragment"
+        android:label="BacksideMainPage">
+    </fragment>
 
 </navigation>

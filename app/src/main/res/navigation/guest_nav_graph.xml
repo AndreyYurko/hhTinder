@@ -1,6 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/guest_nav_graph">
+    android:id="@+id/guest_nav_graph"
+    app:startDestination="@id/entranceFragment">
+
+    <fragment
+        android:id="@+id/entranceFragment"
+        android:name="com.andreyyurko.hhtinder.ui.entrance.EntranceFragment"
+        android:label="EntranceFragment">
+        <action
+            android:id="@+id/action_entranceFragment_to_registrationVariantsFragment"
+            app:destination="@id/registrationVariantsFragment" />
+        <action
+            android:id="@+id/action_entranceFragment_to_logInFragment"
+            app:destination="@id/logInFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/registrationApplicantFragment"
+        android:name="com.andreyyurko.hhtinder.ui.registrationapplicant.RegistrationApplicantFragment"
+        android:label="RegistrationApplicantFragment">
+    </fragment>
+
+    <fragment
+        android:id="@+id/registrationEmployerFragment"
+        android:name="com.andreyyurko.hhtinder.ui.registrationemployer.RegistrationEmployerFragment"
+        android:label="RegistrationEmployerFragment">
+    </fragment>
+
+    <fragment
+        android:id="@+id/registrationVariantsFragment"
+        android:name="com.andreyyurko.hhtinder.ui.registrationvariants.RegistrationVariantsFragment"
+        android:label="RegistrationVariantsFragment">
+        <action
+            android:id="@+id/action_registrationVariantsFragment_to_registrationEmployerFragment"
+            app:destination="@id/registrationEmployerFragment" />
+        <action
+            android:id="@+id/action_registrationVariantsFragment_to_registrationApplicantFragment"
+            app:destination="@id/registrationApplicantFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/logInFragment"
+        android:name="com.andreyyurko.hhtinder.ui.login.LogInFragment"
+        android:label="LogInFragment">
+    </fragment>
 
 </navigation>

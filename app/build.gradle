@@ -6,12 +6,12 @@ plugins {
 }
 
 android {
-    compileSdk 32
+    compileSdk 33
 
     defaultConfig {
         applicationId "com.andreyyurko.hhtinder"
         minSdk 25
-        targetSdk 32
+        targetSdk 33
         versionCode 1
         versionName "1.0"
 
@@ -36,6 +36,10 @@ android {
     }
 }
 
+hilt {
+    enableAggregatingTask = true
+}
+
 dependencies {
 
     implementation 'androidx.core:core-ktx:1.7.0'
@@ -54,7 +58,7 @@ dependencies {
     def lifecycleVersion = "2.4.0"
     implementation "androidx.lifecycle:lifecycle-runtime-ktx:$lifecycleVersion"
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycleVersion"
-    implementation 'androidx.activity:activity-ktx:1.5.1'
+    implementation 'androidx.activity:activity-ktx:1.6.0'
     // View binding helper.
     implementation 'com.github.kirich1409:viewbindingpropertydelegate-noreflection:1.5.3'
     // RecyclerView adapter delegates.
@@ -75,4 +79,14 @@ dependencies {
     implementation "com.google.dagger:hilt-android:$hiltVersion"
     kapt "com.google.dagger:hilt-compiler:$hiltVersion"
     implementation "androidx.hilt:hilt-navigation-fragment:1.0.0"
+
+    def retrofitVersion = "2.9.0"
+    def okhttpVersion = '5.0.0-alpha.3'
+    implementation "com.squareup.retrofit2:retrofit:$retrofitVersion"
+    implementation "com.squareup.retrofit2:converter-moshi:$retrofitVersion"
+    implementation "com.squareup.okhttp3:okhttp:$okhttpVersion"
+    implementation "com.squareup.okhttp3:okhttp-tls:$okhttpVersion"
+    implementation "com.squareup.okhttp3:logging-interceptor:5.0.0-alpha.3"
+
+    implementation("ru.gildor.coroutines:kotlin-coroutines-okhttp:1.0")
 }

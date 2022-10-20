@@ -15,9 +15,9 @@
         android:layout_marginTop="300dp"
         android:paddingHorizontal="10dp"
         android:textAlignment="center"
-        android:text="username"
+        android:hint="username"
         android:background="@drawable/rounded_edittext"
-        android:textColor="@color/black_transparent"
+        android:textColor="@color/black"
         android:textStyle="bold"
         android:textSize="18sp">
     </EditText>
@@ -32,9 +32,9 @@
         android:layout_marginTop="12dp"
         android:paddingHorizontal="10dp"
         android:textAlignment="center"
-        android:text="password"
+        android:hint="password"
         android:background="@drawable/rounded_edittext"
-        android:textColor="@color/black_transparent"
+        android:textColor="@color/black"
         android:textStyle="bold"
         android:textSize="18sp">
     </EditText>

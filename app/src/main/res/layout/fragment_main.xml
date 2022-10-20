@@ -5,17 +5,93 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/design_default_color_primary">
 
-<ImageButton
-    android:layout_width="296dp"
-    android:layout_height="296dp"
-    android:layout_marginTop="84dp"
-    android:adjustViewBounds="true"
-    android:scaleType="centerCrop"
-    app:layout_constraintTop_toTopOf="parent"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintEnd_toEndOf="parent"
-    android:background="@drawable/rounded_image"
-    />
+    <RelativeLayout
+        android:id="@+id/logoRelativeLayout"
+        android:layout_width="296dp"
+        android:layout_height="296dp"
+        android:layout_marginTop="84dp"
+        android:adjustViewBounds="true"
+        android:scaleType="centerCrop"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+    </RelativeLayout>
+
+    <ImageView
+        android:id="@+id/iconImageNext"
+        android:layout_width="296dp"
+        android:layout_height="296dp"
+        android:background="@drawable/rounded_image"
+        android:layout_marginTop="84dp"
+        android:clipToOutline="true"
+        android:scaleType="centerCrop"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <ImageView
+        android:id="@+id/iconImageShown"
+        android:layout_width="296dp"
+        android:layout_height="296dp"
+        android:background="@drawable/rounded_image"
+        android:layout_marginTop="84dp"
+        android:clipToOutline="true"
+        android:scaleType="centerCrop"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+
+    <LinearLayout
+        android:id="@+id/titleLinearLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/logoRelativeLayout"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="53dp"
+        android:background="@drawable/oval_title"
+        android:orientation="vertical"
+        android:paddingHorizontal="36dp"
+        android:paddingVertical="8dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="SPbU"
+            android:layout_gravity="center"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textColor="@color/black"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Saint-Petersburg, Russia"
+            android:layout_gravity="center"
+            android:textSize="10sp"
+            android:textStyle="bold"
+            android:textColor="@color/black"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Lecturer. 6 days/week"
+            android:layout_gravity="center"
+            android:textSize="10sp"
+            android:textStyle="bold"
+            android:textColor="@color/black"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="3 days ago"
+            android:layout_gravity="center"
+            android:textSize="10sp"
+            android:textStyle="bold"
+            android:textColor="@color/black"/>
+
+    </LinearLayout>
 
 
 

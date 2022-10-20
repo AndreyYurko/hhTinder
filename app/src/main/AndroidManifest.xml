@@ -3,7 +3,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.andreyyurko.hhtinder">
 
+    <uses-permission android:name="android.permission.INTERNET"/>
+
     <application
+        android:name=".App"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
@@ -12,7 +15,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.HhTinder"
-        tools:targetApi="31">
+        tools:targetApi="33"
+        android:usesCleartextTraffic="true">
         <activity
             android:name=".ui.MainActivity"
             android:exported="true"

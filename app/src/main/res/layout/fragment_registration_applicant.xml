@@ -15,9 +15,9 @@
         android:layout_marginTop="200dp"
         android:paddingHorizontal="10dp"
         android:textAlignment="center"
-        android:text="first name"
+        android:hint="first name"
         android:background="@drawable/rounded_edittext"
-        android:textColor="@color/black_transparent"
+        android:textColor="@color/black"
         android:textStyle="bold"
         android:textSize="18sp">
     </EditText>
@@ -32,9 +32,9 @@
         android:layout_marginTop="12dp"
         android:paddingHorizontal="10dp"
         android:textAlignment="center"
-        android:text="last name"
+        android:hint="last name"
         android:background="@drawable/rounded_edittext"
-        android:textColor="@color/black_transparent"
+        android:textColor="@color/black"
         android:textStyle="bold"
         android:textSize="18sp">
     </EditText>
@@ -49,9 +49,9 @@
         android:layout_marginTop="12dp"
         android:paddingHorizontal="10dp"
         android:textAlignment="center"
-        android:text="username"
+        android:hint="username"
         android:background="@drawable/rounded_edittext"
-        android:textColor="@color/black_transparent"
+        android:textColor="@color/black"
         android:textStyle="bold"
         android:textSize="18sp">
     </EditText>
@@ -66,9 +66,9 @@
         android:layout_marginTop="12dp"
         android:paddingHorizontal="10dp"
         android:textAlignment="center"
-        android:text="password"
+        android:hint="password"
         android:background="@drawable/rounded_edittext"
-        android:textColor="@color/black_transparent"
+        android:textColor="@color/black"
         android:textStyle="bold"
         android:textSize="18sp">
     </EditText>
