@@ -6,7 +6,7 @@ from fastapi import FastAPI
 
 app = FastAPI()  # rest api
 app.type = "00"
-tunnel_, conn_ = connect_db()
+conn_, is_server = connect_db()
 app.state.connection = conn_
 
 
@@ -46,7 +46,7 @@ def Start():
     # add_smthng(conn_)
     # app.state.connection = conn_
     print("ok")
-    uvicorn.run("main:app", host="127.0.0.1", port=8000, log_level="info")
+    uvicorn.run("main:app", host="0.0.0.0", port=8000, log_level="info")
     print("ehm")
 
 

@@ -2,6 +2,7 @@ import psycopg2
 from sshtunnel import SSHTunnelForwarder
 import json
 
+
 def connect_db():
     with open('config.json') as f:
         templates = json.load(f)
@@ -11,30 +12,42 @@ def connect_db():
     database_name = templates["database_name"]
     user_name = templates["user_name"]
     try:
-        tunnel = SSHTunnelForwarder(
-        (ssh_host, 22),
-        ssh_username="root",
-        ssh_password=ssh_password,
-        remote_bind_address=('localhost', 5432))
 
-        tunnel.start()
-        print("SUCCESS: Server connected")
+        local_port = 5432
+        local_host = 'localhost'
+        is_server = True
+
+        if ssh_host != "":
+            tunnel = SSHTunnelForwarder(
+                (ssh_host, 22),
+                ssh_username="root",
+                ssh_password=ssh_password,
+                remote_bind_address=('localhost', 5432))
+
+            tunnel.start()
+            local_port = tunnel.local_bind_port
+            is_server = False
+
+            print("SUCCESS: Server connected")
 
         params = {
             'database': database_name,
             'user': user_name,
             'password': ssh_password,
-            'host': 'localhost',
-            'port': tunnel.local_bind_port
+            'host': local_host,
+            'port': local_port
         }
         conn = psycopg2.connect(**params)
         print("SUCCESS: Database connected")
-        return tunnel, conn
+        return conn, is_server
     except:
-        print("FAILED: Connection failed")   
+        print("FAILED: Connection failed")
+
 
 def close_ssh_tunnel(tunnel):
-    tunnel.close
+    if tunnel is not None:
+        tunnel.close
+
 
 def close_connection(conn):
-    conn.close() 
+    conn.close()
