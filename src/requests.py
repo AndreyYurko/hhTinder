@@ -1,5 +1,5 @@
 import random
-from user import *
+from models import *
 
 def execute_sql_query(conn, query):
     try:
@@ -14,6 +14,7 @@ def execute_sql_query(conn, query):
     except:
         print("FAILED: Query failed")
 
+# get random user
 def get_next_user(conn):
     ids = execute_sql_query(conn, "select id from users")
     random_id = ids[random.randint(0, len(ids) - 1)][0]
@@ -21,6 +22,15 @@ def get_next_user(conn):
     user_data = execute_sql_query(conn, message_template_select_user.format(id = random_id))
     user = User(user_data[0])
     return user
+
+# get random vacancy
+def get_next_vacancy(conn):
+    ids = execute_sql_query(conn, "select id from vacancy")
+    random_id = ids[random.randint(0, len(ids) - 1)][0]
+    message_template_select_vacancy = "select * from vacancy where id = {id}"
+    vacancy_data = execute_sql_query(conn, message_template_select_vacancy.format(id = random_id))
+    vacancy = Vacancy(vacancy_data[0])
+    return vacancy
 
 def post_like_from_job(job_id, worker_id):
     # Здесь точно так же надо написать sql запрос в бд который бы поставил лайк в соответствующую таблицу,
