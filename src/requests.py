@@ -15,23 +15,39 @@ def execute_sql_query(conn, query):
     except:
         print("FAILED: Query failed")
 
+# get user by id
+def get_user(conn, user_id):
+    message_template_select_user = Queries.GER_USER_BY_ID
+    user_data = execute_sql_query(conn, message_template_select_user.format(id = user_id))
+    if len(user_data) == 0:
+        print("No user with id =", user_id)
+        return None
+    else:
+        user = User(user_data[0])
+        return user
+
 # get random user
 def get_next_user(conn):
     ids = execute_sql_query(conn, Queries.GET_USER_IDS)
     random_id = ids[random.randint(0, len(ids) - 1)][0]
-    message_template_select_user = Queries.GER_USER_BY_ID
-    user_data = execute_sql_query(conn, message_template_select_user.format(id = random_id))
-    user = User(user_data[0])
-    return user
+    return get_user(conn, random_id)
+
+# get vacancy by id
+def get_vacancy(conn, vac_id):
+    message_template_select_vacancy = Queries.GET_VACANCY_BY_ID
+    vacancy_data = execute_sql_query(conn, message_template_select_vacancy.format(id = vac_id))
+    if len(vacancy_data) == 0:
+        print("No vacancy with id =", vac_id)
+        return None
+    else:
+        vacancy = Vacancy(vacancy_data[0])
+        return vacancy
 
 # get random vacancy
 def get_next_vacancy(conn):
     ids = execute_sql_query(conn, Queries.GET_VACANCY_IDS)
     random_id = ids[random.randint(0, len(ids) - 1)][0]
-    message_template_select_vacancy = Queries.GET_VACANCY_BY_ID
-    vacancy_data = execute_sql_query(conn, message_template_select_vacancy.format(id = random_id))
-    vacancy = Vacancy(vacancy_data[0])
-    return vacancy
+    return get_vacancy(conn, random_id)
 
 def post_like_from_job(job_id, worker_id):
     # Здесь точно так же надо написать sql запрос в бд который бы поставил лайк в соответствующую таблицу,
