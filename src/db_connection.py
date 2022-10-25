@@ -16,6 +16,8 @@ def connect_db():
         local_port = 5432
         local_host = 'localhost'
         is_server = True
+        tunnel = None
+
 
         if ssh_host != "":
             tunnel = SSHTunnelForwarder(
@@ -39,7 +41,7 @@ def connect_db():
         }
         conn = psycopg2.connect(**params)
         print("SUCCESS: Database connected")
-        return conn, is_server
+        return tunnel, conn
     except:
         print("FAILED: Connection failed")
 

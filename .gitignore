@@ -8,3 +8,5 @@
 .externalNativeBuild
 .cxx
 local.properties
+src/config.json
+src/config.json

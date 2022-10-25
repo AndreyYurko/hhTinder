@@ -6,7 +6,7 @@ from fastapi import FastAPI
 
 app = FastAPI()  # rest api
 app.type = "00"
-conn_, is_server = connect_db()
+tun_, conn_ = connect_db()
 app.state.connection = conn_
 
 
