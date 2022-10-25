@@ -1,6 +1,6 @@
 class Queries():
     GET_USER_IDS = "select id from users"
-    GER_USER_BY_ID = "select * from users where id = {id}"
+    GET_USER_BY_ID = "select * from users where id = {id}"
 
     GET_VACANCY_IDS = "select id from vacancy"
     GET_VACANCY_BY_ID = "select * from vacancy where id = {id}"

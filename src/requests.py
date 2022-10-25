@@ -17,7 +17,7 @@ def execute_sql_query(conn, query):
 
 # get user by id
 def get_user(conn, user_id):
-    message_template_select_user = Queries.GER_USER_BY_ID
+    message_template_select_user = Queries.GET_USER_BY_ID
     user_data = execute_sql_query(conn, message_template_select_user.format(id = user_id))
     if len(user_data) == 0:
         print("No user with id =", user_id)
