@@ -3,95 +3,176 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@color/design_default_color_primary">
+    android:background="@color/white">
 
-    <RelativeLayout
-        android:id="@+id/logoRelativeLayout"
-        android:layout_width="296dp"
-        android:layout_height="296dp"
-        android:layout_marginTop="84dp"
-        android:adjustViewBounds="true"
-        android:scaleType="centerCrop"
-        app:layout_constraintTop_toTopOf="parent"
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/searchTextInputLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/guest_screens_margin_horizontal"
+        android:layout_marginTop="95dp"
+        app:hintEnabled="false"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
-    </RelativeLayout>
-
-    <ImageView
-        android:id="@+id/iconImageNext"
-        android:layout_width="296dp"
-        android:layout_height="296dp"
-        android:background="@drawable/rounded_image"
-        android:layout_marginTop="84dp"
-        android:clipToOutline="true"
-        android:scaleType="centerCrop"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:boxCornerRadiusBottomEnd="@dimen/default_corner_radius"
+        app:boxCornerRadiusBottomStart="@dimen/default_corner_radius"
+        app:boxCornerRadiusTopEnd="@dimen/default_corner_radius"
+        app:boxCornerRadiusTopStart="@dimen/default_corner_radius"
+        android:textColorHint="@color/grey"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        >
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/searchEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            android:hint="Search query"
+            android:paddingEnd="100dp"
+            />
+    </com.google.android.material.textfield.TextInputLayout>
 
-    <ImageView
-        android:id="@+id/iconImageShown"
-        android:layout_width="296dp"
-        android:layout_height="296dp"
-        android:background="@drawable/rounded_image"
-        android:layout_marginTop="84dp"
-        android:clipToOutline="true"
-        android:scaleType="centerCrop"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
-
-
-    <LinearLayout
-        android:id="@+id/titleLinearLayout"
+    <ImageButton
+        android:id="@+id/searchImageButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/logoRelativeLayout"
+        android:src="@drawable/ic_search"
+        android:background="@color/white"
+        app:layout_constraintTop_toTopOf="@id/searchTextInputLayout"
+        app:layout_constraintBottom_toBottomOf="@id/searchTextInputLayout"
+        app:layout_constraintEnd_toEndOf="@id/searchTextInputLayout"
+        android:layout_marginEnd="20dp"/>
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_filters"
+        android:background="@color/white"
+        app:layout_constraintTop_toTopOf="@id/searchTextInputLayout"
+        app:layout_constraintBottom_toBottomOf="@id/searchTextInputLayout"
+        app:layout_constraintEnd_toStartOf="@id/searchImageButton"
+        android:layout_marginEnd="20dp"/>
+
+    <RelativeLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/searchTextInputLayout"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="53dp"
-        android:background="@drawable/oval_title"
-        android:orientation="vertical"
-        android:paddingHorizontal="36dp"
-        android:paddingVertical="8dp">
+        android:layout_marginTop="20dp"
+        android:layout_marginHorizontal="15dp"
+        android:background="@drawable/main_relative_layout_background">
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="153dp"
+            android:background="@drawable/employee_top_background"/>
+
 
         <TextView
+            android:id="@+id/job_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="SPbU"
-            android:layout_gravity="center"
-            android:textSize="18sp"
+            android:text="Java developer"
+            android:textColor="@color/white"
             android:textStyle="bold"
-            android:textColor="@color/black"/>
+            android:textSize="32sp"
+            android:layout_marginTop="30dp"
+            android:layout_marginStart="20dp"/>
+
+        <ImageView
+            android:id="@+id/iconImageShown"
+            android:layout_width="130dp"
+            android:layout_height="130dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="88dp"
+            android:background="@drawable/rounded_image"
+            android:clipToOutline="true"
+            android:scaleType="centerCrop"
+            android:src="@drawable/shrek"/>
 
         <TextView
+            android:id="@+id/employee_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Saint-Petersburg, Russia"
-            android:layout_gravity="center"
-            android:textSize="10sp"
-            android:textStyle="bold"
-            android:textColor="@color/black"/>
+            android:text="Li Kim"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            android:layout_marginTop="88dp"
+            android:layout_marginStart="175dp"/>
 
         <TextView
+            android:id="@+id/employee_salary"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Lecturer. 6 days/week"
-            android:layout_gravity="center"
-            android:textSize="10sp"
-            android:textStyle="bold"
-            android:textColor="@color/black"/>
+            android:text="Salary: 100 $ / h"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            android:layout_marginTop="115dp"
+            android:layout_marginStart="175dp"/>
 
         <TextView
+            android:id="@+id/employee_gender_and_age"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="3 days ago"
-            android:layout_gravity="center"
-            android:textSize="10sp"
-            android:textStyle="bold"
-            android:textColor="@color/black"/>
+            android:text="Man, 25 years old"
+            android:textColor="@color/grey"
+            android:textSize="20sp"
+            android:layout_marginTop="170dp"
+            android:layout_marginStart="175dp"/>
 
-    </LinearLayout>
+        <TextView
+            android:id="@+id/education_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="228dp"
+            android:text="Education"
+            android:textColor="@color/black"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/education_info"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="260dp"
+            android:text="Yonsei University, 2004 - 2008"
+            android:textColor="@color/grey"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/work_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="290dp"
+            android:text="Work experience"
+            android:textColor="@color/black"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/work_info"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="320dp"
+            android:text="5 years, OOO Gazprom"
+            android:textColor="@color/grey"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/projects_info"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="345dp"
+            android:text="Projects: Autoclicker, Shortlinker, Online-shop “qwerty”"
+            android:textColor="@color/grey"
+            android:textSize="16sp"
+            android:layout_marginBottom="20dp"/>
+
+    </RelativeLayout>
 
 
 

@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/white">
+
+    <TextView
+        android:id="@+id/roleChoiceText"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:textSize="32sp"
+        android:textColor="@color/black"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginHorizontal="@dimen/guest_screens_margin_horizontal"
+        android:textStyle="bold"
+        android:layout_marginTop="@dimen/guest_screens_text_margin_top"
+        android:text="Are you an applicant or an employer?"/>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/employeeButton"
+        android:layout_width="0dp"
+        android:layout_height="180dp"
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+        app:layout_constraintTop_toBottomOf="@id/roleChoiceText"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginHorizontal="@dimen/guest_screens_margin_horizontal"
+        android:layout_marginTop="40dp"
+        app:strokeColor="@color/grey"
+        app:cornerRadius="10dp" />
+
+    <ImageView
+        android:id="@+id/employeeImageView"
+        android:layout_width="90dp"
+        android:layout_height="90dp"
+        android:src="@drawable/employee_image"
+        app:layout_constraintTop_toTopOf="@id/employeeButton"
+        app:layout_constraintBottom_toBottomOf="@id/employeeButton"
+        app:layout_constraintStart_toStartOf="@id/employeeButton"
+        app:layout_constraintEnd_toStartOf="@id/employerImageView"/>
+
+    <TextView
+        android:id="@+id/employeeTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="@id/employeeButton"
+        app:layout_constraintBottom_toBottomOf="@id/employeeButton"
+        app:layout_constraintStart_toEndOf="@id/employeeImageView"
+        app:layout_constraintEnd_toEndOf="@id/employeeButton"
+        android:text="Applicant"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:textColor="@color/black"/>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/employerButton"
+        android:layout_width="0dp"
+        android:layout_height="180dp"
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+        app:layout_constraintTop_toBottomOf="@id/employeeButton"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginHorizontal="@dimen/guest_screens_margin_horizontal"
+        android:layout_marginTop="40dp"
+        app:strokeColor="@color/grey"
+        app:cornerRadius="10dp" />
+
+    <TextView
+        android:id="@+id/employerTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="@id/employerButton"
+        app:layout_constraintBottom_toBottomOf="@id/employerButton"
+        app:layout_constraintStart_toStartOf="@id/employerButton"
+        app:layout_constraintEnd_toStartOf="@id/employerImageView"
+        android:text="Employer"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:textColor="@color/black"/>
+
+    <ImageView
+        android:id="@+id/employerImageView"
+        android:layout_width="90dp"
+        android:layout_height="90dp"
+        android:src="@drawable/employer_image"
+        app:layout_constraintTop_toTopOf="@id/employerButton"
+        app:layout_constraintBottom_toBottomOf="@id/employerButton"
+        app:layout_constraintStart_toEndOf="@id/employerTextView"
+        app:layout_constraintEnd_toEndOf="@id/employerButton"/>
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

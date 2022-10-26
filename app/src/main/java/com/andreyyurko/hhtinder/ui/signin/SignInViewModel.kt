@@ -1,4 +1,4 @@
-package com.andreyyurko.hhtinder.ui.registrationemployer
+package com.andreyyurko.hhtinder.ui.signin
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -8,7 +8,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class RegistrationEmployerViewModel @Inject constructor(
+class SignInViewModel @Inject constructor(
     private val authHandler: AuthHandler
 ) : ViewModel()  {
 

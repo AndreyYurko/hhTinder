@@ -1,4 +1,4 @@
-package com.andreyyurko.hhtinder.ui.login
+package com.andreyyurko.hhtinder.ui.rolevariants
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -8,10 +8,9 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class LogInViewModel @Inject constructor(
+class RoleVariantsViewModel @Inject constructor(
     private val authHandler: AuthHandler
 ) : ViewModel()  {
-
     fun auth() {
         viewModelScope.launch {
             authHandler.logIn()

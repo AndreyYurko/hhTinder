@@ -9,4 +9,12 @@
 
     <string name="hello_first_fragment">Hello first fragment</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+    <string name="fragment_entrance_welcome_textview">Welcome</string>
+    <string name="fragment_entrance_create_account_textview">Create an account and get access to thousands of job vacancies or CVs</string>
+    <string name="fragment_entrance_getting_started_button">Getting Started</string>
+    <string name="entrance_fragment_already_have_account_text">Already have an account?</string>
+    <string name="entrance_fragment_sign_up_button">Sign In</string>
+    <string name="sign_in_fragment_title_text">Sign In</string>
+    <string name="sign_in_fragment_login_text">Please login to continue our app</string>
+    <string name="sign_up_fill_details_text">Please fill the details and create account</string>
 </resources>

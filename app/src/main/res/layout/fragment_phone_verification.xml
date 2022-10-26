@@ -5,9 +5,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/white">
 
-
     <TextView
-        android:id="@+id/welcomeTextView"
+        android:id="@+id/verifyPhoneTextView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:textSize="32sp"
@@ -18,73 +17,72 @@
         android:layout_marginHorizontal="@dimen/guest_screens_margin_horizontal"
         android:textStyle="bold"
         android:layout_marginTop="@dimen/guest_screens_text_margin_top"
-        android:text="@string/fragment_entrance_welcome_textview"/>
+        android:text="Verify Your Number"/>
 
     <TextView
-        android:id="@+id/createAccountTextView"
+        android:id="@+id/enterCodeTextView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:textSize="@dimen/guest_screens_default_text_size"
         android:textColor="@color/grey"
-        app:layout_constraintTop_toBottomOf="@id/welcomeTextView"
+        app:layout_constraintTop_toBottomOf="@id/verifyPhoneTextView"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginHorizontal="@dimen/guest_screens_margin_horizontal"
         android:layout_marginTop="@dimen/guest_screens_default_margin_top"
-        android:text="@string/fragment_entrance_create_account_textview"/>
+        android:text="Please enter your Country &amp; your Phone Number"/>
 
     <ImageView
-        android:id="@+id/welcomeImageView"
+        android:id="@+id/verifyPhoneImageView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/createAccountTextView"
+        app:layout_constraintTop_toBottomOf="@id/enterCodeTextView"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginHorizontal="@dimen/guest_screens_margin_horizontal"
         android:layout_marginTop="@dimen/guest_screens_image_view_margin_top"
-        android:src="@drawable/fragment_entrance_welcome_image"/>
+        android:src="@drawable/ic_confirm_phone_image"/>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/codeTextInputLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/guest_screens_margin_horizontal"
+        android:layout_marginTop="20dp"
+        android:hint="Phone number"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/verifyPhoneImageView"
+        app:boxCornerRadiusBottomEnd="@dimen/default_corner_radius"
+        app:boxCornerRadiusBottomStart="@dimen/default_corner_radius"
+        app:boxCornerRadiusTopEnd="@dimen/default_corner_radius"
+        app:boxCornerRadiusTopStart="@dimen/default_corner_radius"
+        android:textColorHint="@color/grey"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        >
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/phoneEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="phone"
+            />
+    </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/gettingStartedButton"
+        android:id="@+id/sendButton"
         android:layout_width="0dp"
         android:layout_height="61dp"
-        app:layout_constraintTop_toBottomOf="@id/welcomeImageView"
+        app:layout_constraintTop_toBottomOf="@id/codeTextInputLayout"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginHorizontal="@dimen/guest_screens_margin_horizontal"
-        android:layout_marginTop="@dimen/entrance_fragment_getting_started_button_margin_top"
+        android:layout_marginTop="20dp"
         android:textSize="20sp"
         android:textColor="@color/white"
         android:textStyle="bold"
-        android:text="@string/fragment_entrance_getting_started_button"
+        android:text="Send"
         android:textAllCaps="false"
         app:cornerRadius="@dimen/default_corner_radius" />
-
-    <TextView
-        android:id="@+id/alreadyHaveAccountTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/signInButton"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:text="@string/entrance_fragment_already_have_account_text"
-        android:textColor="@color/grey"
-        android:textSize="@dimen/guest_screens_default_text_size"
-        android:layout_marginBottom="@dimen/entrance_fragment_sign_in_margin_bottom"/>
-
-    <TextView
-        android:id="@+id/signInButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/alreadyHaveAccountTextView"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:text="@string/entrance_fragment_sign_up_button"
-        android:textColor="@color/deep_blue"
-        android:textSize="@dimen/guest_screens_default_text_size"
-        android:layout_marginBottom="@dimen/entrance_fragment_sign_in_margin_bottom"
-        android:clickable="true"
-        android:focusable="true" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

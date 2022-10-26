@@ -12,13 +12,4 @@ class EntranceViewModel @Inject constructor(
     private val authHandler: AuthHandler
 ) : ViewModel()  {
 
-    companion object {
-        val LOG_TAG = "EntranceViewModel"
-    }
-
-    fun send() {
-        viewModelScope.launch {
-            authHandler.send()
-        }
-    }
 }

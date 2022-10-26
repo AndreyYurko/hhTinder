@@ -28,7 +28,7 @@ class MainFragment : Fragment(R.layout.fragment_main) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        imagesList = context?.let { mutableListOf(
+        /*imagesList = context?.let { mutableListOf(
             ContextCompat.getDrawable(
                 it,
                 R.drawable.shrek
@@ -88,9 +88,9 @@ class MainFragment : Fragment(R.layout.fragment_main) {
                 super.onSwipeDown()
             }
 
-        })
+        })*/
     }
-
+/*
     private fun setupLeftSwipeAnim(): AnimatorSet {
         val leftPivotY = ObjectAnimator.ofFloat(
             viewBinding.iconImageShown,
@@ -181,5 +181,5 @@ class MainFragment : Fragment(R.layout.fragment_main) {
         })
 
         return swipeAnimatorSet
-    }
+    }*/
 }
