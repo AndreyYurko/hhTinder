@@ -10,58 +10,101 @@ import android.util.Log
 import android.view.View
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.viewModelScope
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.andreyyurko.hhtinder.R
 import com.andreyyurko.hhtinder.databinding.FragmentMainBinding
+import com.andreyyurko.hhtinder.structures.Vacancy
+import com.andreyyurko.hhtinder.utils.network.VacancyHandler
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 
 class MainFragment : Fragment(R.layout.fragment_main) {
     companion object {
         const val LOG_TAG = "Main Fragment"
     }
 
-    private lateinit var imagesList : MutableList<Drawable?>
+    private lateinit var imagesList: MutableList<Drawable?>
     private var index = 0
     private var baseTranslationX = 0F
     private var baseTranslationY = 0F
     private var baseRotation = 0F
 
+    private var vacancyHandler = VacancyHandler()
+
+    private var vacancyList = arrayListOf<Vacancy>()
 
     private val viewBinding by viewBinding(FragmentMainBinding::bind)
+
+
+    // TODO: В будущем оно должно будет возвращать не вот этот колхоз
+    fun loadVacancy() {
+        runBlocking {
+            launch {
+                for(i in 0 .. 20){
+                    val vac = vacancyHandler.getNextVacancy()
+                    vacancyList.add(vac)
+                    Log.d(LOG_TAG, vac.name)
+                }
+                var lastVac = vacancyHandler.getNextVacancy()
+                setVacancyContent(lastVac)
+            }
+        }
+    }
+
+    fun setVacancyContent(vac : Vacancy){
+        viewBinding.jobName.setText(vac.name)
+        viewBinding.projectsInfo.setText(vac.content)
+
+        Log.d(LOG_TAG, vac.name)
+    }
+
+    fun setNextVacancy(){
+        if(index < vacancyList.size){
+            val vacancy = vacancyList.get(index)
+            setVacancyContent(vacancy)
+        }
+    }
 
     @SuppressLint("ClickableViewAccessibility")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        loadVacancy()
+
         baseRotation = viewBinding.employeeCard.rotation
         baseTranslationX = viewBinding.employeeCard.translationX
         baseTranslationY = viewBinding.employeeCard.translationY
 
-        imagesList = context?.let { mutableListOf(
-            ContextCompat.getDrawable(
-                it,
-                R.drawable.shrek
-            ),
-            ContextCompat.getDrawable(
-                it,
-                R.drawable.shrek2
-            ),
-            ContextCompat.getDrawable(
-                it,
-                R.drawable.shrek3
-            ),
-            ContextCompat.getDrawable(
-                it,
-                R.drawable.spanchbob1
-            ),
-            ContextCompat.getDrawable(
-                it,
-                R.drawable.spanchbob2
-            ),
-        )
+        imagesList = context?.let {
+            mutableListOf(
+                ContextCompat.getDrawable(
+                    it,
+                    R.drawable.shrek
+                ),
+                ContextCompat.getDrawable(
+                    it,
+                    R.drawable.shrek2
+                ),
+                ContextCompat.getDrawable(
+                    it,
+                    R.drawable.shrek3
+                ),
+                ContextCompat.getDrawable(
+                    it,
+                    R.drawable.spanchbob1
+                ),
+                ContextCompat.getDrawable(
+                    it,
+                    R.drawable.spanchbob2
+                ),
+            )
         } ?: mutableListOf()
 
         viewBinding.iconImageShown.setImageDrawable(
             imagesList[index]
         )
+
         /*viewBinding.iconImageNext.setImageDrawable(
             imagesList[index+1]
         )
@@ -77,20 +120,24 @@ class MainFragment : Fragment(R.layout.fragment_main) {
         )
         fadeIn.duration = 500*/
 
-        viewBinding.employeeCard.setOnTouchListener(object : GesturesHandler(context, viewBinding.employeeCard) {
+        viewBinding.employeeCard.setOnTouchListener(object :
+            GesturesHandler(context, viewBinding.employeeCard) {
             override fun onSwipeLeft() {
                 super.onSwipeLeft()
                 swipeLeftAnimatorSet.start()
                 //fadeIn.start()
             }
+
             override fun onSwipeRight() {
                 super.onSwipeRight()
                 swipeRightAnimatorSet.start()
                 //fadeIn.start()
             }
+
             override fun onSwipeUp() {
                 super.onSwipeUp()
             }
+
             override fun onSwipeDown() {
                 super.onSwipeDown()
             }
@@ -126,7 +173,11 @@ class MainFragment : Fragment(R.layout.fragment_main) {
         return setupRightAndLeftAnim(1, rightPivotX, rightPivotY)
     }
 
-    private fun setupRightAndLeftAnim(sign: Int, pivotX: ObjectAnimator, pivotY: ObjectAnimator): AnimatorSet {
+    private fun setupRightAndLeftAnim(
+        sign: Int,
+        pivotX: ObjectAnimator,
+        pivotY: ObjectAnimator
+    ): AnimatorSet {
         val rotation = ObjectAnimator.ofFloat(
             viewBinding.employeeCard,
             "rotation",
@@ -159,6 +210,7 @@ class MainFragment : Fragment(R.layout.fragment_main) {
             override fun onAnimationEnd(animation: Animator) {
                 index += 1
                 Log.d(MainFragment.LOG_TAG, "index = $index")
+                setNextVacancy()
                 if (index + 1 < (imagesList.size)) {
                     viewBinding.employeeCard.translationX = baseTranslationX
                     viewBinding.employeeCard.translationY = baseTranslationY
