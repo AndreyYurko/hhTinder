@@ -95,4 +95,4 @@ def get_liked_workers(conn, employee_id):
     message_template_get_liked_workers = Queries.GET_LIKED_WORKERS_BY_EMPLOYEEID
     workers = execute_sql_query(conn, message_template_get_liked_workers.format(id=employee_id))
     # TODO
-    return None
+    return workers
