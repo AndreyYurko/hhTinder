@@ -96,6 +96,12 @@ def next_vacancy(vac_id: int):
     vacancy = get_next_vacancy(app.state.connection)
     return vacancy.to_json()
 
+@app.get("/cv/{cv_id}")
+def next_cv(cv_id: int):
+    # global connection
+    cv = get_next_cv(app.state.connection)
+    return cv.to_json()
+
 
 # General comment
 # Пока что нет сущности сессии, хотя в будущем  возможно придётся переписать с расчётом на сессии,

@@ -28,3 +28,27 @@ class Vacancy():
 
     def to_json(self):
         return {"id": self.id, "name": self.vac_name, "body": self.vac_text, "image_id": self.img_id}
+
+
+class CV():
+    def __init__(self, cv_data):
+        self.id = cv_data[0]
+        self.cv_name = cv_data[1]
+        self.cv_text = cv_data[2]
+        self.salary = cv_data[3]
+        self.experience_content = cv_data[4]
+        self.education_content = cv_data[5]
+        self.name = cv_data[6]
+        self.surname = cv_data[7]
+        self.age = cv_data[8]
+        self.img_id = cv_data[9]
+        self.img_extension = cv_data[10]
+        self.gender = cv_data[11]
+        self.category = cv_data[12]
+        self.image_link = "http://217.25.88.166/web_project/files/images/0/" + str(self.img_id) + "." + self.img_extension
+
+    def to_json(self):
+        return {"id": self.id, "name": self.cv_name, "body": self.cv_text, "image_id": self.img_id,
+                "image_extension": self.img_extension, "salary": self.salary, "experience": self.experience_content,
+                "education": self.education_content, "user_name": self.name, "user_surname": self.surname,
+                "user_age": self.age, "gender": self.gender, "category": self.category, "image_link": self.image_link}
