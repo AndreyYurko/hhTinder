@@ -21,14 +21,21 @@ class MainFragment : Fragment(R.layout.fragment_main) {
 
     private lateinit var imagesList : MutableList<Drawable?>
     private var index = 0
+    private var baseTranslationX = 0F
+    private var baseTranslationY = 0F
+    private var baseRotation = 0F
+
 
     private val viewBinding by viewBinding(FragmentMainBinding::bind)
 
     @SuppressLint("ClickableViewAccessibility")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        baseRotation = viewBinding.employeeCard.rotation
+        baseTranslationX = viewBinding.employeeCard.translationX
+        baseTranslationY = viewBinding.employeeCard.translationY
 
-        /*imagesList = context?.let { mutableListOf(
+        imagesList = context?.let { mutableListOf(
             ContextCompat.getDrawable(
                 it,
                 R.drawable.shrek
@@ -55,31 +62,31 @@ class MainFragment : Fragment(R.layout.fragment_main) {
         viewBinding.iconImageShown.setImageDrawable(
             imagesList[index]
         )
-        viewBinding.iconImageNext.setImageDrawable(
+        /*viewBinding.iconImageNext.setImageDrawable(
             imagesList[index+1]
         )
-        viewBinding.iconImageNext.alpha = 0f
+        viewBinding.iconImageNext.alpha = 0f*/
 
         val swipeLeftAnimatorSet = setupLeftSwipeAnim()
         val swipeRightAnimatorSet = setupRightSwipeAnim()
-        val fadeIn = ObjectAnimator.ofFloat(
+        /*val fadeIn = ObjectAnimator.ofFloat(
             viewBinding.iconImageNext,
             "alpha",
             0f,
             1f
         )
-        fadeIn.duration = 500
+        fadeIn.duration = 500*/
 
-        viewBinding.logoRelativeLayout.setOnTouchListener(object : GesturesHandler(context, viewBinding.logoRelativeLayout) {
+        viewBinding.employeeCard.setOnTouchListener(object : GesturesHandler(context, viewBinding.employeeCard) {
             override fun onSwipeLeft() {
                 super.onSwipeLeft()
                 swipeLeftAnimatorSet.start()
-                fadeIn.start()
+                //fadeIn.start()
             }
             override fun onSwipeRight() {
                 super.onSwipeRight()
                 swipeRightAnimatorSet.start()
-                fadeIn.start()
+                //fadeIn.start()
             }
             override fun onSwipeUp() {
                 super.onSwipeUp()
@@ -88,54 +95,54 @@ class MainFragment : Fragment(R.layout.fragment_main) {
                 super.onSwipeDown()
             }
 
-        })*/
+        })
     }
-/*
+
     private fun setupLeftSwipeAnim(): AnimatorSet {
         val leftPivotY = ObjectAnimator.ofFloat(
-            viewBinding.iconImageShown,
+            viewBinding.employeeCard,
             "pivotY",
-            viewBinding.iconImageShown.translationY + resources.getDimensionPixelSize(R.dimen.main_fragment_logo_size)
+            viewBinding.employeeCard.translationY + resources.getDimensionPixelSize(R.dimen.main_fragment_card_size)
         )
         val leftPivotX = ObjectAnimator.ofFloat(
-            viewBinding.iconImageShown,
+            viewBinding.employeeCard,
             "pivotX",
-            viewBinding.iconImageShown.translationX
+            viewBinding.employeeCard.translationX
         )
         return setupRightAndLeftAnim(-1, leftPivotX, leftPivotY)
     }
 
     private fun setupRightSwipeAnim(): AnimatorSet {
         val rightPivotY = ObjectAnimator.ofFloat(
-            viewBinding.iconImageShown,
+            viewBinding.employeeCard,
             "pivotY",
-            viewBinding.iconImageShown.translationY + resources.getDimensionPixelSize(R.dimen.main_fragment_logo_size)
+            viewBinding.employeeCard.translationY + resources.getDimensionPixelSize(R.dimen.main_fragment_card_size)
         )
         val rightPivotX = ObjectAnimator.ofFloat(
-            viewBinding.iconImageShown,
+            viewBinding.employeeCard,
             "pivotX",
-            viewBinding.iconImageShown.translationX + resources.getDimensionPixelSize(R.dimen.main_fragment_logo_size)
+            viewBinding.employeeCard.translationX + resources.getDimensionPixelSize(R.dimen.main_fragment_card_size)
         )
         return setupRightAndLeftAnim(1, rightPivotX, rightPivotY)
     }
 
     private fun setupRightAndLeftAnim(sign: Int, pivotX: ObjectAnimator, pivotY: ObjectAnimator): AnimatorSet {
         val rotation = ObjectAnimator.ofFloat(
-            viewBinding.iconImageShown,
+            viewBinding.employeeCard,
             "rotation",
             0f,
             45f * sign
         )
         val transition = ObjectAnimator.ofFloat(
-            viewBinding.iconImageShown,
+            viewBinding.employeeCard,
             "translationX",
-            viewBinding.iconImageShown.translationX,
+            viewBinding.employeeCard.translationX,
             1000f * sign
         )
         transition.duration = 300
         transition.startDelay = 200
         val fadeOut = ObjectAnimator.ofFloat(
-            viewBinding.iconImageShown,
+            viewBinding.employeeCard,
             "alpha",
             1f,
             0f
@@ -153,17 +160,17 @@ class MainFragment : Fragment(R.layout.fragment_main) {
                 index += 1
                 Log.d(MainFragment.LOG_TAG, "index = $index")
                 if (index + 1 < (imagesList.size)) {
-                    viewBinding.iconImageShown.translationX = viewBinding.iconImageNext.translationX
-                    viewBinding.iconImageShown.translationY = viewBinding.iconImageNext.translationY
-                    viewBinding.iconImageShown.rotation = viewBinding.iconImageNext.rotation
+                    viewBinding.employeeCard.translationX = baseTranslationX
+                    viewBinding.employeeCard.translationY = baseTranslationY
+                    viewBinding.employeeCard.rotation = baseRotation
                     viewBinding.iconImageShown.setImageDrawable(
                         imagesList[index]
                     )
-                    viewBinding.iconImageShown.alpha = 1f
-                    viewBinding.iconImageNext.alpha = 0f
-                    viewBinding.iconImageNext.setImageDrawable(
-                        imagesList[index+1]
-                    )
+                    viewBinding.employeeCard.alpha = 1f
+                    //viewBinding.iconImageNext.alpha = 0f
+                    //viewBinding.iconImageNext.setImageDrawable(
+                    //    imagesList[index+1]
+                    //)
                     imagesList.add(
                         context?.let {
                             ContextCompat.getDrawable(
@@ -181,5 +188,5 @@ class MainFragment : Fragment(R.layout.fragment_main) {
         })
 
         return swipeAnimatorSet
-    }*/
+    }
 }
