@@ -14,7 +14,9 @@ import androidx.lifecycle.viewModelScope
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.andreyyurko.hhtinder.R
 import com.andreyyurko.hhtinder.databinding.FragmentMainBinding
+import com.andreyyurko.hhtinder.structures.CV
 import com.andreyyurko.hhtinder.structures.Vacancy
+import com.andreyyurko.hhtinder.utils.network.CVHandler
 import com.andreyyurko.hhtinder.utils.network.VacancyHandler
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
@@ -30,9 +32,9 @@ class MainFragment : Fragment(R.layout.fragment_main) {
     private var baseTranslationY = 0F
     private var baseRotation = 0F
 
-    private var vacancyHandler = VacancyHandler()
+    private var cvHandler = CVHandler()
 
-    private var vacancyList = arrayListOf<Vacancy>()
+    private var cvList = arrayListOf<CV>()
 
     private val viewBinding by viewBinding(FragmentMainBinding::bind)
 
@@ -41,28 +43,43 @@ class MainFragment : Fragment(R.layout.fragment_main) {
     fun loadVacancy() {
         runBlocking {
             launch {
-                for(i in 0 .. 20){
-                    val vac = vacancyHandler.getNextVacancy()
-                    vacancyList.add(vac)
-                    Log.d(LOG_TAG, vac.name)
+                for (i in 0..20) {
+                    val cv = cvHandler.getNextCV()
+                    cvList.add(cv)
+                    Log.d(LOG_TAG, cv.name)
                 }
-                var lastVac = vacancyHandler.getNextVacancy()
-                setVacancyContent(lastVac)
+                var lastCV = cvHandler.getNextCV()
+                setCVContent(lastCV)
             }
         }
     }
 
-    fun setVacancyContent(vac : Vacancy){
-        viewBinding.jobName.setText(vac.name)
-        viewBinding.projectsInfo.setText(vac.content)
+    fun setCVContent(cv: CV) {
+        viewBinding.jobName.setText(cv.name)
+        viewBinding.projectsInfo.setText(cv.content)
+        viewBinding.employeeName.setText(cv.userName + " " + cv.userSurname)
+        viewBinding.employeeSalary.setText(String.format("Salary %d $", cv.salary))
+        viewBinding.educationInfo.setText(cv.education)
+        viewBinding.workInfo.setText(cv.experience)
+        viewBinding.employeeGenderAndAge.setText(
+            String.format(
+                "%s, %s years old",
+                cv.userGender,
+                cv.userAge
+            )
+        )
 
-        Log.d(LOG_TAG, vac.name)
+        if (cv.image != null) {
+            viewBinding.iconImageShown.setImageDrawable(cv.image)
+        }
+
+        Log.d(LOG_TAG, cv.name)
     }
 
-    fun setNextVacancy(){
-        if(index < vacancyList.size){
-            val vacancy = vacancyList.get(index)
-            setVacancyContent(vacancy)
+    fun setNextVacancy() {
+        if (index < cvList.size) {
+            val vacancy = cvList.get(index)
+            setCVContent(vacancy)
         }
     }
 
@@ -101,9 +118,6 @@ class MainFragment : Fragment(R.layout.fragment_main) {
             )
         } ?: mutableListOf()
 
-        viewBinding.iconImageShown.setImageDrawable(
-            imagesList[index]
-        )
 
         /*viewBinding.iconImageNext.setImageDrawable(
             imagesList[index+1]
@@ -210,19 +224,20 @@ class MainFragment : Fragment(R.layout.fragment_main) {
             override fun onAnimationEnd(animation: Animator) {
                 index += 1
                 Log.d(MainFragment.LOG_TAG, "index = $index")
-                setNextVacancy()
-                if (index + 1 < (imagesList.size)) {
+                if (index + 1 < (cvList.size)) {
                     viewBinding.employeeCard.translationX = baseTranslationX
                     viewBinding.employeeCard.translationY = baseTranslationY
                     viewBinding.employeeCard.rotation = baseRotation
+                    /*
                     viewBinding.iconImageShown.setImageDrawable(
                         imagesList[index]
-                    )
+                    )*/
                     viewBinding.employeeCard.alpha = 1f
                     //viewBinding.iconImageNext.alpha = 0f
                     //viewBinding.iconImageNext.setImageDrawable(
                     //    imagesList[index+1]
                     //)
+                     /*
                     imagesList.add(
                         context?.let {
                             ContextCompat.getDrawable(
@@ -230,8 +245,9 @@ class MainFragment : Fragment(R.layout.fragment_main) {
                                 R.drawable.shrek
                             )
                         },
-                    )
+                    )*/
                 }
+                setNextVacancy()
             }
 
             override fun onAnimationCancel(animation: Animator) {}
