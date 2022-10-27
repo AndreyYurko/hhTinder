@@ -30,18 +30,14 @@ def read_item(item_id: int, q: Union[str, None] = None):
 @app.get("/worker/{job_id}")
 def next_worker(job_id: int):
     # global connection
-    print(job_id)
     user = get_next_user(app.state.connection)
-    print(user.id, user.name, job_id)
     return user.to_json()
 
 
 @app.get("/vacancy/{vac_id}")
 def next_vacancy(vac_id: int):
     # global connection
-    print(vac_id)
     vacancy = get_next_vacancy(app.state.connection)
-    print(vacancy.id, vacancy.vac_name, vac_id)
     return vacancy.to_json()
 
 
