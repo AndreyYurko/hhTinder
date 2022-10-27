@@ -36,6 +36,15 @@ def next_worker(job_id: int):
     return user.to_json()
 
 
+@app.get("/vacancy/{vac_id}")
+def next_vacancy(vac_id: int):
+    # global connection
+    print(vac_id)
+    vacancy = get_next_vacancy(app.state.connection)
+    print(vacancy.id, vacancy.vac_name, vac_id)
+    return vacancy.to_json()
+
+
 # General comment
 # Пока что нет сущности сессии, хотя в будущем  возможно придётся переписать с расчётом на сессии,
 # так что все кто редактируют код, пожалуйста держите это в уме.
