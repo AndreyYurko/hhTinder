@@ -44,7 +44,7 @@ def next_job(worker_id: int):
 @app.get("/history/job/{job_id}")
 def next_job(job_id: int):
     # global connection
-    workers = get_liked_workers(app.state.connection, job_id)
+    workers = get_liked_workers_ids(app.state.connection, job_id)
     new_workers = []
     for worker in workers:
         new_workers += [worker[0]]
@@ -53,7 +53,7 @@ def next_job(job_id: int):
 @app.get("/history/worker/{worker_id}")
 def next_job(worker_id: int):
     # global connection
-    vacancies = get_liked_vacancies(app.state.connection, worker_id)
+    vacancies = get_liked_vacancies_ids(app.state.connection, worker_id)
     new_vacancies = []
     for worker in vacancies:
         new_vacancies += [worker[0]]
@@ -67,11 +67,11 @@ class Like(BaseModel):
 @app.post("/worker_like/")
 async def like(like: Like):
     # check likes and
-    vacancies = get_liked_vacancies(app.state.connection, like.worker_id)
-    print(vacancies)
-    print(type(vacancies))
-    for vac in vacancies:
-        if vac == like.job_id:
+    vacancies_ids = get_liked_vacancies_ids(app.state.connection, like.worker_id)
+    print(vacancies_ids)
+    print(type(vacancies_ids))
+    for vacancy_id in vacancies_ids:
+        if vacancy_id == like.job_id:
             return {"match": True, "job_id": like.job_id}
     # if vacancies contains like.job_id then match
     # create like
@@ -81,10 +81,10 @@ async def like(like: Like):
 @app.post("/job_like/")
 async def like(like: Like):
     # check likes and
-    workers = get_liked_workers(app.state.connection, like.job_id)
-    print(workers)
-    for worker in workers:
-        if worker == like.worker_id:
+    workers_ids = get_liked_workers_ids(app.state.connection, like.job_id)
+    print(workers_ids)
+    for worker_id in workers_ids:
+        if worker_id == like.worker_id:
             return {"match": True, "worker_id": like.worker_id}
     # create like
     return {"match": False, "worker_id": like.worker_id}

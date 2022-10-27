@@ -84,15 +84,15 @@ def post_like_from_worker(job_id, worker_id):
     return True
 
 
-def get_liked_vacancies(conn, user_id):
-    message_template_get_liked_vacancies = Queries.GET_LIKED_VACANCIES_BY_USERID
+def get_liked_vacancies_ids(conn, user_id):
+    message_template_get_liked_vacancies = Queries.GET_LIKED_VACANCIES_ID_BY_USERID
     vacancies = execute_sql_query(conn, message_template_get_liked_vacancies.format(id=user_id))
     # TODO
     return vacancies
 
 
-def get_liked_workers(conn, employee_id):
-    message_template_get_liked_workers = Queries.GET_LIKED_WORKERS_BY_EMPLOYEEID
+def get_liked_workers_ids(conn, employee_id):
+    message_template_get_liked_workers = Queries.GET_LIKED_WORKERS_ID_BY_EMPLOYEEID
     workers = execute_sql_query(conn, message_template_get_liked_workers.format(id=employee_id))
     # TODO
     return workers
