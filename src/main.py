@@ -70,11 +70,14 @@ async def like(like: Like):
     vacancies_ids = get_liked_vacancies_ids(app.state.connection, like.worker_id)
     print(vacancies_ids)
     print(type(vacancies_ids))
+
+    # if vacancies contains like.job_id then match
     for vacancy_id in vacancies_ids:
         if vacancy_id == like.job_id:
             return {"match": True, "job_id": like.job_id}
-    # if vacancies contains like.job_id then match
+
     # create like
+    post_like_from_worker(app.state.connection, like.job_id, like.worker_id)
     return {"match": False, "job_id": like.job_id}
 
 
@@ -86,7 +89,9 @@ async def like(like: Like):
     for worker_id in workers_ids:
         if worker_id == like.worker_id:
             return {"match": True, "worker_id": like.worker_id}
+
     # create like
+    post_like_from_job(app.state.connection, like.job_id, like.worker_id)
     return {"match": False, "worker_id": like.worker_id}
 
 

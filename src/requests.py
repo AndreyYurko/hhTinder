@@ -73,15 +73,14 @@ def get_next_cv(conn):
     return get_cv(conn, random_id)
 
 
-def post_like_from_job(job_id, worker_id):
-    # Здесь точно так же надо написать sql запрос в бд который бы поставил лайк в соответствующую таблицу,
-    # пока что здесь будет стоять заглушка
-    return True
+def post_like_from_job(conn, job_id, worker_id):
+    message_template_post_like_from_job = Queries.INSERT_LIKE_FROM_VACANCY
+    execute_sql_query(conn, message_template_post_like_from_job.format(job_id, worker_id))
 
 
-def post_like_from_worker(job_id, worker_id):
-    # аналогично
-    return True
+def post_like_from_worker(conn, job_id, worker_id):
+    message_template_post_like_from_worker = Queries.INSERT_LIKE_FROM_WORKER
+    execute_sql_query(conn, message_template_post_like_from_worker.format(worker_id, job_id))
 
 
 def get_liked_vacancies_ids(conn, user_id):

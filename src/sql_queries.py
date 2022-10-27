@@ -11,3 +11,6 @@ class Queries():
 
     GET_CV_IDS = "select  cv.id from cv join user_info ui on cv.cr_user = ui.cr_user join images i on ui.img_id = i.id join voc_gender vg on ui.gender_id = vg.id join voc_job_category vjc on cv_category = vjc.id"
     GET_CV_BY_ID = "select  cv.id as vac_id, cv_name, cv_text, salary, experience_content, education_content,ui.name, surname, age, i.id as image_id, extension, vg.name as gender, vjc.name as category from cv join user_info ui on cv.cr_user = ui.cr_user join images i on ui.img_id = i.id join voc_gender vg on ui.gender_id = vg.id join voc_job_category vjc on cv_category = vjc.id where cv.id = {id}"
+
+    INSERT_LIKE_FROM_VACANCY = "insert into employer_worker_match values ({vacancy_id}, {user_id})"
+    INSERT_LIKE_FROM_WORKER = "insert into user_vac_match values ({user_id}, {vacancy_id})"
