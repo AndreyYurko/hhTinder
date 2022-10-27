@@ -63,11 +63,12 @@ def get_liked_vacancies(conn, user_id):
     vacancies = execute_sql_query(conn, message_template_get_liked_vacancies.format(id = user_id))
     print(vacancies)
     # TODO
-    return None
+    return vacancies
 
 def get_liked_workers(conn, employee_id):
     message_template_get_liked_workers = Queries.GET_LIKED_WORKERS_BY_EMPLOYEEID
     workers = execute_sql_query(conn, message_template_get_liked_workers.format(id = employee_id))
     print(workers)
+    print("s pravo na levo")
     # TODO
     return None
