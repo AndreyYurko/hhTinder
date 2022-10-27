@@ -31,9 +31,7 @@ def read_item(item_id: int, q: Union[str, None] = None):
 @app.get("/worker/{job_id}")
 def next_worker(job_id: int):
     # global connection
-    print(job_id)
     user = get_next_user(app.state.connection)
-    print(user.id, user.name, job_id)
     return user.to_json()
 
 @app.get("/job/{worker_id}")
@@ -90,6 +88,13 @@ async def like(like: Like):
             return {"match": True, "worker_id": like.worker_id}
     # create like
     return {"match": False, "worker_id": like.worker_id}
+
+
+@app.get("/vacancy/{vac_id}")
+def next_vacancy(vac_id: int):
+    # global connection
+    vacancy = get_next_vacancy(app.state.connection)
+    return vacancy.to_json()
 
 
 # General comment

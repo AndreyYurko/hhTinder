@@ -15,6 +15,7 @@ class User():
         # потом можно будет больше полей дописать, пока не знаю как это будет смотреться на стороны мобилки
         return {self.id, self.email, self.name, self.passwd}
 
+
 class Vacancy():
     def __init__(self, vacancy_data):
         self.id = vacancy_data[0]
@@ -26,5 +27,4 @@ class Vacancy():
         self.img_id = vacancy_data[6]
 
     def to_json(self):
-        # потом можно будет больше полей дописать, пока не знаю как это будет смотреться на стороны мобилки
-        return {self.id, self.vac_name, self.vac_text, self.img_id}
+        return {"id": self.id, "name": self.vac_name, "body": self.vac_text, "image_id": self.img_id}
