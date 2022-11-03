@@ -55,6 +55,127 @@
         android:layout_marginEnd="20dp"/>
 
     <RelativeLayout
+        android:id="@+id/employeeCardNext"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/searchTextInputLayout"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="20dp"
+        android:layout_marginHorizontal="15dp"
+        android:background="@drawable/main_relative_layout_background">
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="153dp"
+            android:background="@drawable/employee_top_background"/>
+
+        <TextView
+            android:id="@+id/jobNameNext"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Java developer"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:textSize="32sp"
+            android:layout_marginTop="30dp"
+            android:layout_marginStart="20dp"/>
+
+        <ImageView
+            android:id="@+id/iconImageShownNext"
+            android:layout_width="130dp"
+            android:layout_height="130dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="88dp"
+            android:background="@drawable/rounded_image"
+            android:clipToOutline="true"
+            android:scaleType="centerCrop"
+            android:src="@drawable/shrek"/>
+
+        <TextView
+            android:id="@+id/employeeNameNext"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Li Kim"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            android:layout_marginTop="88dp"
+            android:layout_marginStart="175dp"/>
+
+        <TextView
+            android:id="@+id/employeeSalaryNext"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Salary: 100 $ / h"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            android:layout_marginTop="115dp"
+            android:layout_marginStart="175dp"/>
+
+        <TextView
+            android:id="@+id/employeeGenderAndAgeNext"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Man, 25 years old"
+            android:textColor="@color/grey"
+            android:textSize="20sp"
+            android:layout_marginTop="170dp"
+            android:layout_marginStart="175dp"/>
+
+        <TextView
+            android:id="@+id/educationTextNext"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="228dp"
+            android:text="Education"
+            android:textColor="@color/black"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/educationInfoNext"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="260dp"
+            android:text="Yonsei University, 2004 - 2008"
+            android:textColor="@color/grey"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/workTextNext"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="290dp"
+            android:text="Work experience"
+            android:textColor="@color/black"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/workInfoNext"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="320dp"
+            android:text="5 years, OOO Gazprom"
+            android:textColor="@color/grey"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/projectsInfoNext"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="345dp"
+            android:text="Projects: Autoclicker, Shortlinker, Online-shop “qwerty”"
+            android:textColor="@color/grey"
+            android:textSize="16sp"
+            android:layout_marginBottom="20dp"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
         android:id="@+id/employeeCard"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -72,7 +193,7 @@
 
 
         <TextView
-            android:id="@+id/job_name"
+            android:id="@+id/jobName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Java developer"
@@ -94,7 +215,7 @@
             android:src="@drawable/shrek"/>
 
         <TextView
-            android:id="@+id/employee_name"
+            android:id="@+id/employeeName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Li Kim"
@@ -104,7 +225,7 @@
             android:layout_marginStart="175dp"/>
 
         <TextView
-            android:id="@+id/employee_salary"
+            android:id="@+id/employeeSalary"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Salary: 100 $ / h"
@@ -114,7 +235,7 @@
             android:layout_marginStart="175dp"/>
 
         <TextView
-            android:id="@+id/employee_gender_and_age"
+            android:id="@+id/employeeGenderAndAge"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Man, 25 years old"
@@ -124,7 +245,7 @@
             android:layout_marginStart="175dp"/>
 
         <TextView
-            android:id="@+id/education_text"
+            android:id="@+id/educationText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
@@ -134,7 +255,7 @@
             android:textSize="20sp" />
 
         <TextView
-            android:id="@+id/education_info"
+            android:id="@+id/educationInfo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
@@ -144,7 +265,7 @@
             android:textSize="16sp" />
 
         <TextView
-            android:id="@+id/work_text"
+            android:id="@+id/workText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
@@ -154,7 +275,7 @@
             android:textSize="20sp" />
 
         <TextView
-            android:id="@+id/work_info"
+            android:id="@+id/workInfo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
@@ -164,7 +285,7 @@
             android:textSize="16sp" />
 
         <TextView
-            android:id="@+id/projects_info"
+            android:id="@+id/projectsInfo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"

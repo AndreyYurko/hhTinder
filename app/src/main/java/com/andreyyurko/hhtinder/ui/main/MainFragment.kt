@@ -12,6 +12,7 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.andreyyurko.hhtinder.R
+import com.andreyyurko.hhtinder.data.EmployeeInfo
 import com.andreyyurko.hhtinder.databinding.FragmentMainBinding
 
 class MainFragment : Fragment(R.layout.fragment_main) {
@@ -186,7 +187,28 @@ class MainFragment : Fragment(R.layout.fragment_main) {
 
             override fun onAnimationRepeat(animation: Animator) {}
         })
-
         return swipeAnimatorSet
+    }
+
+    private fun setupShownCard(info: EmployeeInfo) {
+        viewBinding.jobName.text = info.jobName
+        viewBinding.iconImageShown.setImageDrawable(info.icon)
+        viewBinding.employeeName.text = info.name
+        viewBinding.employeeSalary.text = "Salary: ${info.salary} \$ / h"
+        viewBinding.employeeGenderAndAge.text = "${info.gender}, ${info.age} years old"
+        viewBinding.educationInfo.text = info.education
+        viewBinding.workInfo.text = info.work
+        viewBinding.projectsInfo.text = "Projects: ${info.projects}"
+    }
+
+    private fun setupNextCard(info: EmployeeInfo) {
+        viewBinding.jobNameNext.text = info.jobName
+        viewBinding.iconImageShownNext.setImageDrawable(info.icon)
+        viewBinding.employeeNameNext.text = info.name
+        viewBinding.employeeSalaryNext.text = "Salary: ${info.salary} \$ / h"
+        viewBinding.employeeGenderAndAgeNext.text = "${info.gender}, ${info.age} years old"
+        viewBinding.educationInfoNext.text = info.education
+        viewBinding.workInfoNext.text = info.work
+        viewBinding.projectsInfoNext.text = "Projects: ${info.projects}"
     }
 }
