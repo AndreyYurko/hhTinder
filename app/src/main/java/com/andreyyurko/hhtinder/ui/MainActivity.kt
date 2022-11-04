@@ -3,6 +3,7 @@ package com.andreyyurko.hhtinder.ui
 
 import android.os.Bundle
 import android.util.Log
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.WindowCompat
 import androidx.lifecycle.Lifecycle
@@ -26,9 +27,7 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
     }
 
     private val viewBinding by viewBinding(ActivityMainBinding::bind)
-
-    @Inject
-    lateinit var authHandler: AuthHandler
+    private val viewModel: MainActivityViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,7 +36,7 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
         val navController = navHostFragment.navController
         lifecycleScope.launch {
             lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                authHandler.authStateFlow().collect {
+                viewModel.authStateFlow().collect {
                     Log.d(LOG_TAG, "change log state $it")
                     when (it) {
                         AuthHandler.AuthState.Logged -> {
