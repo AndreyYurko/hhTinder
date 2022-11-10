@@ -4,11 +4,14 @@ from typing import Union
 import uvicorn
 from fastapi import FastAPI
 from pydantic import BaseModel
+from prometheus_fastapi_instrumentator import Instrumentator
+
 
 app = FastAPI()  # rest api
 app.type = "00"
 tun_, conn_ = connect_db()
 app.state.connection = conn_
+
 
 
 # def add_smthng(smthng):
@@ -17,6 +20,10 @@ app.state.connection = conn_
 #     return True
 
 # tunnel, conn = connect_db() # server for DB
+# дефолтные метрики доступны по /metrics
+@app.on_event("startup")
+async def startup():
+    Instrumentator().instrument(app).expose(app)
 
 @app.get("/")
 def read_root():
