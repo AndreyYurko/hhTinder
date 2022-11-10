@@ -7,16 +7,6 @@
     <fragment
         android:id="@+id/mainFragment"
         android:name="com.andreyyurko.hhtinder.ui.main.MainFragment"
-        android:label="MainFragment">
-        <action
-            android:id="@+id/action_mainFragment_to_backsideMainPage"
-            app:destination="@id/backsideMainPage" />
-    </fragment>
-
-    <fragment
-        android:id="@+id/backsideMainPage"
-        android:name="com.andreyyurko.hhtinder.ui.backsidemainpage.BacksideMainPageFragment"
-        android:label="BacksideMainPage">
-    </fragment>
+        android:label="MainFragment" />
 
 </navigation>

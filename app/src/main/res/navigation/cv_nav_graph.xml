@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/cv_nav_graph"
+    app:startDestination="@id/cvFragment">
+
+    <fragment
+        android:id="@+id/cvFragment"
+        android:name="com.andreyyurko.hhtinder.ui.cv.CVFragment"
+        android:label="CVFragment">
+        <action
+            android:id="@+id/action_mainFragment_to_backsideMainPage"
+            app:destination="@id/backsideMainPage" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/backsideMainPage"
+        android:name="com.andreyyurko.hhtinder.ui.backsidemainpage.BacksideMainPageFragment"
+        android:label="BacksideMainPage">
+    </fragment>
+
+</navigation>

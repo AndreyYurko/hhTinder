@@ -1,4 +1,4 @@
-package com.andreyyurko.hhtinder.ui.main
+package com.andreyyurko.hhtinder.ui.cv
 
 import android.content.Context
 import android.view.GestureDetector
@@ -7,7 +7,6 @@ import android.view.MotionEvent
 import android.view.View
 import android.view.View.OnTouchListener
 import androidx.navigation.Navigation.findNavController
-import androidx.navigation.fragment.findNavController
 import com.andreyyurko.hhtinder.R
 import kotlin.math.abs
 

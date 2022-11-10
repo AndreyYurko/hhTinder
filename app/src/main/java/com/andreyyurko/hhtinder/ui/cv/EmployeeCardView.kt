@@ -1,4 +1,4 @@
-package com.andreyyurko.hhtinder.ui.main
+package com.andreyyurko.hhtinder.ui.cv
 
 import android.content.Context
 import android.util.AttributeSet

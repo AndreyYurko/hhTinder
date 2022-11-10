@@ -1,310 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+<androidx.drawerlayout.widget.DrawerLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@color/white">
+    android:id="@+id/drawer_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/searchTextInputLayout"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="@dimen/guest_screens_margin_horizontal"
-        android:layout_marginTop="95dp"
-        app:hintEnabled="false"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:boxCornerRadiusBottomEnd="@dimen/default_corner_radius"
-        app:boxCornerRadiusBottomStart="@dimen/default_corner_radius"
-        app:boxCornerRadiusTopEnd="@dimen/default_corner_radius"
-        app:boxCornerRadiusTopStart="@dimen/default_corner_radius"
-        android:textColorHint="@color/grey"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        >
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/searchEditText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="50dp"
-            android:hint="Search query"
-            android:paddingEnd="100dp"
-            />
-    </com.google.android.material.textfield.TextInputLayout>
+        android:layout_height="match_parent">
 
-    <ImageButton
-        android:id="@+id/searchImageButton"
+        <ImageButton
+            android:id="@+id/menuImageButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_baseline_menu_24"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:background="@color/white"
+            android:layout_marginStart="18dp"
+            android:layout_marginTop="24dp"/>
+
+        <androidx.fragment.app.FragmentContainerView
+            android:id="@+id/mainFragmentNavigationHost"
+            android:name="androidx.navigation.fragment.NavHostFragment"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintTop_toBottomOf="@id/menuImageButton"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:defaultNavHost="false"
+            app:navGraph="@navigation/drawer_nav_graph" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+
+
+    <com.google.android.material.navigation.NavigationView
+        android:id="@+id/nvView"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/ic_search"
-        android:background="@color/white"
-        app:layout_constraintTop_toTopOf="@id/searchTextInputLayout"
-        app:layout_constraintBottom_toBottomOf="@id/searchTextInputLayout"
-        app:layout_constraintEnd_toEndOf="@id/searchTextInputLayout"
-        android:layout_marginEnd="20dp"/>
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:background="@android:color/white"
+        app:menu="@menu/drawer_employer_menu" />
 
-    <ImageButton
-        android:id="@+id/filterButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/ic_filters"
-        android:background="@color/white"
-        app:layout_constraintTop_toTopOf="@id/searchTextInputLayout"
-        app:layout_constraintBottom_toBottomOf="@id/searchTextInputLayout"
-        app:layout_constraintEnd_toStartOf="@id/searchImageButton"
-        android:layout_marginEnd="20dp"/>
-
-    <RelativeLayout
-        android:id="@+id/employeeCardNext"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/searchTextInputLayout"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="20dp"
-        android:layout_marginHorizontal="15dp"
-        android:background="@drawable/main_relative_layout_background">
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="153dp"
-            android:background="@drawable/employee_top_background"/>
-
-        <TextView
-            android:id="@+id/jobNameNext"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Java developer"
-            android:textColor="@color/white"
-            android:textStyle="bold"
-            android:textSize="32sp"
-            android:layout_marginTop="30dp"
-            android:layout_marginStart="20dp"/>
-
-        <ImageView
-            android:id="@+id/iconImageShownNext"
-            android:layout_width="130dp"
-            android:layout_height="130dp"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="88dp"
-            android:background="@drawable/rounded_image"
-            android:clipToOutline="true"
-            android:scaleType="centerCrop"
-            android:src="@drawable/shrek"/>
-
-        <TextView
-            android:id="@+id/employeeNameNext"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Li Kim"
-            android:textColor="@color/white"
-            android:textSize="20sp"
-            android:layout_marginTop="88dp"
-            android:layout_marginStart="175dp"/>
-
-        <TextView
-            android:id="@+id/employeeSalaryNext"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Salary: 100 $ / h"
-            android:textColor="@color/white"
-            android:textSize="20sp"
-            android:layout_marginTop="115dp"
-            android:layout_marginStart="175dp"/>
-
-        <TextView
-            android:id="@+id/employeeGenderAndAgeNext"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Man, 25 years old"
-            android:textColor="@color/grey"
-            android:textSize="20sp"
-            android:layout_marginTop="170dp"
-            android:layout_marginStart="175dp"/>
-
-        <TextView
-            android:id="@+id/educationTextNext"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="228dp"
-            android:text="Education"
-            android:textColor="@color/black"
-            android:textSize="20sp" />
-
-        <TextView
-            android:id="@+id/educationInfoNext"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="260dp"
-            android:text="Yonsei University, 2004 - 2008"
-            android:textColor="@color/grey"
-            android:textSize="16sp" />
-
-        <TextView
-            android:id="@+id/workTextNext"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="290dp"
-            android:text="Work experience"
-            android:textColor="@color/black"
-            android:textSize="20sp" />
-
-        <TextView
-            android:id="@+id/workInfoNext"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="320dp"
-            android:text="5 years, OOO Gazprom"
-            android:textColor="@color/grey"
-            android:textSize="16sp" />
-
-        <TextView
-            android:id="@+id/projectsInfoNext"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="345dp"
-            android:text="Projects: Autoclicker, Shortlinker, Online-shop “qwerty”"
-            android:textColor="@color/grey"
-            android:textSize="16sp"
-            android:layout_marginBottom="20dp"/>
-
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:id="@+id/employeeCard"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/searchTextInputLayout"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="20dp"
-        android:layout_marginHorizontal="15dp"
-        android:background="@drawable/main_relative_layout_background">
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="153dp"
-            android:background="@drawable/employee_top_background"/>
-
-
-        <TextView
-            android:id="@+id/jobName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Java developer"
-            android:textColor="@color/white"
-            android:textStyle="bold"
-            android:textSize="32sp"
-            android:layout_marginTop="30dp"
-            android:layout_marginStart="20dp"/>
-
-        <ImageView
-            android:id="@+id/iconImageShown"
-            android:layout_width="130dp"
-            android:layout_height="130dp"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="88dp"
-            android:background="@drawable/rounded_image"
-            android:clipToOutline="true"
-            android:scaleType="centerCrop"
-            android:src="@drawable/shrek"/>
-
-        <TextView
-            android:id="@+id/employeeName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Li Kim"
-            android:textColor="@color/white"
-            android:textSize="20sp"
-            android:layout_marginTop="88dp"
-            android:layout_marginStart="175dp"/>
-
-        <TextView
-            android:id="@+id/employeeSalary"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Salary: 100 $ / h"
-            android:textColor="@color/white"
-            android:textSize="20sp"
-            android:layout_marginTop="115dp"
-            android:layout_marginStart="175dp"/>
-
-        <TextView
-            android:id="@+id/employeeGenderAndAge"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Man, 25 years old"
-            android:textColor="@color/grey"
-            android:textSize="20sp"
-            android:layout_marginTop="170dp"
-            android:layout_marginStart="175dp"/>
-
-        <TextView
-            android:id="@+id/educationText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="228dp"
-            android:text="Education"
-            android:textColor="@color/black"
-            android:textSize="20sp" />
-
-        <TextView
-            android:id="@+id/educationInfo"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="260dp"
-            android:text="Yonsei University, 2004 - 2008"
-            android:textColor="@color/grey"
-            android:textSize="16sp" />
-
-        <TextView
-            android:id="@+id/workText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="290dp"
-            android:text="Work experience"
-            android:textColor="@color/black"
-            android:textSize="20sp" />
-
-        <TextView
-            android:id="@+id/workInfo"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="320dp"
-            android:text="5 years, OOO Gazprom"
-            android:textColor="@color/grey"
-            android:textSize="16sp" />
-
-        <TextView
-            android:id="@+id/projectsInfo"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="345dp"
-            android:text="Projects: Autoclicker, Shortlinker, Online-shop “qwerty”"
-            android:textColor="@color/grey"
-            android:textSize="16sp"
-            android:layout_marginBottom="20dp"/>
-
-    </RelativeLayout>
-
-    <com.google.android.material.progressindicator.CircularProgressIndicator
-        android:id="@+id/progressBar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:indeterminate="true"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.drawerlayout.widget.DrawerLayout>

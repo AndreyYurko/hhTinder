@@ -1,11 +1,8 @@
-package com.andreyyurko.hhtinder.ui.main
+package com.andreyyurko.hhtinder.ui.cv
 
-import android.content.Context
 import android.util.Log
-import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.andreyyurko.hhtinder.R
 import com.andreyyurko.hhtinder.structures.CV
 import com.andreyyurko.hhtinder.utils.network.CVHandler
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -17,7 +14,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class MainViewModel @Inject constructor(private val cvHandler : CVHandler) : ViewModel()  {
+class CVViewModel @Inject constructor(private val cvHandler : CVHandler) : ViewModel()  {
 
     companion object {
         const val LOG_TAG = "MainViewModel"
