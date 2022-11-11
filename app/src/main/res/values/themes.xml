@@ -6,7 +6,7 @@
         <item name="colorPrimaryVariant">@color/deep_orange</item>
         <item name="colorOnPrimary">@color/white</item>
         <!-- Secondary brand color. -->
-        <item name="colorSecondary">@color/deep_blue</item>
+        <item name="colorSecondary">#3D3D3D</item>
         <item name="colorSecondaryVariant">@color/deep_blue</item>
         <item name="colorOnSecondary">@color/black</item>
         <!-- Status bar color. -->
@@ -25,4 +25,15 @@
     <style name="Theme.HhTinder.AppBarOverlay" parent="ThemeOverlay.AppCompat.DayNight.ActionBar" />
 
     <style name="Theme.HhTinder.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <style name="ShapeAppearanceOverlay.CardView" parent="">
+        <item name="cornerFamilyTopRight">rounded</item>
+        <item name="cornerFamilyTopLeft">rounded</item>
+        <item name="cornerFamilyBottomLeft">rounded</item>
+        <item name="cornerFamilyBottomRight">rounded</item>
+        <item name="cornerSizeTopRight">8dp</item>
+        <item name="cornerSizeTopLeft">8dp</item>
+        <item name="cornerSizeBottomLeft">8dp</item>
+        <item name="cornerSizeBottomRight">8dp</item>
+    </style>
 </resources>

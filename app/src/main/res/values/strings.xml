@@ -17,4 +17,10 @@
     <string name="sign_in_fragment_title_text">Sign In</string>
     <string name="sign_in_fragment_login_text">Please login to continue our app</string>
     <string name="sign_up_fill_details_text">Please fill the details and create account</string>
+    <string name="vacancy_name">Vacancy name</string>
+    <string name="name">Name</string>
+    <string name="vacancy_text">Vacancy text</string>
+    <string name="text">Text</string>
+    <string name="date">Date</string>
+    <string name="save">Save</string>
 </resources>
