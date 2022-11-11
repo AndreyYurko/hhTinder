@@ -21,16 +21,23 @@ class MainFragment : Fragment(R.layout.fragment_main) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        viewBinding.toolbar.setNavigationOnClickListener {
+            viewBinding.drawerLayout.openDrawer(
+                GravityCompat.START
+            )
+        }
+
+        /*
         viewBinding.menuImageButton.applyInsetter {
             type(statusBars = true) { margin() }
-        }
+        }*/
 
         val navController =
-                (childFragmentManager.findFragmentById(R.id.mainFragmentNavigationHost) as NavHostFragment).navController
+            (childFragmentManager.findFragmentById(R.id.mainFragmentNavigationHost) as NavHostFragment).navController
         viewBinding.nvView.setupWithNavController(navController)
-
+/*
         viewBinding.menuImageButton.setOnClickListener() {
             viewBinding.drawerLayout.openDrawer(GravityCompat.START)
-        }
+        }*/
     }
 }
