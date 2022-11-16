@@ -5,6 +5,7 @@ import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
+import androidx.core.view.marginTop
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
@@ -27,10 +28,10 @@ class MainFragment : Fragment(R.layout.fragment_main) {
             )
         }
 
-        /*
-        viewBinding.menuImageButton.applyInsetter {
+
+        viewBinding.mainFragmentNavigationHost.applyInsetter {
             type(statusBars = true) { margin() }
-        }*/
+        }
 
         val navController =
             (childFragmentManager.findFragmentById(R.id.mainFragmentNavigationHost) as NavHostFragment).navController
