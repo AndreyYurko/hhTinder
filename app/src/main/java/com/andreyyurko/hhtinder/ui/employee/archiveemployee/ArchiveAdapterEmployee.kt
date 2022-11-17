@@ -7,11 +7,12 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.andreyyurko.hhtinder.R
+import com.andreyyurko.hhtinder.structures.Archive
 
-class ArchiveAdapterEmployee(archiveList: List<ArchiveEmployee>) :
+class ArchiveAdapterEmployee(archiveList: List<Archive>) :
     RecyclerView.Adapter<ArchiveAdapterEmployee.ViewHolder>() {
 
-    var archiveList: List<ArchiveEmployee> = archiveList
+    var archiveList: List<Archive> = archiveList
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val avatarImageView = itemView.findViewById<ImageView>(R.id.avatarImageView)
@@ -28,7 +29,7 @@ class ArchiveAdapterEmployee(archiveList: List<ArchiveEmployee>) :
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.cardNameTextView.setText(archiveList.get(position).name)
-        holder.cardBodyTextView.setText(archiveList.get(position).body)
+        holder.cardBodyTextView.setText(archiveList.get(position).content)
     }
 
     override fun getItemCount(): Int {

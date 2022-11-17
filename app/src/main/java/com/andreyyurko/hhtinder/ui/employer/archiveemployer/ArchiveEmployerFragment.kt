@@ -7,30 +7,36 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.andreyyurko.hhtinder.R
 import com.andreyyurko.hhtinder.databinding.FragmentArchiveEmployerBinding
+import com.andreyyurko.hhtinder.structures.Archive
 import com.andreyyurko.hhtinder.ui.employee.archiveemployee.ArchiveAdapterEmployee
 import com.andreyyurko.hhtinder.ui.employee.archiveemployee.ArchiveEmployee
+import com.andreyyurko.hhtinder.utils.network.ArchiveHandler
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.launch
+import kotlin.coroutines.CoroutineContext
 
-class ArchiveEmployerFragment : Fragment(R.layout.fragment_archive_employer) {
+class ArchiveEmployerFragment : Fragment(R.layout.fragment_archive_employer), CoroutineScope {
 
     private val viewBinding by viewBinding(FragmentArchiveEmployerBinding::bind)
+
+    private var job: Job = Job()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        setupRecyclerView()
+        launch {
+            setupRecyclerView()
+        }
     }
 
 
-    private fun getArchiveList(): List<ArchiveEmployee> {
-        var list = arrayListOf<ArchiveEmployee>()
-
-        list.add(ArchiveEmployee())
-        list.add(ArchiveEmployee())
-
-        return return list
+    private suspend fun getArchiveList(): List<Archive> {
+        return ArchiveHandler().getArchiveList()
     }
 
-    private fun setupRecyclerView(): ArchiveAdapterEmployee {
+    private suspend fun setupRecyclerView(): ArchiveAdapterEmployee {
         val recyclerView = viewBinding.recycleView
         recyclerView.layoutManager =
             LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
@@ -39,4 +45,7 @@ class ArchiveEmployerFragment : Fragment(R.layout.fragment_archive_employer) {
 
         return adapter
     }
+
+    override val coroutineContext: CoroutineContext
+        get() = Dispatchers.Main + job
 }
