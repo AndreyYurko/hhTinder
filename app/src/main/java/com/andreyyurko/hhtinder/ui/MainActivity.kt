@@ -15,13 +15,20 @@ import by.kirich1409.viewbindingdelegate.viewBinding
 import com.andreyyurko.hhtinder.R
 import com.andreyyurko.hhtinder.databinding.ActivityMainBinding
 import com.andreyyurko.hhtinder.singleton.SharedPreferencesSingleton
+import com.andreyyurko.hhtinder.singleton.VocabsSingleton
 import com.andreyyurko.hhtinder.utils.network.AuthHandler
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import javax.inject.Inject
+import kotlin.coroutines.CoroutineContext
 
 @AndroidEntryPoint
-class MainActivity : AppCompatActivity(R.layout.activity_main) {
+class MainActivity : AppCompatActivity(R.layout.activity_main), CoroutineScope {
+
+    private var job: Job = Job()
 
     companion object {
         const val LOG_TAG = "Main Activity"
@@ -32,6 +39,10 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        launch {
+            VocabsSingleton.instance.initAllVocabs()
+        }
 
         SharedPreferencesSingleton.instance.setSingletonContext(this.baseContext)
 
@@ -55,4 +66,7 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
             }
         }
     }
+
+    override val coroutineContext: CoroutineContext
+        get() = Dispatchers.Main + job
 }

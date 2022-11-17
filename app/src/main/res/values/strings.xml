@@ -23,4 +23,5 @@
     <string name="text">Text</string>
     <string name="date">Date</string>
     <string name="save">Save</string>
+    <string name="category">Category</string>
 </resources>
