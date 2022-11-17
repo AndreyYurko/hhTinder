@@ -54,7 +54,14 @@ class MainActivity : AppCompatActivity(R.layout.activity_main), CoroutineScope {
                     Log.d(LOG_TAG, "change log state $it")
                     when (it) {
                         AuthHandler.AuthState.Logged -> {
-                            navController.navigate(R.id.action_EmployeeNavGraph)
+                            val roleId =
+                                SharedPreferencesSingleton.instance.getSharedPreferences()!!
+                                    .getInt("role_id", 2);
+                            if (roleId == 2) {
+                                navController.navigate(R.id.action_EmployerNavGraph)
+                            } else if(roleId == 3) {
+                                navController.navigate(R.id.action_EmployeeNavGraph)
+                            }
                         }
                         AuthHandler.AuthState.NotLogged -> {
                             navController.navigate(R.id.action_guestNavGraph)

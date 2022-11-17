@@ -81,7 +81,35 @@ class AuthHandler @Inject constructor() : ViewModel() {
             e.printStackTrace()
         }
 
+        if (res) {
+            getUserRole(log)
+        }
+
         return res
+    }
+
+    suspend fun getUserRole(log: String) {
+        val url = "http:217.25.88.166:8000/user_role/" + log
+
+        val request = Request.Builder()
+            .url(url)
+            .get()
+            .build()
+
+        val response = client.newCall(request).await()
+        val responseBody = response.body?.string() ?: ""
+        var jsonObj = JSONObject(responseBody)
+
+        try {
+            val roleId = jsonObj.getInt("id")
+            val roleName = jsonObj.getString("name")
+
+            SharedPreferencesSingleton.instance.getSharedPreferences()!!.edit()
+                .putInt("role_id", roleId).putString("role_name", roleName).commit()
+
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
     }
 
     suspend fun logIn(log: String?, pass: String?, token: String?) {
