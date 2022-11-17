@@ -7,7 +7,6 @@ from pydantic import BaseModel
 from monitoring import instrumentator
 from fastapi.middleware.cors import CORSMiddleware
 
-
 app = FastAPI()  # rest api
 app.type = "00"
 tun_, conn_ = connect_db()
@@ -18,7 +17,9 @@ app.state.connection = conn_
 #     connection += [smthng]
 #     return True
 
-# tunnel, conn = connect_db() # server for DB
+tunnel, conn = connect_db()  # server for DB
+
+
 #  метрики доступны по /metrics
 # @app.on_event("startup")
 # async def startup():
@@ -27,6 +28,7 @@ app.state.connection = conn_
 @app.get("/")
 def read_root():
     return {"Hello": "World"}
+
 
 @app.get("/items/{item_id}")
 def read_item(item_id: int, q: Union[str, None] = None):
@@ -39,12 +41,14 @@ def next_worker(job_id: int):
     user = get_next_user(app.state.connection)
     return user.to_json()
 
+
 @app.get("/job/{worker_id}")
 def next_job(worker_id: int):
     # global connection
     print(worker_id)
     vac = get_next_vacancy(app.state.connection)
     return vac.to_json()
+
 
 @app.get("/history/job/{job_id}")
 def next_job(job_id: int):
@@ -55,6 +59,7 @@ def next_job(job_id: int):
         new_workers += [worker[0]]
     return {"workers": new_workers}
 
+
 @app.get("/history/worker/{worker_id}")
 def next_job(worker_id: int):
     # global connection
@@ -63,6 +68,7 @@ def next_job(worker_id: int):
     for worker in vacancies:
         new_vacancies += [worker[0]]
     return {"workers": new_vacancies}
+
 
 class Like(BaseModel):
     job_id: int
@@ -105,11 +111,30 @@ def next_vacancy(vac_id: int):
     vacancy = get_next_vacancy(app.state.connection)
     return vacancy.to_json()
 
+
 @app.get("/cv/{cv_id}")
 def next_cv(cv_id: int):
     # global connection
     cv = get_next_cv(app.state.connection)
     return cv.to_json()
+
+
+@app.get("/voc/job_categories")
+def job_categories():
+    categories = get_job_categories(app.state.connection)
+    return categories
+
+
+@app.post("/login/token/{login}/{token}")
+def login_with_token(login: str, token: str):
+    res = check_token(app.state.connection, login, token)
+    return {"login": res}
+
+
+@app.post("/login/password/{login}/{password}")
+def login_with_password(login: str, password: str):
+    token = try_login(app.state.connection, login, password)
+    return {"token": token}
 
 
 # General comment
@@ -125,6 +150,7 @@ def Start():
     uvicorn.run("main:app", host="0.0.0.0", port=8000, log_level="info")
     print("ehm")
 
+
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
@@ -133,11 +159,10 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-
-# if __name__ == '__main__':
-#     Start()
-# print("Something is not quite right")
-# close_ssh_tunnel(tunnel)
-# close_connection(conn)
+if __name__ == '__main__':
+    Start()
+    print("Something is not quite right")
+    close_ssh_tunnel(tunnel)
+    close_connection(conn)
 
 instrumentator.instrument(app).expose(app, endpoint="/metrics", include_in_schema=True, should_gzip=True)

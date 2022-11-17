@@ -1,14 +1,18 @@
 import random
 from models import *
 from sql_queries import Queries
+import utils, secrets
 
 
-def execute_sql_query(conn, query):
+def execute_sql_query(conn, query, type='default'):
     try:
         print("Executing SQL Query..")
         db_cursor = conn.cursor()
         db_cursor.execute(query)
-        records = db_cursor.fetchall()
+        if type == 'default':
+            records = db_cursor.fetchall()
+        else:
+            conn.commit()
         db_cursor.close()
         print("SUCCESS: Query was successful")
         return records
@@ -83,6 +87,11 @@ def post_like_from_worker(conn, job_id, worker_id):
     execute_sql_query(conn, message_template_post_like_from_worker.format(worker_id, job_id))
 
 
+def get_job_categories(conn):
+    categories = execute_sql_query(conn, Queries.GET_JOB_CATEGORIES)
+    return utils.vocab_to_json(categories)
+
+
 def get_liked_vacancies_ids(conn, user_id):
     message_template_get_liked_vacancies = Queries.GET_LIKED_VACANCIES_ID_BY_USERID
     vacancies = execute_sql_query(conn, message_template_get_liked_vacancies.format(id=user_id))
@@ -95,3 +104,29 @@ def get_liked_workers_ids(conn, employee_id):
     workers = execute_sql_query(conn, message_template_get_liked_workers.format(id=employee_id))
     # TODO
     return workers
+
+
+def check_token(conn, log, token):
+    sql = Queries.LOGIN_BY_LOG_AND_TOKEN
+    res = execute_sql_query(conn, sql.format(email=log, un_key=token))
+
+    try:
+        if (len(res) > 0):
+            return True
+    except:
+        pass
+
+    return False
+
+
+def try_login(conn, log, password):
+    sql = Queries.LOGIN_BY_LOG_AND_PASS
+    res = execute_sql_query(conn, sql.format(email=log, passwd=password))
+    token = ""
+
+    if (len(res) != 0):
+        token = secrets.token_urlsafe(16)
+        sql = Queries.PUSH_TOKEN_BY_LOG
+        res = execute_sql_query(conn, sql.format(email=log, passwd=password, un_key=token), 'update')
+
+    return token

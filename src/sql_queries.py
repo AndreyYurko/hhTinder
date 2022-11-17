@@ -14,3 +14,10 @@ class Queries():
 
     INSERT_LIKE_FROM_VACANCY = "insert into employer_worker_match values ({vacancy_id}, {user_id})"
     INSERT_LIKE_FROM_WORKER = "insert into user_vac_match values ({user_id}, {vacancy_id})"
+
+    GET_JOB_CATEGORIES = "select * from voc_job_category"
+
+    LOGIN_BY_LOG_AND_PASS = "select * from users where email like '{email}' and passwd like '{passwd}' limit 1"
+    LOGIN_BY_LOG_AND_TOKEN = "select * from users where email like '{email}' and un_key like '{un_key}' limit 1"
+
+    PUSH_TOKEN_BY_LOG = "UPDATE users SET un_key = '{un_key}' WHERE (email LIKE '{email}' AND passwd LIKE '{passwd}')"
