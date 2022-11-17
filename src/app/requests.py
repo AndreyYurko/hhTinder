@@ -138,24 +138,28 @@ def get_role(conn, email):
 
 
 def get_all_vacancy_preview(conn, email):
-    res = execute_sql_query(conn, Queries.GET_VACANCY_PREVIEW_INFO.format(email_str=email))
-    out = {}
-    for i in range(len(res)):
-        el = res[i]
-        jsonObj = {"name": el[0], "content": el[1], "vac_cat": el[2], "image_id": el[3], "img_ext": el[5]}
-        out[i] = jsonObj
+    result = execute_sql_query(conn, Queries.GET_VACANCY_PREVIEW_INFO.format(email_str=email))
+    preview = {}
+    for i in range(len(result)):
+        vacancy = result[i]
+        preview[i] = {"name": vacancy[0], "content": vacancy[1], "vac_cat": vacancy[2], "image_id": vacancy[3], "img_ext": vacancy[5]}
 
-    return out
+    return preview
 
 
 def get_all_cv_preview(conn, email):
-    res = execute_sql_query(conn, Queries.GET_CV_PREVIEW_INFO.format(email_str=email))
-    out = {}
+    result = execute_sql_query(conn, Queries.GET_CV_PREVIEW_INFO.format(email_str=email))
+    preview = {}
 
-    for i in range(len(res)):
-        el = res[i]
-        jsonObj = {"name": el[0], "content": el[2], "salary": el[1], "cv_cat": el[3], "image_id": el[4],
-                   "img_ext": el[6]}
-        out[i] = jsonObj
+    for i in range(len(result)):
+        cv = result[i]
+        preview[i] = {
+            "name": cv[0],
+            "content": cv[2],
+            "salary": cv[1],
+            "cv_cat": cv[3],
+            "image_id": cv[4],
+            "img_ext": cv[6],
+        }
 
-    return out
+    return preview
