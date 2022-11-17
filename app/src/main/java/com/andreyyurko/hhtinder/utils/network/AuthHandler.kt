@@ -57,26 +57,31 @@ class AuthHandler @Inject constructor() : ViewModel() {
 
         val response = client.newCall(request).await()
         val responseBody = response.body?.string() ?: ""
-        var jsonObj = JSONObject(responseBody)
 
         var res = false
 
-        if (type.equals("password")) {
-            var token = jsonObj.getString("token")
+        try {
+            var jsonObj = JSONObject(responseBody)
 
-            SharedPreferencesSingleton.instance.getSharedPreferences()!!.edit()
-                .putString("token", token).commit()
+            if (type.equals("password")) {
+                var token = jsonObj.getString("token")
 
-            SharedPreferencesSingleton.instance.getSharedPreferences()!!.edit()
-                .putString("login", log).commit()
+                SharedPreferencesSingleton.instance.getSharedPreferences()!!.edit()
+                    .putString("token", token).commit()
+
+                SharedPreferencesSingleton.instance.getSharedPreferences()!!.edit()
+                    .putString("login", log).commit()
 
 
-            res = !token.equals("")
-        } else {
-            res = jsonObj.getBoolean("login")
+                res = !token.equals("")
+            } else {
+                res = jsonObj.getBoolean("login")
+            }
+
+            Log.d(LOG_TAG, responseBody)
+        } catch (e: Exception) {
+            e.printStackTrace()
         }
-
-        Log.d(LOG_TAG, responseBody)
 
         return res
     }

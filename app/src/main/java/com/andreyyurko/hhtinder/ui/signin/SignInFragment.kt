@@ -42,6 +42,7 @@ class SignInFragment : Fragment(R.layout.fragment_sign_in) {
             SharedPreferencesSingleton.instance.getSharedPreferences()!!.getString("token", "")
         val login =
             SharedPreferencesSingleton.instance.getSharedPreferences()!!.getString("login", "")
+
         viewModel.auth(login, "pass", token)
     }
 }

@@ -25,7 +25,7 @@ class EntranceFragment : Fragment(R.layout.fragment_entrance) {
         super.onCreate(savedInstanceState)
         viewModel = ViewModelProvider(this)[EntranceViewModel::class.java]
 
-        if (hasToken()) {
+        if (hasToken() && hasLogin()) {
             val controller = findNavController()
             controller.navigate(R.id.signInFragment)
         }
@@ -50,5 +50,12 @@ class EntranceFragment : Fragment(R.layout.fragment_entrance) {
         var token =
             SharedPreferencesSingleton.instance.getSharedPreferences()!!.getString("token", "")
         return !token.equals("")
+    }
+
+    fun hasLogin(): Boolean {
+        SharedPreferencesSingleton.instance.setSingletonContext(this.requireContext())
+        var login =
+            SharedPreferencesSingleton.instance.getSharedPreferences()!!.getString("login", "")
+        return !login.equals("")
     }
 }
