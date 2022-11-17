@@ -4,7 +4,8 @@ from typing import Union
 import uvicorn
 from fastapi import FastAPI
 from pydantic import BaseModel
-from prometheus import instrumentator
+from monitoring import instrumentator
+from fastapi.middleware.cors import CORSMiddleware
 
 
 app = FastAPI()  # rest api
@@ -19,9 +20,9 @@ app.state.connection = conn_
 
 # tunnel, conn = connect_db() # server for DB
 #  метрики доступны по /metrics
-@app.on_event("startup")
-async def startup():
-    instrumentator.instrument(app).expose(app, endpoint="/metrics", include_in_schema=False, should_gzip=True)
+# @app.on_event("startup")
+# async def startup():
+#     instrumentator.instrument(app).expose(app, endpoint="/metrics", include_in_schema=True, should_gzip=True)
 
 @app.get("/")
 def read_root():
@@ -124,9 +125,19 @@ def Start():
     uvicorn.run("main:app", host="0.0.0.0", port=8000, log_level="info")
     print("ehm")
 
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
-if __name__ == '__main__':
-    Start()
+
+# if __name__ == '__main__':
+#     Start()
 # print("Something is not quite right")
 # close_ssh_tunnel(tunnel)
 # close_connection(conn)
+
+instrumentator.instrument(app).expose(app, endpoint="/metrics", include_in_schema=True, should_gzip=True)
