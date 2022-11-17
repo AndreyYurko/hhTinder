@@ -140,7 +140,7 @@ def login_with_password(login: str, password: str):
 @app.get("/user_role/{email}")
 def user_role_by_email(email: str):
     roles = get_role(app.state.connection, email)
-    return roles[-1]
+    return roles
 
 
 @app.get("/vacancy_preview_info/{email}")

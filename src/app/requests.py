@@ -133,7 +133,8 @@ def try_login(conn, log, password):
 
 
 def get_role(conn, email):
-    return execute_sql_query(conn, Queries.GET_USER_ROLE_BY_EMAIL.format(email_str=email))
+    res = execute_sql_query(conn, Queries.GET_USER_ROLE_BY_EMAIL.format(email_str=email))[0]
+    return {"id": res[0], "name": res[1]}
 
 
 def get_all_vacancy_preview(conn, email):
@@ -153,7 +154,8 @@ def get_all_cv_preview(conn, email):
 
     for i in range(len(res)):
         el = res[i]
-        jsonObj = {"name": el[0], "content": el[2], "salary":el[1], "cv_cat": el[3], "image_id": el[4], "img_ext": el[6]}
+        jsonObj = {"name": el[0], "content": el[2], "salary": el[1], "cv_cat": el[3], "image_id": el[4],
+                   "img_ext": el[6]}
         out[i] = jsonObj
 
     return out
