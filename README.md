@@ -6,7 +6,7 @@ The Vacanter is a mobile application for matching employers with potential emplo
 - 2 sprint: 7.10.2022-28.10.2022 ✅
 - 3 sprint: 28.10-18.11.2022 ⏳
 - 4 sprint: 18.11-09.12.2022 ❌
-# Build and run the container only for app.py
+# Build and run the container only for FastAPI(app.py)
 Build the docker image using:
 ```
 docker build . -t main 
@@ -27,7 +27,7 @@ Some usefull commands:
 
 - ```docker stop main``` - stop the docker container
 - ```docker rm main``` - remove image (before rebuild image step in case of error)
-# Run the containers for app.py, Prometheus, Grafana
+# Run the containers for FastAPI(app.py), Prometheus, Grafana
 Run all 3 containers
 ```
 docker compose up
