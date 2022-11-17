@@ -8,6 +8,7 @@ import androidx.navigation.fragment.findNavController
 import com.andreyyurko.hhtinder.R
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.andreyyurko.hhtinder.databinding.FragmentEntranceBinding
+import com.andreyyurko.hhtinder.singleton.SharedPreferencesSingleton
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -23,6 +24,11 @@ class EntranceFragment : Fragment(R.layout.fragment_entrance) {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         viewModel = ViewModelProvider(this)[EntranceViewModel::class.java]
+
+        if (hasToken()) {
+            val controller = findNavController()
+            controller.navigate(R.id.signInFragment)
+        }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -37,5 +43,12 @@ class EntranceFragment : Fragment(R.layout.fragment_entrance) {
             val controller = findNavController()
             controller.navigate(R.id.signUpFragment)
         }
+    }
+
+    fun hasToken(): Boolean {
+        SharedPreferencesSingleton.instance.setSingletonContext(this.requireContext())
+        var token =
+            SharedPreferencesSingleton.instance.getSharedPreferences()!!.getString("token", "")
+        return !token.equals("")
     }
 }

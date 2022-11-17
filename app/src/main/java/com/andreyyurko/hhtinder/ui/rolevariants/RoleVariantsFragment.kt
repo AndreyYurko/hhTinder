@@ -24,12 +24,14 @@ class RoleVariantsFragment : Fragment(R.layout.fragment_role_variants) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        //TODO:
+        /*
         viewBinding.employeeButton.setOnClickListener {
             viewModel.auth()
         }
 
         viewBinding.employerButton.setOnClickListener {
             viewModel.auth()
-        }
+        }*/
     }
 }

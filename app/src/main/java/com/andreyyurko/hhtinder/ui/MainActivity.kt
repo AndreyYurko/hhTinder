@@ -14,6 +14,7 @@ import androidx.navigation.fragment.NavHostFragment
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.andreyyurko.hhtinder.R
 import com.andreyyurko.hhtinder.databinding.ActivityMainBinding
+import com.andreyyurko.hhtinder.singleton.SharedPreferencesSingleton
 import com.andreyyurko.hhtinder.utils.network.AuthHandler
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -31,8 +32,12 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        SharedPreferencesSingleton.instance.setSingletonContext(this.baseContext)
+
         WindowCompat.setDecorFitsSystemWindows(window, false)
-        val navHostFragment = supportFragmentManager.findFragmentById(R.id.mainActivityNavigationHost) as NavHostFragment
+        val navHostFragment =
+            supportFragmentManager.findFragmentById(R.id.mainActivityNavigationHost) as NavHostFragment
         val navController = navHostFragment.navController
         lifecycleScope.launch {
             lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {

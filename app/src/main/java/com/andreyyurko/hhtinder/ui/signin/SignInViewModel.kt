@@ -1,5 +1,7 @@
 package com.andreyyurko.hhtinder.ui.signin
 
+import android.content.SharedPreferences
+import android.preference.PreferenceManager
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.andreyyurko.hhtinder.utils.network.AuthHandler
@@ -10,11 +12,11 @@ import javax.inject.Inject
 @HiltViewModel
 class SignInViewModel @Inject constructor(
     private val authHandler: AuthHandler
-) : ViewModel()  {
+) : ViewModel() {
 
-    fun auth() {
+    fun auth(log: String?, pass: String?, token: String?) {
         viewModelScope.launch {
-            authHandler.logIn()
+            authHandler.logIn(log, pass, token)
         }
     }
 }

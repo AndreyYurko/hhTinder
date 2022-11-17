@@ -2,6 +2,7 @@ package com.andreyyurko.hhtinder
 
 import android.app.Application
 import android.os.StrictMode
+import com.andreyyurko.hhtinder.singleton.SharedPreferencesSingleton
 import dagger.hilt.android.HiltAndroidApp
 
 @HiltAndroidApp

@@ -10,10 +10,10 @@ import javax.inject.Inject
 @HiltViewModel
 class RoleVariantsViewModel @Inject constructor(
     private val authHandler: AuthHandler
-) : ViewModel()  {
-    fun auth() {
+) : ViewModel() {
+    fun auth(log: String?, pass: String?, token: String?) {
         viewModelScope.launch {
-            authHandler.logIn()
+            authHandler.logIn(log, pass, token)
         }
     }
 }
