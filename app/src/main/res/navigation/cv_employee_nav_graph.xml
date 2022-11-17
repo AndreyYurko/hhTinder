@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/cv_nav_graph"
+    android:id="@+id/cv_employee_nav_graph"
     app:startDestination="@id/cvFragment">
 
     <fragment
         android:id="@+id/cvFragment"
-        android:name="com.andreyyurko.hhtinder.ui.employer.cvemployer.CVEmployerFragment"
+        android:name="com.andreyyurko.hhtinder.ui.employee.cvemployee.CVEmployeeFragment"
         android:label="CVFragment">
     </fragment>
 

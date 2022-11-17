@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/drawer_employer_nav_graph"
+    app:startDestination="@+id/cv_employer_nav_graph">
+
+
+    <include app:graph="@navigation/archive_employer_nav_graph" />
+    <include app:graph="@navigation/cv_employer_nav_graph" />
+    <include app:graph="@navigation/settings_employer_nav_graph" />
+    <include app:graph="@navigation/message_employer_nav_graph" />
+    <include app:graph="@navigation/profile_employer_nav_graph" />
+    <include app:graph="@navigation/vacancy_employer_nav_graph" />
+</navigation>

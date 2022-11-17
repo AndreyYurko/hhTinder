@@ -13,7 +13,7 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="153dp"
-        android:background="@drawable/employee_top_background"/>
+        android:background="@drawable/employee_card_top_background"/>
 
 
     <TextView
