@@ -6,3 +6,24 @@ The Vacanter is a mobile application for matching employers with potential emplo
 - 2 sprint: 7.10.2022-28.10.2022 ✅
 - 3 sprint: 28.10-18.11.2022 ⏳
 - 4 sprint: 18.11-09.12.2022 ❌
+# Build and run the container
+Build the docker image using:
+```
+docker build . -t main 
+```
+Check whether you have successfully build the image:
+```
+docker images  
+```
+Generate the docker container using:
+```
+docker run --name main -p 8000:8000 main 
+```
+Check that your image is running:
+```
+docker ps -a 
+```
+Some usefull commands:
+
+- ```docker stop main``` - stop the docker container
+- ```docker rm main``` - remove image (before rebuild image step in case of error)
