@@ -138,10 +138,22 @@ def get_role(conn, email):
 
 def get_all_vacancy_preview(conn, email):
     res = execute_sql_query(conn, Queries.GET_VACANCY_PREVIEW_INFO.format(email_str=email))
-    return res
+    out = {}
+    for i in range(len(res)):
+        el = res[i]
+        jsonObj = {"name": el[0], "content": el[1], "vac_cat": el[2], "image_id": el[3], "img_ext": el[5]}
+        out[i] = jsonObj
 
+    return out
 
 
 def get_all_cv_preview(conn, email):
     res = execute_sql_query(conn, Queries.GET_CV_PREVIEW_INFO.format(email_str=email))
-    return res
+    out = {}
+
+    for i in range(len(res)):
+        el = res[i]
+        jsonObj = {"name": el[0], "content": el[2], "salary":el[1], "cv_cat": el[3], "image_id": el[4], "img_ext": el[6]}
+        out[i] = jsonObj
+
+    return out

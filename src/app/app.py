@@ -145,12 +145,12 @@ def user_role_by_email(email: str):
 
 @app.get("/vacancy_preview_info/{email}")
 def get_vacancy_preview(email: str):
-    return get_all_vacancy_preview(app.state.connection, email)[-1]
+    return get_all_vacancy_preview(app.state.connection, email)
 
 
 @app.get("/cv_preview_info/{email}")
 def get_cv_preview(email: str):
-    return get_all_cv_preview(app.state.connection, email)[-1]
+    return get_all_cv_preview(app.state.connection, email)
 
 
 # General comment
