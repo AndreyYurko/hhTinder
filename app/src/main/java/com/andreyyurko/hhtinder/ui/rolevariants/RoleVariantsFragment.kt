@@ -4,11 +4,10 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import com.andreyyurko.hhtinder.R
-import dagger.hilt.android.AndroidEntryPoint
 import by.kirich1409.viewbindingdelegate.viewBinding
+import com.andreyyurko.hhtinder.R
 import com.andreyyurko.hhtinder.databinding.FragmentRoleVariantsBinding
-import com.andreyyurko.hhtinder.ui.signin.SignInViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class RoleVariantsFragment : Fragment(R.layout.fragment_role_variants) {

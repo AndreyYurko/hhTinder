@@ -20,7 +20,7 @@
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="40dp"
-            android:background="@color/deep_orange">
+            android:background="@color/deep_blue">
 
             <TextView
                 android:id="@+id/cardName"

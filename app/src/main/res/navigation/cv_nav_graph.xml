@@ -6,17 +6,8 @@
 
     <fragment
         android:id="@+id/cvFragment"
-        android:name="com.andreyyurko.hhtinder.ui.cv.CVFragment"
+        android:name="com.andreyyurko.hhtinder.ui.employer.cvemployer.CVEmployerFragment"
         android:label="CVFragment">
-        <action
-            android:id="@+id/action_mainFragment_to_backsideMainPage"
-            app:destination="@id/backsideMainPage" />
-    </fragment>
-
-    <fragment
-        android:id="@+id/backsideMainPage"
-        android:name="com.andreyyurko.hhtinder.ui.backsidemainpage.BacksideMainPageFragment"
-        android:label="BacksideMainPage">
     </fragment>
 
 </navigation>

@@ -6,7 +6,7 @@
 
     <fragment
         android:id="@+id/archiveFragment"
-        android:name="com.andreyyurko.hhtinder.ui.archive.ArchiveFragment"
+        android:name="com.andreyyurko.hhtinder.ui.employer.archiveemployer.ArchiveEmployerFragment"
         android:label="ArchiveFragment"/>
 
 </navigation>

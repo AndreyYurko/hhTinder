@@ -1,7 +1,5 @@
 package com.andreyyurko.hhtinder.ui.signin
 
-import android.content.SharedPreferences
-import android.preference.PreferenceManager
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.andreyyurko.hhtinder.utils.network.AuthHandler

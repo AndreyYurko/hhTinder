@@ -1,8 +1,6 @@
 package com.andreyyurko.hhtinder.utils.network
 
 import android.util.Log
-import com.andreyyurko.hhtinder.singleton.VocabsSingleton
-import com.andreyyurko.hhtinder.structures.Vacancy
 import com.andreyyurko.hhtinder.structures.Vocab
 import okhttp3.OkHttpClient
 import okhttp3.Request

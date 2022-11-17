@@ -6,7 +6,7 @@
 
     <fragment
         android:id="@+id/messageFragment"
-        android:name="com.andreyyurko.hhtinder.ui.message.MessageFragment"
+        android:name="com.andreyyurko.hhtinder.ui.employer.messageemployer.MessageEmployerFragment"
         android:label="MessageFragment"/>
 
 </navigation>

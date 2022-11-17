@@ -9,7 +9,6 @@ import androidx.core.view.WindowCompat
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.andreyyurko.hhtinder.R
@@ -22,7 +21,6 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
-import javax.inject.Inject
 import kotlin.coroutines.CoroutineContext
 
 @AndroidEntryPoint
@@ -56,7 +54,7 @@ class MainActivity : AppCompatActivity(R.layout.activity_main), CoroutineScope {
                     Log.d(LOG_TAG, "change log state $it")
                     when (it) {
                         AuthHandler.AuthState.Logged -> {
-                            navController.navigate(R.id.action_RegisteredUserNavGraph)
+                            navController.navigate(R.id.action_EmployerNavGraph)
                         }
                         AuthHandler.AuthState.NotLogged -> {
                             navController.navigate(R.id.action_guestNavGraph)

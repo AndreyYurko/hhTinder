@@ -4,10 +4,10 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import by.kirich1409.viewbindingdelegate.viewBinding
 import com.andreyyurko.hhtinder.R
 import com.andreyyurko.hhtinder.databinding.FragmentPhoneVerificationBinding
 import dagger.hilt.android.AndroidEntryPoint
-import by.kirich1409.viewbindingdelegate.viewBinding
 
 @AndroidEntryPoint
 class PhoneVerification : Fragment(R.layout.fragment_phone_verification) {

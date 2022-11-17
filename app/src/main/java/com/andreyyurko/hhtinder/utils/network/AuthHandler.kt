@@ -1,7 +1,5 @@
 package com.andreyyurko.hhtinder.utils.network
 
-import android.content.SharedPreferences
-import android.preference.PreferenceManager
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import com.andreyyurko.hhtinder.singleton.SharedPreferencesSingleton

@@ -1,16 +1,8 @@
 package com.andreyyurko.hhtinder.utils.network
 
-import android.graphics.drawable.Drawable
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import com.andreyyurko.hhtinder.structures.CV
-import dagger.hilt.android.lifecycle.HiltViewModel
 import okhttp3.OkHttpClient
-import okhttp3.Request
-import org.json.JSONObject
-import ru.gildor.coroutines.okhttp.await
-import java.io.InputStream
-import java.net.URL
 import javax.inject.Inject
 import javax.inject.Singleton
 

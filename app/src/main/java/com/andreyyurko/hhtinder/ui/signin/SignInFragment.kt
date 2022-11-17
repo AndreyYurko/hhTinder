@@ -1,7 +1,6 @@
 package com.andreyyurko.hhtinder.ui.signin
 
 import android.os.Bundle
-import android.preference.PreferenceManager
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider

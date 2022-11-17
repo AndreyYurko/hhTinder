@@ -6,7 +6,7 @@
 
     <fragment
         android:id="@+id/settingsFragment"
-        android:name="com.andreyyurko.hhtinder.ui.settings.SettingsFragment"
+        android:name="com.andreyyurko.hhtinder.ui.employer.settingsemployer.SettingsEmployerFragment"
         android:label="SettingsFragment"/>
 
 </navigation>

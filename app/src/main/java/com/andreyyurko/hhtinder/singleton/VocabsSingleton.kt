@@ -3,7 +3,6 @@ package com.andreyyurko.hhtinder.singleton
 import android.util.Log
 import com.andreyyurko.hhtinder.structures.Vocab
 import com.andreyyurko.hhtinder.utils.network.VocabHandler
-import kotlin.math.log
 
 class VocabsSingleton {
 
