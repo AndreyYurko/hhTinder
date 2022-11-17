@@ -23,7 +23,7 @@ class Queries():
     PUSH_TOKEN_BY_LOG = "UPDATE users SET un_key = '{un_key}' WHERE (email LIKE '{email}' AND passwd LIKE '{passwd}')"
 
 
-    GET_USER_ROLE_BY_EMAIL = "SELECT role_id, roles.name from users join users_role roles on users.role_id = roles.id where users.email = {email_str}"
+    GET_USER_ROLE_BY_EMAIL = "SELECT role_id, roles.name from users join users_role roles on users.role_id = roles.id where users.email = '{email_str}'"
 
-    GET_VACANCY_PREVIEW_INFO = "SELECT vac_name, vac_text, vac_category, img_id, images.name, images.extension from vacancy join users on vacancy.cr_user = users.id join images on vacancy.img_id = images.id where users.email = {email_str}"
-    GET_CV_PREVIEW_INFO = "SELECT cv_name, salary, cv_text, cv_category, img_id, images.name, images.extension from cv join users on cv.cr_user = users.id join images on cv.img_id = images.id where users.email = {email_str}"
+    GET_VACANCY_PREVIEW_INFO = "SELECT vac_name, vac_text, vac_category, img_id, images.name, images.extension from vacancy join users on vacancy.cr_user = users.id join images on vacancy.img_id = images.id where users.email = '{email_str}'"
+    GET_CV_PREVIEW_INFO = "SELECT cv_name, salary, cv_text, cv_category, img_id, images.name, images.extension from cv join users on cv.cr_user = users.id join images on cv.img_id = images.id where users.email = '{email_str}'"

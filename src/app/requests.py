@@ -133,12 +133,15 @@ def try_login(conn, log, password):
 
 
 def get_role(conn, email):
-    return execute_sql_query(conn, Queries.GET_USER_ROLE_BY_EMAIL.format(email=email))
+    return execute_sql_query(conn, Queries.GET_USER_ROLE_BY_EMAIL.format(email_str=email))
 
 
-def get_vacancy_preview(conn, email):
-    return execute_sql_query(conn, Queries.GET_VACANCY_PREVIEW_INFO.format(email=email))
+def get_all_vacancy_preview(conn, email):
+    res = execute_sql_query(conn, Queries.GET_VACANCY_PREVIEW_INFO.format(email_str=email))
+    return res
 
 
-def get_cv_preview(conn, email):
-    return execute_sql_query(conn, Queries.GET_CV_PREVIEW_INFO.format(email=email))
+
+def get_all_cv_preview(conn, email):
+    res = execute_sql_query(conn, Queries.GET_CV_PREVIEW_INFO.format(email_str=email))
+    return res

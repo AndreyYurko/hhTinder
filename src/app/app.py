@@ -137,20 +137,20 @@ def login_with_password(login: str, password: str):
     return {"token": token}
 
 
-@app.get("user_role/{email}")
+@app.get("/user_role/{email}")
 def user_role_by_email(email: str):
     roles = get_role(app.state.connection, email)
     return roles[-1]
 
 
-@app.get("vacancy_preview_info/{email}")
+@app.get("/vacancy_preview_info/{email}")
 def get_vacancy_preview(email: str):
-    return get_vacancy_preview(app.state.connection, email)[-1]
+    return get_all_vacancy_preview(app.state.connection, email)[-1]
 
 
-@app.get("cv_preview_info/{email}")
+@app.get("/cv_preview_info/{email}")
 def get_cv_preview(email: str):
-    return get_cv_preview(app.state.connection, email)[-1]
+    return get_all_cv_preview(app.state.connection, email)[-1]
 
 
 # General comment
@@ -175,10 +175,10 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# if __name__ == '__main__':
-#     Start()
-#     print("Something is not quite right")
-#     close_ssh_tunnel(tunnel)
-#     close_connection(conn)
+if __name__ == '__main__':
+   Start()
+   print("Something is not quite right")
+   close_ssh_tunnel(tunnel)
+   close_connection(conn)
 
 instrumentator.instrument(app).expose(app, endpoint="/metrics", include_in_schema=True, should_gzip=True)
