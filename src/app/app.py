@@ -137,6 +137,22 @@ def login_with_password(login: str, password: str):
     return {"token": token}
 
 
+@app.get("user_role/{email}")
+def user_role_by_email(email: str):
+    roles = get_role(app.state.connection, email)
+    return roles[-1]
+
+
+@app.get("vacancy_preview_info/{email}")
+def get_vacancy_preview(email: str):
+    return get_vacancy_preview(app.state.connection, email)[-1]
+
+
+@app.get("cv_preview_info/{email}")
+def get_cv_preview(email: str):
+    return get_cv_preview(app.state.connection, email)[-1]
+
+
 # General comment
 # Пока что нет сущности сессии, хотя в будущем  возможно придётся переписать с расчётом на сессии,
 # так что все кто редактируют код, пожалуйста держите это в уме.

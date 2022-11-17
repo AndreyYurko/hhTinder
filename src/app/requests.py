@@ -130,3 +130,15 @@ def try_login(conn, log, password):
         res = execute_sql_query(conn, sql.format(email=log, passwd=password, un_key=token), 'update')
 
     return token
+
+
+def get_role(conn, email):
+    return execute_sql_query(conn, Queries.GET_USER_ROLE_BY_EMAIL.format(email=email))
+
+
+def get_vacancy_preview(conn, email):
+    return execute_sql_query(conn, Queries.GET_VACANCY_PREVIEW_INFO.format(email=email))
+
+
+def get_cv_preview(conn, email):
+    return execute_sql_query(conn, Queries.GET_CV_PREVIEW_INFO.format(email=email))
