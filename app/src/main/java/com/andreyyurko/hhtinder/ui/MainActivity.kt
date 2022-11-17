@@ -54,7 +54,7 @@ class MainActivity : AppCompatActivity(R.layout.activity_main), CoroutineScope {
                     Log.d(LOG_TAG, "change log state $it")
                     when (it) {
                         AuthHandler.AuthState.Logged -> {
-                            navController.navigate(R.id.action_EmployerNavGraph)
+                            navController.navigate(R.id.action_EmployeeNavGraph)
                         }
                         AuthHandler.AuthState.NotLogged -> {
                             navController.navigate(R.id.action_guestNavGraph)
