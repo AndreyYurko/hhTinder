@@ -13,6 +13,7 @@ import androidx.fragment.app.setFragmentResult
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.andreyyurko.hhtinder.R
+import com.andreyyurko.hhtinder.singleton.TransferSingleton
 import com.andreyyurko.hhtinder.structures.Archive
 import com.google.android.material.card.MaterialCardView
 
@@ -40,8 +41,8 @@ class ArchiveAdapterEmployee(archiveList: List<Archive>) :
         holder.cardBodyTextView.setText(archiveList.get(position).content)
         holder.avatarImageView.setImageDrawable(archiveList.get(position).image)
         holder.cardMain.setOnClickListener {
+            TransferSingleton.instance.setTransferArchive(archiveList.get(position))
             it.findNavController().navigate(R.id.action_archiveFragment_to_employeeArchiveCardFragment)
-
             it.findFragment<ArchiveEmployeeFragment>().setFragmentResult(
                 "EmployeeInfo", bundleOf(
                     "jobName" to archiveList[position].name,

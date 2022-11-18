@@ -8,6 +8,7 @@ import androidx.fragment.app.setFragmentResultListener
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.andreyyurko.hhtinder.R
 import com.andreyyurko.hhtinder.databinding.FragmentEmployerArchiveCardBinding
+import com.andreyyurko.hhtinder.singleton.TransferSingleton
 
 class EmployerArchiveCardFragment : Fragment(R.layout.fragment_employer_archive_card) {
     private val viewBinding by viewBinding(FragmentEmployerArchiveCardBinding::bind)
@@ -16,9 +17,14 @@ class EmployerArchiveCardFragment : Fragment(R.layout.fragment_employer_archive_
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setFragmentResultListener("EmployeeInfo") {_, bundle ->
+        setFragmentResultListener("EmployeeInfo") { _, bundle ->
             viewBinding.jobName.text = bundle.get("jobName").toString()
             vacancyId = bundle.getInt("id")
+        }
+        try {
+            viewBinding.iconImageShown.setImageDrawable(TransferSingleton.instance.getTransferArchive()!!.image)
+        } catch (e: Exception) {
+            
         }
     }
 }
