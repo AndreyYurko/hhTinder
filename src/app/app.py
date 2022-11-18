@@ -1,3 +1,5 @@
+import datetime
+
 from requests import *
 from db_connection import *
 from typing import Union
@@ -150,6 +152,120 @@ def get_vacancy_preview(email: str):
 @app.get("/cv_preview_info/{email}")
 def get_cv_preview(email: str):
     return get_all_cv_preview(app.state.connection, email)
+
+
+class CV(BaseModel):
+    id: int
+    cr_user: int
+    cv_name: str
+    cv_text: str
+    cr_date: datetime.datetime
+    img_id: int
+    cv_category: int
+    salary: int
+    experience_content: str
+    education_content: str
+
+
+class Vacancy(BaseModel):
+    id: int
+    cr_user: int
+    vac_name: str
+    vac_text: str
+    cr_date: datetime.datetime
+    vac_category: int
+    img_id: int
+
+
+class Profile(BaseModel):
+    id: int
+    name: str
+    surname: str
+    age: str
+    gender_id: int
+    img_id: int
+    cr_user: int
+
+
+@app.post("/add_vacancy/")
+async def add_vacancy(vacancy: Vacancy):
+    await add_vacancy_to_db(
+        app.state.connection,
+        vac_name=vacancy.vac_name,
+        vac_text=vacancy.vac_text,
+        cr_date=vacancy.cr_date,
+        vac_category=vacancy.vac_category,
+    )
+    return {"status": "ok"}
+
+
+@app.post("/edit_vacancy/")
+async def edit_vacancy(vacancy: Vacancy):
+    await edit_vacancy_in_db(
+        app.state.connection,
+        vac_name=vacancy.vac_name,
+        vac_text=vacancy.vac_text,
+        cr_date=vacancy.cr_date,
+        vac_category=vacancy.vac_category,
+        id=vacancy.id,
+    )
+    return {"status": "ok"}
+
+
+@app.post("/add_cv/")
+async def add_cv(cv: CV):
+    await add_cv_to_db(
+        app.state.connection,
+        cv.cv_name,
+        cv.cv_text,
+        cv.experience_content,
+        cv.education_content,
+        cv.salary,
+        cv.cr_date,
+        cv.cv_category,
+    )
+    return {"status": "ok"}
+
+
+@app.post("/edit_cv/")
+def edit_cv(cv: CV):
+    await edit_cv_in_db(
+        app.state.connection,
+        cv.cv_name,
+        cv.cv_text,
+        cv.experience_content,
+        cv.education_content,
+        cv.salary,
+        cv.cr_date,
+        cv.cv_category,
+        cv.id,
+    )
+    return {"status": "ok"}
+
+
+@app.post("/add_profile/")
+async def add_profile(profile: Profile):
+    await add_profile_to_db(
+        app.state.connection,
+        profile.name,
+        profile.surname,
+        profile.age,
+        profile.gender_id,
+    )
+    return {"status": "ok"}
+
+
+@app.post("/edit_profile/")
+async def edit_profile(profile: Profile):
+    await edit_profile_in_db(
+        app.state.connection,
+        profile.name,
+        profile.surname,
+        profile.age,
+        profile.gender_id,
+        profile.id
+    )
+    return {"status": "ok"}
 
 
 # General comment

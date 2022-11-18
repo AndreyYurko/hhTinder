@@ -27,3 +27,37 @@ class Queries():
 
     GET_VACANCY_PREVIEW_INFO = "SELECT vac_name, vac_text, vac_category, img_id, images.name, images.extension from vacancy join users on vacancy.cr_user = users.id join images on vacancy.img_id = images.id where users.email = '{email_str}'"
     GET_CV_PREVIEW_INFO = "SELECT cv_name, salary, cv_text, cv_category, img_id, images.name, images.extension from cv join users on cv.cr_user = users.id join images on cv.img_id = images.id where users.email = '{email_str}'"
+
+    ADD_VACANCY = """
+        INSERT INTO vacancy(vac_name, vac_text, cr_date, vac_category)
+        VALUES
+        ({vac_name}. {vac_text}, {cr_date}, {vac_category})
+    """
+    UPDATE_VACANCY = """
+        UPDATE vacancy
+        SET {vac_name}, {vac_text}, {cr_date}, {vac_category}
+        WHERE id = {id} 
+    """
+
+    ADD_CV = """
+        INSERT INTO cv(cv_name, cv_text, experience_content, education_content, salary, cr_date, cv_category)
+        VALUES
+        ({cv_name}, {cv_text}, {experience_content}, {education_content}, {salary}, {cr_date}, {cv_category})
+    """
+    UPDATE_CV = """
+        UPDATE cv
+        SET {cv_name}, {cv_text}, {experience_content}, {education_content}, {salary}, {cr_date}, {cv_category}
+        WHERE id = {id} 
+    """
+
+    ADD_PROFILE = """
+        INSERT INTO user_info(user_name, surname, age, gender_id)
+        VALUES 
+        ({user_name}, {surname}, {age}, {gender_id})
+    """
+
+    UPDATE_PROFILE = """
+        UPDATE user_info
+        SET {user_name}, {surname}, {age}, {gender_id}
+        WHERE id = {id}
+    """

@@ -1,3 +1,4 @@
+import datetime
 import random
 from models import *
 from sql_queries import Queries
@@ -163,3 +164,88 @@ def get_all_cv_preview(conn, email):
         }
 
     return preview
+
+
+def add_vacancy_to_db(conn, vac_name, vac_text, cr_date, vac_category):
+    execute_sql_query(
+        conn,
+        Queries.ADD_VACANCY.format(vac_name, vac_text, cr_date, vac_category),
+    )
+
+
+def edit_vacancy_in_db(conn, vac_name, vac_text, cr_date, vac_category, id):
+    execute_sql_query(
+        conn,
+        Queries.UPDATE_VACANCY.format(vac_name, vac_text, cr_date, vac_category, id),
+    )
+
+
+def add_cv_to_db(
+    conn,
+    cv_name: str,
+    cv_text: str,
+    experience_content: str,
+    education_content: str,
+    salary: int,
+    cr_date: datetime.datetime,
+    cv_category: int,
+):
+    execute_sql_query(
+        conn,
+        Queries.ADD_CV.format(cv_name, cv_text, experience_content, education_content, salary, cr_date, cv_category)
+    )
+
+
+def edit_cv_in_db(
+    conn,
+    cv_name: str,
+    cv_text: str,
+    experience_content: str,
+    education_content: str,
+    salary: int,
+    cr_date: datetime.datetime,
+    cv_category: int,
+    id: int,
+):
+    execute_sql_query(
+        conn,
+        Queries.ADD_CV.format(cv_name, cv_text, experience_content, education_content, salary, cr_date, cv_category, id)
+    )
+
+
+def add_profile_to_db(
+    conn,
+    user_name,
+    surname,
+    age,
+    gender,
+):
+    execute_sql_query(
+        conn,
+        Queries.ADD_PROFILE.format(
+            user_name,
+            surname,
+            age,
+            gender,
+        )
+    )
+
+
+def edit_profile_in_db(
+    conn,
+    user_name,
+    surname,
+    age,
+    gender,
+    id,
+):
+    execute_sql_query(
+        conn,
+        Queries.UPDATE_PROFILE.format(
+            user_name,
+            surname,
+            age,
+            gender,
+            id,
+        )
+    )
