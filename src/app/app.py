@@ -1,5 +1,3 @@
-import datetime
-
 from requests import *
 from db_connection import *
 from typing import Union
@@ -9,7 +7,7 @@ from pydantic import BaseModel
 from monitoring import instrumentator
 from fastapi.middleware.cors import CORSMiddleware
 
-app = FastAPI()  # rest api
+app = FastAPI()
 app.type = "00"
 tun_, conn_ = connect_db()
 app.state.connection = conn_
@@ -19,7 +17,7 @@ app.state.connection = conn_
 #     connection += [smthng]
 #     return True
 
-tunnel, conn = connect_db()  # server for DB
+tunnel, conn = connect_db()
 
 
 #  метрики доступны по /metrics
@@ -37,39 +35,38 @@ def read_item(item_id: int, q: Union[str, None] = None):
     return {"item_id": item_id, "q": q}
 
 
-@app.get("/worker/{job_id}")
-def next_worker(job_id: int):
-    # global connection
-    user = get_next_user(app.state.connection)
-    return user.to_json()
+@app.get("/next_worker/")
+def next_worker():
+    return get_next_user(app.state.connection).to_json()
 
 
-@app.get("/job/{worker_id}")
-def next_job(worker_id: int):
-    # global connection
-    print(worker_id)
-    vac = get_next_vacancy(app.state.connection)
-    return vac.to_json()
+@app.get("/next_vacancy/")
+def next_vacancy():
+    return get_next_vacancy(app.state.connection).to_json()
 
 
-@app.get("/history/job/{job_id}")
-def next_job(job_id: int):
-    # global connection
-    workers = get_liked_workers_ids(app.state.connection, job_id)
-    new_workers = []
-    for worker in workers:
-        new_workers += [worker[0]]
-    return {"workers": new_workers}
+@app.get("/cv/{cv_id}")
+def next_cv(cv_id: int):
+    cv = get_next_cv(app.state.connection)
+    return cv.to_json()
+
+
+@app.get("/history/vacancy/{job_id}")
+def liked_workers(vacancy_id: int):
+    workers_ids = get_liked_workers_ids(app.state.connection, vacancy_id)
+    liked_workers_for_vacancy = []
+    for worker in workers_ids:
+        liked_workers_for_vacancy.append(worker[0])
+    return {"workers": liked_workers_for_vacancy}
 
 
 @app.get("/history/worker/{worker_id}")
-def next_job(worker_id: int):
-    # global connection
-    vacancies = get_liked_vacancies_ids(app.state.connection, worker_id)
-    new_vacancies = []
-    for worker in vacancies:
-        new_vacancies += [worker[0]]
-    return {"workers": new_vacancies}
+def liked_vacancies(worker_id: int):
+    vacancies_ids = get_liked_vacancies_ids(app.state.connection, worker_id)
+    liked_vacancies_by_worker = []
+    for worker in vacancies_ids:
+        liked_vacancies_by_worker.append(worker[0])
+    return {"workers": liked_vacancies_by_worker}
 
 
 class Like(BaseModel):
@@ -78,53 +75,28 @@ class Like(BaseModel):
 
 
 @app.post("/worker_like/")
-async def like(like: Like):
-    # check likes and
+async def like_from_worker(like: Like):
     vacancies_ids = get_liked_vacancies_ids(app.state.connection, like.worker_id)
-    print(vacancies_ids)
-    print(type(vacancies_ids))
-
-    # create like
     post_like_from_worker(app.state.connection, like.job_id, like.worker_id)
 
-    # if vacancies contains like.job_id then match
     if like.job_id in vacancies_ids:
         return {"match": True, "job_id": like.job_id}
     return {"match": False, "job_id": like.job_id}
 
 
-@app.post("/job_like/")
-async def like(like: Like):
-    # check likes and
+@app.post("/vacancy_like/")
+async def like_from_vacancy(like: Like):
     workers_ids = get_liked_workers_ids(app.state.connection, like.job_id)
-    print(workers_ids)
-
-    # create like
-    post_like_from_job(app.state.connection, like.job_id, like.worker_id)
+    post_like_from_vacancy(app.state.connection, like.job_id, like.worker_id)
 
     if like.worker_id in workers_ids:
         return {"match": True, "worker_id": like.worker_id}
     return {"match": False, "worker_id": like.worker_id}
 
 
-@app.get("/vacancy/{vac_id}")
-def next_vacancy(vac_id: int):
-    # global connection
-    vacancy = get_next_vacancy(app.state.connection)
-    return vacancy.to_json()
-
-
-@app.get("/cv/{cv_id}")
-def next_cv(cv_id: int):
-    # global connection
-    cv = get_next_cv(app.state.connection)
-    return cv.to_json()
-
-
-@app.get("/voc/job_categories")
-def job_categories():
-    categories = get_job_categories(app.state.connection)
-    return categories
+@app.get("/vacancy/vacancy_categories")
+def vacancy_categories():
+    return get_vacancy_categories(app.state.connection)
 
 
 @app.post("/login/token/{login}/{token}")

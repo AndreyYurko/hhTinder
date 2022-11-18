@@ -6,6 +6,7 @@ import utils, secrets
 
 
 def execute_sql_query(conn, query, type='default'):
+    records = None
     try:
         print("Executing SQL Query..")
         db_cursor = conn.cursor()
@@ -17,7 +18,7 @@ def execute_sql_query(conn, query, type='default'):
         db_cursor.close()
         print("SUCCESS: Query was successful")
         return records
-    except:
+    except Exception:
         print("FAILED: Query failed")
 
 
@@ -78,43 +79,36 @@ def get_next_cv(conn):
     return get_cv(conn, random_id)
 
 
-def post_like_from_job(conn, job_id, worker_id):
-    message_template_post_like_from_job = Queries.INSERT_LIKE_FROM_VACANCY
-    execute_sql_query(conn, message_template_post_like_from_job.format(job_id, worker_id))
+def post_like_from_vacancy(conn, vacancy_id, worker_id):
+    execute_sql_query(conn, Queries.INSERT_LIKE_FROM_VACANCY.format(vacancy_id, worker_id))
 
 
-def post_like_from_worker(conn, job_id, worker_id):
-    message_template_post_like_from_worker = Queries.INSERT_LIKE_FROM_WORKER
-    execute_sql_query(conn, message_template_post_like_from_worker.format(worker_id, job_id))
+def post_like_from_worker(conn, vacancy_id, worker_id):
+    execute_sql_query(conn, Queries.INSERT_LIKE_FROM_WORKER.format(worker_id, vacancy_id))
 
 
-def get_job_categories(conn):
-    categories = execute_sql_query(conn, Queries.GET_JOB_CATEGORIES)
+def get_vacancy_categories(conn):
+    categories = execute_sql_query(conn, Queries.GET_VACANCY_CATEGORIES)
     return utils.vocab_to_json(categories)
 
 
 def get_liked_vacancies_ids(conn, user_id):
     message_template_get_liked_vacancies = Queries.GET_LIKED_VACANCIES_ID_BY_USERID
-    vacancies = execute_sql_query(conn, message_template_get_liked_vacancies.format(id=user_id))
-    # TODO
-    return vacancies
+    return execute_sql_query(conn, message_template_get_liked_vacancies.format(id=user_id))
 
 
 def get_liked_workers_ids(conn, employee_id):
     message_template_get_liked_workers = Queries.GET_LIKED_WORKERS_ID_BY_EMPLOYEEID
-    workers = execute_sql_query(conn, message_template_get_liked_workers.format(id=employee_id))
-    # TODO
-    return workers
+    return execute_sql_query(conn, message_template_get_liked_workers.format(id=employee_id))
 
 
 def check_token(conn, log, token):
-    sql = Queries.LOGIN_BY_LOG_AND_TOKEN
-    res = execute_sql_query(conn, sql.format(email=log, un_key=token))
+    res = execute_sql_query(conn, Queries.LOGIN_BY_LOG_AND_TOKEN.format(email=log, un_key=token))
 
     try:
-        if (len(res) > 0):
+        if len(res) > 0:
             return True
-    except:
+    except Exception:
         pass
 
     return False
@@ -125,10 +119,10 @@ def try_login(conn, log, password):
     res = execute_sql_query(conn, sql.format(email=log, passwd=password))
     token = ""
 
-    if (len(res) != 0):
+    if len(res) != 0:
         token = secrets.token_urlsafe(16)
         sql = Queries.PUSH_TOKEN_BY_LOG
-        res = execute_sql_query(conn, sql.format(email=log, passwd=password, un_key=token), 'update')
+        execute_sql_query(conn, sql.format(email=log, passwd=password, un_key=token), 'update')
 
     return token
 
@@ -143,7 +137,13 @@ def get_all_vacancy_preview(conn, email):
     preview = {}
     for i in range(len(result)):
         vacancy = result[i]
-        preview[i] = {"name": vacancy[0], "content": vacancy[1], "vac_cat": vacancy[2], "image_id": vacancy[3], "img_ext": vacancy[5]}
+        preview[i] = {
+            "name": vacancy[0],
+            "content": vacancy[1],
+            "vac_cat": vacancy[2],
+            "image_id": vacancy[3],
+            "img_ext": vacancy[5],
+        }
 
     return preview
 
