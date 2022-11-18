@@ -37,7 +37,19 @@ class ArchiveHandler {
                 val key = it
                 val archive = jsonObj.getJSONObject(key)
                 val name = archive.getString("name")
-                val content = archive.getString("content")
+                var content = archive.getString("content")
+                content = content.substring(0, Math.min(40, content.length))
+                var parts = content.split(" ")
+                content = ""
+                var flag = false
+                parts.forEach {
+                    if(content.length > 15 && !flag){
+                        flag = true
+                        content += it + "\n"
+                    } else {
+                        content += it + " "
+                    }
+                }
                 res.add(Archive(key.toInt(), name, content))
             }
             Log.d(LOG_TAG, responseBody)
