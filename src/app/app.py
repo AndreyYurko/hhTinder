@@ -50,6 +50,10 @@ def next_cv(cv_id: int):
     cv = get_next_cv(app.state.connection)
     return cv.to_json()
 
+@app.get("/vacancy/{vac_id}")
+def next_cv(vac_id: int):
+    vac = get_vacancy(app.state.connection, vac_id)
+    return vac.to_json()
 
 @app.get("/history/vacancy/{job_id}")
 def liked_workers(vacancy_id: int):

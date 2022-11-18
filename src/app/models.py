@@ -17,7 +17,13 @@ class User():
 
 
 class Vacancy():
-    def __init__(self, vacancy_data):
+    def __init__(self, vacancy_data = ""):
+        if vacancy_data == "":
+            vacancy_data = []
+            for i in range(15):
+                vacancy_data.insert(0,"")
+            pass
+
         self.id = vacancy_data[0]
         self.cr_user = vacancy_data[1]
         self.vac_name = vacancy_data[2]
@@ -31,7 +37,13 @@ class Vacancy():
 
 
 class CV():
-    def __init__(self, cv_data):
+    def __init__(self, cv_data = ""):
+        if cv_data == "":
+            cv_data = []
+            for i in range(15):
+                cv_data.insert(0,"")
+            pass
+
         self.id = cv_data[0]
         self.cv_name = cv_data[1]
         self.cv_text = cv_data[2]
@@ -46,6 +58,8 @@ class CV():
         self.gender = cv_data[11]
         self.category = cv_data[12]
         self.image_link = "http://217.25.88.166/web_project/files/images/0/" + str(self.img_id) + "." + self.img_extension
+
+
 
     def to_json(self):
         return {"id": self.id, "name": self.cv_name, "body": self.cv_text, "image_id": self.img_id,

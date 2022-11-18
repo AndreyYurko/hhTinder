@@ -46,18 +46,24 @@ def get_next_user(conn):
 def get_vacancy(conn, vac_id):
     message_template_select_vacancy = Queries.GET_VACANCY_BY_ID
     vacancy_data = execute_sql_query(conn, message_template_select_vacancy.format(id=vac_id))
-    if len(vacancy_data) == 0:
-        print("No vacancy with id =", vac_id)
-        return None
-    else:
-        vacancy = Vacancy(vacancy_data[0])
-        return vacancy
+    try:
+        if len(vacancy_data) == 0:
+            print("No vacancy with id =", vac_id)
+            return None
+        else:
+            vacancy = Vacancy(vacancy_data[0])
+            return vacancy
+    except:
+        return Vacancy()
 
 
 # get random vacancy
 def get_next_vacancy(conn):
     ids = execute_sql_query(conn, Queries.GET_VACANCY_IDS)
-    random_id = ids[random.randint(0, len(ids) - 1)][0]
+    try:
+        random_id = ids[random.randint(0, len(ids) - 1)][0]
+    except:
+        return Vacancy()
     return get_vacancy(conn, random_id)
 
 
@@ -65,18 +71,24 @@ def get_next_vacancy(conn):
 def get_cv(conn, cv_id):
     message_template_select_cv = Queries.GET_CV_BY_ID
     cv_data = execute_sql_query(conn, message_template_select_cv.format(id=cv_id))
-    if len(cv_data) == 0:
-        print("No vacancy with id =", cv_id)
-        return None
-    else:
-        cv = CV(cv_data[0])
-        return cv
+    try:
+        if len(cv_data) == 0:
+            print("No vacancy with id =", cv_id)
+            return None
+        else:
+            cv = CV(cv_data[0])
+            return cv
+    except:
+        return CV()
 
 
 # get random CV
 def get_next_cv(conn):
     ids = execute_sql_query(conn, Queries.GET_CV_IDS)
-    random_id = ids[random.randint(0, len(ids) - 1)][0]
+    try:
+        random_id = ids[random.randint(0, len(ids) - 1)][0]
+    except:
+        return CV()
     return get_cv(conn, random_id)
 
 
