@@ -38,10 +38,10 @@
         android:scaleType="centerCrop" />
 
     <TextView
-        android:id="@+id/employee_name"
+        android:id="@+id/employer_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Li Kim"
+        android:text="OOO Gazprom"
         android:textColor="@color/white"
         android:textSize="20sp"
         android:layout_marginTop="88dp"
@@ -58,10 +58,10 @@
         android:layout_marginStart="175dp"/>
 
     <TextView
-        android:id="@+id/employee_gender_and_age"
+        android:id="@+id/employer_city"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Man, 25 years old"
+        android:text="St Petersburg"
         android:textColor="@color/grey"
         android:textSize="20sp"
         android:layout_marginTop="170dp"
@@ -83,7 +83,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:layout_marginTop="260dp"
-        android:text="Yonsei University, 2004 - 2008"
+        android:text="Higher technical education"
         android:textColor="@color/grey"
         android:textSize="16sp" />
 
@@ -103,19 +103,29 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:layout_marginTop="320dp"
-        android:text="5 years, OOO Gazprom"
+        android:text="at least 5 years"
         android:textColor="@color/grey"
         android:textSize="16sp" />
 
     <TextView
-        android:id="@+id/projects_info"
+        android:id="@+id/requirements_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="345dp"
-        android:text="Projects: Autoclicker, Shortlinker, Online-shop “qwerty”"
+        android:layout_marginTop="350dp"
+        android:text="General requirements"
+        android:textColor="@color/black"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/requirements_info"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="380dp"
+        android:layout_marginBottom="10dp"
+        android:text="Java programming, teamwork, communication skills"
         android:textColor="@color/grey"
-        android:textSize="16sp"
-        android:layout_marginBottom="20dp"/>
+        android:textSize="16sp" />
 
 </RelativeLayout>

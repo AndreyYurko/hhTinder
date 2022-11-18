@@ -7,6 +7,15 @@
     <fragment
         android:id="@+id/archiveFragment"
         android:name="com.andreyyurko.hhtinder.ui.employer.archiveemployer.ArchiveEmployerFragment"
-        android:label="ArchiveFragment"/>
+        android:label="ArchiveFragment">
+        <action
+            android:id="@+id/action_archiveFragment_to_employeeArchiveCardFragment"
+            app:destination="@id/employeeArchiveCardFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/employeeArchiveCardFragment"
+        android:name="com.andreyyurko.hhtinder.ui.employee.employeearchivecard.EmployerArchiveCardFragment"
+        android:label="EmployeeArchiveCardFragment"/>
 
 </navigation>
