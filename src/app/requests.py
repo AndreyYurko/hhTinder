@@ -18,8 +18,9 @@ def execute_sql_query(conn, query, type='default'):
         db_cursor.close()
         print("SUCCESS: Query was successful")
         return records
-    except Exception:
-        print("FAILED: Query failed")
+    except Exception as ex:
+        print("FAILED: Wrong query")
+        print(ex)
 
 
 # get user by id
@@ -135,15 +136,18 @@ def get_role(conn, email):
 def get_all_vacancy_preview(conn, email):
     result = execute_sql_query(conn, Queries.GET_VACANCY_PREVIEW_INFO.format(email_str=email))
     preview = {}
-    for i in range(len(result)):
-        vacancy = result[i]
-        preview[i] = {
-            "name": vacancy[0],
-            "content": vacancy[1],
-            "vac_cat": vacancy[2],
-            "image_id": vacancy[3],
-            "img_ext": vacancy[5],
-        }
+    try:
+        for i in range(len(result)):
+            vacancy = result[i]
+            preview[vacancy[0]] = {
+                "name": vacancy[1],
+                "content": vacancy[2],
+                "vac_cat": vacancy[3],
+                "image_id": vacancy[4],
+                "img_ext": vacancy[6],
+            }
+    except:
+        pass
 
     return preview
 
@@ -152,16 +156,19 @@ def get_all_cv_preview(conn, email):
     result = execute_sql_query(conn, Queries.GET_CV_PREVIEW_INFO.format(email_str=email))
     preview = {}
 
-    for i in range(len(result)):
-        cv = result[i]
-        preview[i] = {
-            "name": cv[0],
-            "content": cv[2],
-            "salary": cv[1],
-            "cv_cat": cv[3],
-            "image_id": cv[4],
-            "img_ext": cv[6],
-        }
+    try:
+        for i in range(len(result)):
+            cv = result[cv[0]]
+            preview[i] = {
+                "name": cv[1],
+                "content": cv[3],
+                "salary": cv[2],
+                "cv_cat": cv[4],
+                "image_id": cv[5],
+                "img_ext": cv[7],
+            }
+    except:
+        pass
 
     return preview
 

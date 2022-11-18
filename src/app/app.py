@@ -200,7 +200,7 @@ async def add_cv(cv: CV):
 
 
 @app.post("/edit_cv/")
-def edit_cv(cv: CV):
+async def edit_cv(cv: CV):
     await edit_cv_in_db(
         app.state.connection,
         cv.cv_name,

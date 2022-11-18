@@ -82,14 +82,14 @@ class Queries():
     """
 
     GET_VACANCY_PREVIEW_INFO = """
-        SELECT vac_name, vac_text, vac_category, img_id, images.name, images.extension 
+        SELECT vacancy.id, vac_name, vac_text, vac_category, img_id, images.name, images.extension 
         FROM vacancy 
             JOIN users on vacancy.cr_user = users.id 
             JOIN images on vacancy.img_id = images.id 
         WHERE users.email = '{email_str}'
     """
     GET_CV_PREVIEW_INFO = """
-        SELECT cv_name, salary, cv_text, cv_category, img_id, images.name, images.extension 
+        SELECT cv.id, cv_name, salary, cv_text, cv_category, img_id, images.name, images.extension 
         FROM cv 
             JOIN users on cv.cr_user = users.id 
             JOIN images on cv.img_id = images.id 
