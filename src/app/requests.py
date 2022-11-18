@@ -120,10 +120,13 @@ def try_login(conn, log, password):
     res = execute_sql_query(conn, sql.format(email=log, passwd=password))
     token = ""
 
-    if len(res) != 0:
-        token = secrets.token_urlsafe(16)
-        sql = Queries.PUSH_TOKEN_BY_LOG
-        execute_sql_query(conn, sql.format(email=log, passwd=password, un_key=token), 'update')
+    try:
+        if len(res) != 0:
+            token = secrets.token_urlsafe(16)
+            sql = Queries.PUSH_TOKEN_BY_LOG
+            execute_sql_query(conn, sql.format(email=log, passwd=password, un_key=token), 'update')
+    except:
+        pass
 
     return token
 
