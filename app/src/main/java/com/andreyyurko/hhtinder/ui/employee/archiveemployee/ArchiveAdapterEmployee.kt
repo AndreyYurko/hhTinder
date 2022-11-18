@@ -46,7 +46,8 @@ class ArchiveAdapterEmployee(archiveList: List<Archive>) :
             it.findFragment<ArchiveEmployeeFragment>().setFragmentResult(
                 "EmployeeInfo", bundleOf(
                     "jobName" to archiveList[position].name,
-                    "id" to archiveList[position].id
+                    "id" to archiveList[position].id,
+                    "content" to archiveList[position].content
                 )
             )
         }

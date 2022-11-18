@@ -15,7 +15,7 @@
 
     <fragment
         android:id="@+id/employeeArchiveCardFragment"
-        android:name="com.andreyyurko.hhtinder.ui.employee.employeearchivecard.EmployerArchiveCardFragment"
+        android:name="com.andreyyurko.hhtinder.ui.employer.employerarchivecard.EmployerArchiveCardFragment"
         android:label="EmployeeArchiveCardFragment"/>
 
 </navigation>
