@@ -54,7 +54,7 @@ class ArchiveHandler {
                     }
                 }
 
-                var imgUrl = "http://217.25.88.166:8000/web_project/files/images/0/" + archive.getInt("image_id") + "." + archive.getString("image_ext")
+                var imgUrl = "http://217.25.88.166/web_project/files/images/0/" + archive.getInt("image_id") + "." + archive.getString("img_ext")
 
                 var arch = Archive(key.toInt(), name, content)
 
@@ -63,7 +63,8 @@ class ArchiveHandler {
                         URL(imgUrl).getContent() as InputStream
                     arch.image = Drawable.createFromStream(URLcontent, "your source link");
                 } catch (e: Exception) {
-                    Log.d(VacancyHandler.LOG_TAG, "Load image failed: " + e.toString())
+                    Log.d(LOG_TAG, "Image URL: " + imgUrl)
+                    Log.d(LOG_TAG, "Load image failed: " + e.toString())
                 }
 
                 res.add(arch)

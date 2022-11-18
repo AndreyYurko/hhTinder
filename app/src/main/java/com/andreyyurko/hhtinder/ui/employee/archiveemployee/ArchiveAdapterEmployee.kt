@@ -30,6 +30,7 @@ class ArchiveAdapterEmployee(archiveList: List<Archive>) :
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.cardNameTextView.setText(archiveList.get(position).name)
         holder.cardBodyTextView.setText(archiveList.get(position).content)
+        holder.avatarImageView.setImageDrawable(archiveList.get(position).image)
     }
 
     override fun getItemCount(): Int {
