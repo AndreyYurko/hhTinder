@@ -1,5 +1,6 @@
 package com.andreyyurko.hhtinder.utils.network
 
+import android.graphics.drawable.Drawable
 import android.util.Log
 import com.andreyyurko.hhtinder.singleton.SharedPreferencesSingleton
 import com.andreyyurko.hhtinder.structures.Archive
@@ -8,6 +9,8 @@ import okhttp3.OkHttpClient
 import okhttp3.Request
 import org.json.JSONObject
 import ru.gildor.coroutines.okhttp.await
+import java.io.InputStream
+import java.net.URL
 
 class ArchiveHandler {
 
@@ -50,7 +53,20 @@ class ArchiveHandler {
                         content += it + " "
                     }
                 }
-                res.add(Archive(key.toInt(), name, content))
+
+                var imgUrl = "http://217.25.88.166:8000/web_project/files/images/0/" + archive.getInt("image_id") + "." + archive.getString("image_ext")
+
+                var arch = Archive(key.toInt(), name, content)
+
+                try {
+                    val URLcontent: InputStream =
+                        URL(imgUrl).getContent() as InputStream
+                    arch.image = Drawable.createFromStream(URLcontent, "your source link");
+                } catch (e: Exception) {
+                    Log.d(VacancyHandler.LOG_TAG, "Load image failed: " + e.toString())
+                }
+
+                res.add(arch)
             }
             Log.d(LOG_TAG, responseBody)
             return res
