@@ -4,8 +4,8 @@ The Vacanter is a mobile application for matching employers with potential emplo
 # Sprints
 - 1 sprint: 16.09.22-7.10.2022 ✅
 - 2 sprint: 7.10.2022-28.10.2022 ✅
-- 3 sprint: 28.10-18.11.2022 ⏳
-- 4 sprint: 18.11-09.12.2022 ❌
+- 3 sprint: 28.10-18.11.2022 ✅
+- 4 sprint: 18.11-09.12.2022 ⏳
 # Build and run the container only for FastAPI(app.py)
 Build the docker image using:
 ```
