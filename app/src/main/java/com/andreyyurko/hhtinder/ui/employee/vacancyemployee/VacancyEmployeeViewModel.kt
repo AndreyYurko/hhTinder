@@ -1,4 +1,4 @@
-package com.andreyyurko.hhtinder.ui.employee.cvemployee
+package com.andreyyurko.hhtinder.ui.employee.vacancyemployee
 
 import android.util.Log
 import androidx.lifecycle.ViewModel
@@ -14,7 +14,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class CVEmployeeViewModel @Inject constructor(private val cvHandler : CVHandler) : ViewModel()  {
+class VacancyEmployeeViewModel @Inject constructor(private val cvHandler : CVHandler) : ViewModel()  {
 
     companion object {
         const val LOG_TAG = "MainViewModel"

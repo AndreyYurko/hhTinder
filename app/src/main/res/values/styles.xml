@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
+    <style name="text_in_layout_hint_Style_cv_fragment">
+        <item name="android:textSize">16sp</item>
+    </style>
 </resources>

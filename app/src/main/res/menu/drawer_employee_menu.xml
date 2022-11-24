@@ -9,7 +9,7 @@
         <item
             android:id="@+id/vacancy_employee_nav_graph"
             android:icon="@drawable/ic_factory"
-            android:title="My Vacancy" />
+            android:title="My CV" />
 
         <item
             android:id="@+id/message_employee_nav_graph"
@@ -28,8 +28,8 @@
 
         <item
             android:id="@+id/cv_employee_nav_graph"
-            android:icon="@drawable/ic_outline_setting"
-            android:title="CV" />
+            android:icon="@drawable/search_cv_and_vacancy"
+            android:title="Vacancies" />
     </group>
 
 </menu>

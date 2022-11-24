@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.andreyyurko.hhtinder.R
 import com.andreyyurko.hhtinder.databinding.FragmentSignInBinding
@@ -33,6 +34,10 @@ class SignInFragment : Fragment(R.layout.fragment_sign_in) {
             val pass = viewBinding.passwordEditText.text.toString()
 
             viewModel.auth(login, pass, "")
+        }
+
+        viewBinding.signUpButton.setOnClickListener {
+            findNavController().navigate(R.id.signUpFragment)
         }
     }
 

@@ -26,7 +26,7 @@ class VocabsSingleton {
         val res = ArrayList<String>()
 
         res.add("Категории")
-
+        Log.d("Vocab", jobCategory.toString())
         jobCategory.forEach { res.add(it.name) }
 
         return res

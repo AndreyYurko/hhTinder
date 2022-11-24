@@ -27,6 +27,7 @@ class VocabHandler {
                 .build()
             val response = client.newCall(request).await()
             val responseBody = response.body?.string() ?: ""
+            Log.d(VacancyHandler.LOG_TAG, responseBody)
 
             var jsonObj = JSONObject(responseBody)
 
@@ -38,8 +39,6 @@ class VocabHandler {
                 var voc = Vocab(id.toInt(), name)
                 res.add(voc)
             }
-
-            Log.d(VacancyHandler.LOG_TAG, responseBody)
 
             return res
         } catch (e: Exception) {

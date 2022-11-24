@@ -6,7 +6,7 @@
 
     <fragment
         android:id="@+id/cvFragment"
-        android:name="com.andreyyurko.hhtinder.ui.employee.cvemployee.CVEmployeeFragment"
+        android:name="com.andreyyurko.hhtinder.ui.employee.vacancyemployee.VacancyEmployeeFragment"
         android:label="CVFragment">
     </fragment>
 

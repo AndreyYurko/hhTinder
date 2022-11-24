@@ -58,9 +58,14 @@ class MainActivity : AppCompatActivity(R.layout.activity_main), CoroutineScope {
                                 SharedPreferencesSingleton.instance.getSharedPreferences()!!
                                     .getInt("role_id", 2);
                             if (roleId == 2) {
-                                navController.navigate(R.id.action_EmployerNavGraph)
+                                if (!navController.backQueue.any { it.destination.id == R.id.employer_nav_graph}) {
+                                    navController.navigate(R.id.action_EmployerNavGraph)
+                                }
+
                             } else if(roleId == 3) {
-                                navController.navigate(R.id.action_EmployeeNavGraph)
+                                if (!navController.backQueue.any { it.destination.id == R.id.employee_nav_graph}) {
+                                    navController.navigate(R.id.action_EmployeeNavGraph)
+                                }
                             }
                         }
                         AuthHandler.AuthState.NotLogged -> {

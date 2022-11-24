@@ -1,310 +1,161 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@color/white">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/searchTextInputLayout"
+
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="@dimen/guest_screens_margin_horizontal"
-        android:layout_marginTop="12dp"
-        app:hintEnabled="false"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:boxCornerRadiusBottomEnd="@dimen/default_corner_radius"
-        app:boxCornerRadiusBottomStart="@dimen/default_corner_radius"
-        app:boxCornerRadiusTopEnd="@dimen/default_corner_radius"
-        app:boxCornerRadiusTopStart="@dimen/default_corner_radius"
-        android:textColorHint="@color/grey"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        >
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/searchEditText"
+        android:fitsSystemWindows="true">
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="50dp"
-            android:hint="Search query"
-            android:paddingEnd="100dp"
-            />
-    </com.google.android.material.textfield.TextInputLayout>
+            android:orientation="vertical"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp">
 
-    <ImageButton
-        android:id="@+id/searchImageButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/ic_search"
-        android:background="@color/white"
-        app:layout_constraintTop_toTopOf="@id/searchTextInputLayout"
-        app:layout_constraintBottom_toBottomOf="@id/searchTextInputLayout"
-        app:layout_constraintEnd_toEndOf="@id/searchTextInputLayout"
-        android:layout_marginEnd="20dp"/>
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="42dp">
 
-    <ImageButton
-        android:id="@+id/filterButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/ic_filters"
-        android:background="@color/white"
-        app:layout_constraintTop_toTopOf="@id/searchTextInputLayout"
-        app:layout_constraintBottom_toBottomOf="@id/searchTextInputLayout"
-        app:layout_constraintEnd_toStartOf="@id/searchImageButton"
-        android:layout_marginEnd="20dp"/>
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/mess_card_view"
+                    android:layout_width="130dp"
+                    android:layout_height="130dp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_margin="16dp"
+                    app:cardElevation="0dp"
+                    app:cardPreventCornerOverlap="false"
+                    app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.CardView"
+                    app:strokeColor="@color/grey"
+                    app:strokeWidth="1dp">
 
-    <RelativeLayout
-        android:id="@+id/employeeCardNext"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/searchTextInputLayout"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="20dp"
-        android:layout_marginHorizontal="15dp"
-        android:background="@drawable/main_relative_layout_background">
+                    <ImageView
+                        android:id="@+id/avatarImageView"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"/>
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="153dp"
-            android:background="@drawable/employee_card_top_background"/>
+                </com.google.android.material.card.MaterialCardView>
 
-        <TextView
-            android:id="@+id/jobNameNext"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Java developer"
-            android:textColor="@color/white"
-            android:textStyle="bold"
-            android:textSize="32sp"
-            android:layout_marginTop="30dp"
-            android:layout_marginStart="20dp"/>
+                <ImageButton
+                    android:id="@+id/avatarChangeImageView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom|center"
+                    android:layout_marginLeft="65dp"
+                    app:srcCompat="@drawable/ic_pencil_button"
+                    android:background="@color/white"/>
 
-        <ImageView
-            android:id="@+id/iconImageShownNext"
-            android:layout_width="130dp"
-            android:layout_height="130dp"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="88dp"
-            android:background="@drawable/rounded_image"
-            android:clipToOutline="true"
-            android:scaleType="centerCrop"
-            android:src="@drawable/shrek"/>
+            </FrameLayout>
 
-        <TextView
-            android:id="@+id/employeeNameNext"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Li Kim"
-            android:textColor="@color/white"
-            android:textSize="20sp"
-            android:layout_marginTop="88dp"
-            android:layout_marginStart="175dp"/>
+            <TextView
+                android:id="@+id/cvNameTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="25dp"
+                android:text="CV name"
+                android:layout_marginStart="3dp"/>
 
-        <TextView
-            android:id="@+id/employeeSalaryNext"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Salary: 100 $ / h"
-            android:textColor="@color/white"
-            android:textSize="20sp"
-            android:layout_marginTop="115dp"
-            android:layout_marginStart="175dp"/>
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/cvName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
 
-        <TextView
-            android:id="@+id/employeeGenderAndAgeNext"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Man, 25 years old"
-            android:textColor="@color/grey"
-            android:textSize="20sp"
-            android:layout_marginTop="170dp"
-            android:layout_marginStart="175dp"/>
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp">
 
-        <TextView
-            android:id="@+id/educationTextNext"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="228dp"
-            android:text="Education"
-            android:textColor="@color/black"
-            android:textSize="20sp" />
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/cvText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="CV text" />
+            </com.google.android.material.textfield.TextInputLayout>
 
-        <TextView
-            android:id="@+id/educationInfoNext"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="260dp"
-            android:text="Yonsei University, 2004 - 2008"
-            android:textColor="@color/grey"
-            android:textSize="16sp" />
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp">
 
-        <TextView
-            android:id="@+id/workTextNext"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="290dp"
-            android:text="Work experience"
-            android:textColor="@color/black"
-            android:textSize="20sp" />
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/experienceText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Experience" />
+            </com.google.android.material.textfield.TextInputLayout>
 
-        <TextView
-            android:id="@+id/workInfoNext"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="320dp"
-            android:text="5 years, OOO Gazprom"
-            android:textColor="@color/grey"
-            android:textSize="16sp" />
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp">
 
-        <TextView
-            android:id="@+id/projectsInfoNext"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="345dp"
-            android:text="Projects: Autoclicker, Shortlinker, Online-shop “qwerty”"
-            android:textColor="@color/grey"
-            android:textSize="16sp"
-            android:layout_marginBottom="20dp"/>
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/educationText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Education" />
+            </com.google.android.material.textfield.TextInputLayout>
 
-    </RelativeLayout>
+            <TextView
+                android:id="@+id/cvSalaryTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="25dp"
+                android:text="Salary"
+                android:layout_marginStart="3dp"/>
 
-    <RelativeLayout
-        android:id="@+id/employeeCard"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/searchTextInputLayout"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="20dp"
-        android:layout_marginHorizontal="15dp"
-        android:background="@drawable/main_relative_layout_background">
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/salary"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="" />
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="153dp"
-            android:background="@drawable/employer_card_top_background"/>
+            <TextView
+                android:id="@+id/vacancyDate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="25dp"
+                android:text="@string/date"
+                android:layout_marginStart="3dp"/>
+
+            <EditText
+                android:id="@+id/editTextDate"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:ems="10"
+                android:hint="@string/date"
+                android:inputType="date"
+                android:minHeight="48dp" />
+
+            <TextView
+                android:id="@+id/vacancyCategory"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="25dp"
+                android:text="@string/category" />
 
 
-        <TextView
-            android:id="@+id/jobName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Java developer"
-            android:textColor="@color/white"
-            android:textStyle="bold"
-            android:textSize="32sp"
-            android:layout_marginTop="30dp"
-            android:layout_marginStart="20dp"/>
+            <Spinner
+                android:id="@+id/categoriesList"
+                android:layout_width="match_parent"
+                android:layout_height="48dp" />
 
-        <ImageView
-            android:id="@+id/iconImageShown"
-            android:layout_width="130dp"
-            android:layout_height="130dp"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="88dp"
-            android:background="@drawable/rounded_image"
-            android:clipToOutline="true"
-            android:scaleType="centerCrop"
-            android:src="@drawable/shrek"/>
+            <Button
+                android:id="@+id/button"
+                android:layout_width="match_parent"
+                android:layout_height="64dp"
+                android:layout_marginTop="32dp"
+                android:text="@string/save"
+                android:textSize="23sp" />
 
-        <TextView
-            android:id="@+id/employeeName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Li Kim"
-            android:textColor="@color/white"
-            android:textSize="20sp"
-            android:layout_marginTop="88dp"
-            android:layout_marginStart="175dp"/>
-
-        <TextView
-            android:id="@+id/employeeSalary"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Salary: 100 $ / h"
-            android:textColor="@color/white"
-            android:textSize="20sp"
-            android:layout_marginTop="115dp"
-            android:layout_marginStart="175dp"/>
-
-        <TextView
-            android:id="@+id/employeeGenderAndAge"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Man, 25 years old"
-            android:textColor="@color/grey"
-            android:textSize="20sp"
-            android:layout_marginTop="170dp"
-            android:layout_marginStart="175dp"/>
-
-        <TextView
-            android:id="@+id/educationText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="228dp"
-            android:text="Education"
-            android:textColor="@color/black"
-            android:textSize="20sp" />
-
-        <TextView
-            android:id="@+id/educationInfo"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="260dp"
-            android:text="Yonsei University, 2004 - 2008"
-            android:textColor="@color/grey"
-            android:textSize="16sp" />
-
-        <TextView
-            android:id="@+id/workText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="290dp"
-            android:text="Work experience"
-            android:textColor="@color/black"
-            android:textSize="20sp" />
-
-        <TextView
-            android:id="@+id/workInfo"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="320dp"
-            android:text="5 years, OOO Gazprom"
-            android:textColor="@color/grey"
-            android:textSize="16sp" />
-
-        <TextView
-            android:id="@+id/projectsInfo"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="345dp"
-            android:text="Projects: Autoclicker, Shortlinker, Online-shop “qwerty”"
-            android:textColor="@color/grey"
-            android:textSize="16sp"
-            android:layout_marginBottom="20dp"/>
-
-    </RelativeLayout>
-
-    <com.google.android.material.progressindicator.CircularProgressIndicator
-        android:id="@+id/progressBar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:indeterminate="true"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+        </LinearLayout>
+    </ScrollView>
+</FrameLayout>

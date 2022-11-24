@@ -17,7 +17,7 @@ import by.kirich1409.viewbindingdelegate.viewBinding
 import com.andreyyurko.hhtinder.R
 import com.andreyyurko.hhtinder.databinding.FragmentCvEmployerBinding
 import com.andreyyurko.hhtinder.structures.CV
-import com.andreyyurko.hhtinder.ui.employee.cvemployee.CVEmployeeViewModel
+import com.andreyyurko.hhtinder.ui.employee.vacancyemployee.VacancyEmployeeViewModel
 import com.andreyyurko.hhtinder.utils.commonui.GesturesHandler
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -34,11 +34,11 @@ class CVEmployerFragment : Fragment(R.layout.fragment_cv_employer) {
     private var baseRotation = 0F
 
     private val viewBinding by viewBinding(FragmentCvEmployerBinding::bind)
-    private lateinit var viewModel : CVEmployeeViewModel
+    private lateinit var viewModel : VacancyEmployeeViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        viewModel = ViewModelProvider(requireActivity())[CVEmployeeViewModel::class.java]
+        viewModel = ViewModelProvider(requireActivity())[VacancyEmployeeViewModel::class.java]
     }
 
     @SuppressLint("ClickableViewAccessibility")
@@ -53,7 +53,7 @@ class CVEmployerFragment : Fragment(R.layout.fragment_cv_employer) {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.getCVState().collect { state ->
                     when (state) {
-                        is CVEmployeeViewModel.GetCVState.Ok -> {
+                        is VacancyEmployeeViewModel.GetCVState.Ok -> {
                             //Log.d(LOG_TAG, "Loading complete!")
                             val index = viewModel.getIndex()
                             setupShownCard(viewModel.getCV(index))
@@ -64,10 +64,10 @@ class CVEmployerFragment : Fragment(R.layout.fragment_cv_employer) {
                             viewBinding.employeeCard.alpha = 1f
                             viewBinding.employeeCardNext.alpha = 0f
                         }
-                        is CVEmployeeViewModel.GetCVState.Error -> {
+                        is VacancyEmployeeViewModel.GetCVState.Error -> {
                             // TODO: обработка ошибки получения CV
                         }
-                        is CVEmployeeViewModel.GetCVState.Loading -> {
+                        is VacancyEmployeeViewModel.GetCVState.Loading -> {
                             //Log.d(LOG_TAG, "Loading!")
                             viewBinding.employeeCard.isVisible = false
                             viewBinding.employeeCardNext.isVisible = false
