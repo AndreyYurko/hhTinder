@@ -268,10 +268,10 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-if __name__ == '__main__':
-   Start()
-   print("Something is not quite right")
-   close_ssh_tunnel(tunnel)
-   close_connection(conn)
+# if __name__ == '__main__':
+#    Start()
+#    print("Something is not quite right")
+#    close_ssh_tunnel(tunnel)
+#    close_connection(conn)
 
 instrumentator.instrument(app).expose(app, endpoint="/metrics", include_in_schema=True, should_gzip=True)
