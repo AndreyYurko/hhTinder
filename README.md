@@ -42,4 +42,4 @@ To acces Grafana username ```admin``` password ```pass@123```
 On the FastAPI, you can access ```localhost:8000/metrics``` endpoint to see the data Prometheus is scraping from it.
 
 Example of Grafana visualization metrics:
-![image](https://user-images.githubusercontent.com/55112338/202467963-4f1c8e44-f560-4c03-8f2f-2155e906d7b4.png)
+![image](https://user-images.githubusercontent.com/55112338/205328257-87fac286-296b-487c-a1f7-be4b014d8d16.png)
