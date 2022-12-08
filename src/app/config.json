@@ -1,0 +1,12 @@
+{
+  "ssh_host":
+    "217.25.88.166",
+  "ssh_password":
+    "Rhs:jgjkm166",
+  "ssh_username":
+    "root",
+  "database_name":
+    "vacanter",
+  "user_name":
+    "postgres"
+}

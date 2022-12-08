@@ -2,10 +2,11 @@ from requests import *
 from db_connection import *
 from typing import Union
 import uvicorn
-from fastapi import FastAPI
+from fastapi import FastAPI, Request
 from pydantic import BaseModel
 from monitoring import instrumentator
 from fastapi.middleware.cors import CORSMiddleware
+import hashlib
 
 app = FastAPI()
 app.type = "00"
@@ -26,39 +27,67 @@ tunnel, conn = connect_db()
 #     instrumentator.instrument(app).expose(app, endpoint="/metrics", include_in_schema=True, should_gzip=True)
 
 @app.get("/")
-def read_root():
+def read_root(request: Request):
+    token = request.headers.get('token')
+    if hashlib.sha256(token.encode('utf8')).hexdigest() != getCert():
+        return {"status": "unauthorized"}
+
     return {"Hello": "World"}
 
 
 @app.get("/items/{item_id}")
-def read_item(item_id: int, q: Union[str, None] = None):
+def read_item(item_id: int, request: Request, q: Union[str, None] = None):
+    token = request.headers.get('token')
+    if hashlib.sha256(token.encode('utf8')).hexdigest() != getCert():
+        return {"status": "unauthorized"}
+
     return {"item_id": item_id, "q": q}
 
 
 @app.get("/next_worker/")
-def next_worker():
+def next_worker(request: Request):
+    token = request.headers.get('token')
+    if hashlib.sha256(token.encode('utf8')).hexdigest() != getCert():
+        return {"status": "unauthorized"}
+
     return get_next_user(app.state.connection).to_json()
 
 
 @app.get("/next_vacancy/")
-def next_vacancy():
+def next_vacancy(request: Request):
+    token = request.headers.get('token')
+    if hashlib.sha256(token.encode('utf8')).hexdigest() != getCert():
+        return {"status": "unauthorized"}
+
     return get_next_vacancy(app.state.connection).to_json()
 
 
 @app.get("/cv/{cv_id}")
-def next_cv(cv_id: int):
+def next_cv(cv_id: int, request: Request):
+    token = request.headers.get('token')
+    if hashlib.sha256(token.encode('utf8')).hexdigest() != getCert():
+        return {"status": "unauthorized"}
+
     cv = get_next_cv(app.state.connection)
     return cv.to_json()
 
 
 @app.get("/vacancy/{vac_id}")
-def next_cv(vac_id: int):
+def next_cv(vac_id: int, request: Request):
+    token = request.headers.get('token')
+    if hashlib.sha256(token.encode('utf8')).hexdigest() != getCert():
+        return {"status": "unauthorized"}
+
     vac = get_vacancy(app.state.connection, vac_id)
     return vac.to_json()
 
 
 @app.get("/history/vacancy/{job_id}")
-def liked_workers(vacancy_id: int):
+def liked_workers(vacancy_id: int, request: Request):
+    token = request.headers.get('token')
+    if hashlib.sha256(token.encode('utf8')).hexdigest() != getCert():
+        return {"status": "unauthorized"}
+
     workers_ids = get_liked_workers_ids(app.state.connection, vacancy_id)
     liked_workers_for_vacancy = []
     for worker in workers_ids:
@@ -67,7 +96,11 @@ def liked_workers(vacancy_id: int):
 
 
 @app.get("/history/worker/{worker_id}")
-def liked_vacancies(worker_id: int):
+def liked_vacancies(worker_id: int, request: Request):
+    token = request.headers.get('token')
+    if hashlib.sha256(token.encode('utf8')).hexdigest() != getCert():
+        return {"status": "unauthorized"}
+
     vacancies_ids = get_liked_vacancies_ids(app.state.connection, worker_id)
     liked_vacancies_by_worker = []
     for worker in vacancies_ids:
@@ -81,7 +114,11 @@ class Like(BaseModel):
 
 
 @app.post("/worker_like/")
-async def like_from_worker(like: Like):
+async def like_from_worker(like: Like, request: Request):
+    token = request.headers.get('token')
+    if hashlib.sha256(token.encode('utf8')).hexdigest() != getCert():
+        return {"status": "unauthorized"}
+
     vacancies_ids = get_liked_vacancies_ids(app.state.connection, like.worker_id)
     post_like_from_worker(app.state.connection, like.job_id, like.worker_id)
 
@@ -91,7 +128,11 @@ async def like_from_worker(like: Like):
 
 
 @app.post("/vacancy_like/")
-async def like_from_vacancy(like: Like):
+async def like_from_vacancy(like: Like, request: Request):
+    token = request.headers.get('token')
+    if hashlib.sha256(token.encode('utf8')).hexdigest() != getCert():
+        return {"status": "unauthorized"}
+
     workers_ids = get_liked_workers_ids(app.state.connection, like.job_id)
     post_like_from_vacancy(app.state.connection, like.job_id, like.worker_id)
 
@@ -101,34 +142,58 @@ async def like_from_vacancy(like: Like):
 
 
 @app.get("/vacancy/vacancy_categories")
-def vacancy_categories():
+def vacancy_categories(request: Request):
+    token = request.headers.get('token')
+    if hashlib.sha256(token.encode('utf8')).hexdigest() != getCert():
+        return {"status": "unauthorized"}
+
     return get_vacancy_categories(app.state.connection)
 
 
 @app.post("/login/token/{login}/{token}")
-def login_with_token(login: str, token: str):
+def login_with_token(login: str, token: str, request: Request):
+    token = request.headers.get('token')
+    if hashlib.sha256(token.encode('utf8')).hexdigest() != getCert():
+        return {"status": "unauthorized"}
+
     res = check_token(app.state.connection, login, token)
     return {"login": res}
 
 
 @app.post("/login/password/{login}/{password}")
-def login_with_password(login: str, password: str):
+def login_with_password(login: str, password: str, request: Request):
+    token = request.headers.get('token')
+    if hashlib.sha256(token.encode('utf8')).hexdigest() != getCert():
+        return {"status": "unauthorized"}
+
     token = try_login(app.state.connection, login, password)
     return {"token": token}
 
 
 @app.get("/user_role/{email}")
-def user_role_by_email(email: str):
+def user_role_by_email(email: str, request: Request):
+    token = request.headers.get('token')
+    if hashlib.sha256(token.encode('utf8')).hexdigest() != getCert():
+        return {"status": "unauthorized"}
+
     return get_role(app.state.connection, email)
 
 
 @app.get("/vacancy_preview_info/{email}")
-def get_vacancy_preview(email: str):
+def get_vacancy_preview(email: str, request: Request):
+    token = request.headers.get('token')
+    if hashlib.sha256(token.encode('utf8')).hexdigest() != getCert():
+        return {"status": "unauthorized"}
+
     return get_all_vacancy_preview(app.state.connection, email)
 
 
 @app.get("/cv_preview_info/{email}")
-def get_cv_preview(email: str):
+def get_cv_preview(email: str, request: Request):
+    token = request.headers.get('token')
+    if hashlib.sha256(token.encode('utf8')).hexdigest() != getCert():
+        return {"status": "unauthorized"}
+
     return get_all_cv_preview(app.state.connection, email)
 
 
@@ -166,7 +231,11 @@ class Profile(BaseModel):
 
 
 @app.post("/add_vacancy/")
-async def add_vacancy(vacancy: Vacancy):
+async def add_vacancy(vacancy: Vacancy, request: Request):
+    token = request.headers.get('token')
+    if hashlib.sha256(token.encode('utf8')).hexdigest() != getCert():
+        return {"status": "unauthorized"}
+
     await add_vacancy_to_db(
         app.state.connection,
         vac_name=vacancy.vac_name,
@@ -178,7 +247,11 @@ async def add_vacancy(vacancy: Vacancy):
 
 
 @app.post("/edit_vacancy/")
-async def edit_vacancy(vacancy: Vacancy):
+async def edit_vacancy(vacancy: Vacancy, request: Request):
+    token = request.headers.get('token')
+    if hashlib.sha256(token.encode('utf8')).hexdigest() != getCert():
+        return {"status": "unauthorized"}
+
     await edit_vacancy_in_db(
         app.state.connection,
         vac_name=vacancy.vac_name,
@@ -191,7 +264,11 @@ async def edit_vacancy(vacancy: Vacancy):
 
 
 @app.post("/add_cv/")
-async def add_cv(cv: CV):
+async def add_cv(cv: CV, request: Request):
+    token = request.headers.get('token')
+    if hashlib.sha256(token.encode('utf8')).hexdigest() != getCert():
+        return {"status": "unauthorized"}
+
     await add_cv_to_db(
         app.state.connection,
         cv.cv_name,
@@ -206,7 +283,11 @@ async def add_cv(cv: CV):
 
 
 @app.post("/edit_cv/")
-async def edit_cv(cv: CV):
+async def edit_cv(cv: CV, request: Request):
+    token = request.headers.get('token')
+    if hashlib.sha256(token.encode('utf8')).hexdigest() != getCert():
+        return {"status": "unauthorized"}
+
     await edit_cv_in_db(
         app.state.connection,
         cv.cv_name,
@@ -222,7 +303,11 @@ async def edit_cv(cv: CV):
 
 
 @app.post("/add_profile/")
-async def add_profile(profile: Profile):
+async def add_profile(profile: Profile, request: Request):
+    token = request.headers.get('token')
+    if hashlib.sha256(token.encode('utf8')).hexdigest() != getCert():
+        return {"status": "unauthorized"}
+
     await add_profile_to_db(
         app.state.connection,
         profile.name,
@@ -234,7 +319,11 @@ async def add_profile(profile: Profile):
 
 
 @app.post("/edit_profile/")
-async def edit_profile(profile: Profile):
+async def edit_profile(profile: Profile, request: Request):
+    token = request.headers.get('token')
+    if hashlib.sha256(token.encode('utf8')).hexdigest() != getCert():
+        return {"status": "unauthorized"}
+
     await edit_profile_in_db(
         app.state.connection,
         profile.name,
@@ -243,7 +332,14 @@ async def edit_profile(profile: Profile):
         profile.gender_id,
         profile.id
     )
+
+
     return {"status": "ok"}
+
+
+def getCert():
+    f = open("key.crt").readlines()
+    return f[0]
 
 
 # General comment
@@ -268,10 +364,12 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# if __name__ == '__main__':
-#    Start()
+if __name__ == '__main__':
+    Start()
+
 #    print("Something is not quite right")
 #    close_ssh_tunnel(tunnel)
 #    close_connection(conn)
+
 
 instrumentator.instrument(app).expose(app, endpoint="/metrics", include_in_schema=True, should_gzip=True)
