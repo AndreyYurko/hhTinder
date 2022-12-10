@@ -1,32 +1,29 @@
-package com.andreyyurko.hhtinder.ui.employee.archiveemployee
+package com.andreyyurko.hhtinder.ui.employee.mycvs
 
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
-import by.kirich1409.viewbindingdelegate.viewBinding
 import com.andreyyurko.hhtinder.R
-import com.andreyyurko.hhtinder.databinding.FragmentArchiveEmployeeBinding
+import by.kirich1409.viewbindingdelegate.viewBinding
+import com.andreyyurko.hhtinder.databinding.FragmentMyCvsBinding
 import com.andreyyurko.hhtinder.structures.Card
+import com.andreyyurko.hhtinder.ui.employee.archiveemployee.ArchiveAdapterEmployee
 import com.andreyyurko.hhtinder.utils.network.ArchiveHandler
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
-import kotlin.coroutines.CoroutineContext
 
-class ArchiveEmployeeFragment : Fragment(R.layout.fragment_archive_employee), CoroutineScope {
+class MyCvsFragmentEmployee : Fragment(R.layout.fragment_my_cvs) {
 
-    private var job: Job = Job()
-
-    private val viewBinding by viewBinding(FragmentArchiveEmployeeBinding::bind)
+    private val viewBinding by viewBinding(FragmentMyCvsBinding::bind)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        launch { setupRecyclerView() }
+        viewLifecycleOwner.lifecycleScope.launch {
+            setupRecyclerView()
+        }
     }
-
 
     private suspend fun getArchiveList(): List<Card> {
         return ArchiveHandler().getArchiveList()
@@ -36,12 +33,11 @@ class ArchiveEmployeeFragment : Fragment(R.layout.fragment_archive_employee), Co
         val recyclerView = viewBinding.recycleView
         recyclerView.layoutManager =
             LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+        // TODO: переделать с архивов на что-то нормальное
         val adapter = ArchiveAdapterEmployee(getArchiveList())
         recyclerView.adapter = adapter
 
         return adapter
     }
 
-    override val coroutineContext: CoroutineContext
-        get() = Dispatchers.Main + job
 }

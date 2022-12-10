@@ -3,8 +3,7 @@ package com.andreyyurko.hhtinder.utils.network
 import android.graphics.drawable.Drawable
 import android.util.Log
 import com.andreyyurko.hhtinder.singleton.SharedPreferencesSingleton
-import com.andreyyurko.hhtinder.structures.Archive
-import com.andreyyurko.hhtinder.structures.Vacancy
+import com.andreyyurko.hhtinder.structures.Card
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import org.json.JSONObject
@@ -22,8 +21,8 @@ class ArchiveHandler {
 
     private val client = OkHttpClient()
 
-    suspend fun getArchiveList(): List<Archive> {
-        var res: ArrayList<Archive> = ArrayList()
+    suspend fun getArchiveList(): List<Card> {
+        var res: ArrayList<Card> = ArrayList()
 
         val url = host
         val request = Request.Builder()
@@ -56,7 +55,7 @@ class ArchiveHandler {
 
                 var imgUrl = "http://217.25.88.166/web_project/files/images/0/" + archive.getInt("image_id") + "." + archive.getString("img_ext")
 
-                var arch = Archive(key.toInt(), name, content)
+                var arch = Card(key.toInt(), name, content)
 
                 try {
                     val URLcontent: InputStream =

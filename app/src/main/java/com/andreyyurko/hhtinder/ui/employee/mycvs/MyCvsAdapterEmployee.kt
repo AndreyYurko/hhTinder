@@ -1,4 +1,4 @@
-package com.andreyyurko.hhtinder.ui.employee.archiveemployee
+package com.andreyyurko.hhtinder.ui.employee.mycvs
 
 import android.view.LayoutInflater
 import android.view.View
@@ -13,10 +13,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.andreyyurko.hhtinder.R
 import com.andreyyurko.hhtinder.singleton.TransferSingleton
 import com.andreyyurko.hhtinder.structures.Card
+import com.andreyyurko.hhtinder.ui.employee.archiveemployee.ArchiveEmployeeFragment
 import com.google.android.material.card.MaterialCardView
 
-class ArchiveAdapterEmployee(private var archiveCardList: List<Card>) :
-    RecyclerView.Adapter<ArchiveAdapterEmployee.ViewHolder>() {
+class MyCvsAdapterEmployee(private var cvsCardList: List<Card>) :
+    RecyclerView.Adapter<MyCvsAdapterEmployee.ViewHolder>() {
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val avatarImageView: ImageView = itemView.findViewById(R.id.avatarImageView)
@@ -33,23 +34,23 @@ class ArchiveAdapterEmployee(private var archiveCardList: List<Card>) :
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.cardNameTextView.setText(archiveCardList.get(position).name)
-        holder.cardBodyTextView.setText(archiveCardList.get(position).content)
-        holder.avatarImageView.setImageDrawable(archiveCardList.get(position).image)
+        holder.cardNameTextView.text = cvsCardList[position].name
+        holder.cardBodyTextView.text = cvsCardList[position].content
+        holder.avatarImageView.setImageDrawable(cvsCardList[position].image)
         holder.cardMain.setOnClickListener {
-            TransferSingleton.instance.setTransferArchive(archiveCardList.get(position))
+            TransferSingleton.instance.setTransferArchive(cvsCardList[position])
             it.findNavController().navigate(R.id.action_archiveFragment_to_employeeArchiveCardFragment)
             it.findFragment<ArchiveEmployeeFragment>().setFragmentResult(
                 "EmployeeInfo", bundleOf(
-                    "jobName" to archiveCardList[position].name,
-                    "id" to archiveCardList[position].id,
-                    "content" to archiveCardList[position].content
+                    "jobName" to cvsCardList[position].name,
+                    "id" to cvsCardList[position].id,
+                    "content" to cvsCardList[position].content
                 )
             )
         }
     }
 
     override fun getItemCount(): Int {
-        return archiveCardList.size
+        return cvsCardList.size
     }
 }

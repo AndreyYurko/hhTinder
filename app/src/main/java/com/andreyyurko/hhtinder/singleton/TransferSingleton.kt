@@ -1,20 +1,20 @@
 package com.andreyyurko.hhtinder.singleton
 
-import com.andreyyurko.hhtinder.structures.Archive
+import com.andreyyurko.hhtinder.structures.Card
 
 class TransferSingleton {
 
-    var archive: Archive? = null
+    var archiveCard: Card? = null
 
     companion object {
         val instance = TransferSingleton()
     }
 
-    fun setTransferArchive(archive: Archive?) {
-        this.archive = archive
+    fun setTransferArchive(archiveCard: Card?) {
+        this.archiveCard = archiveCard
     }
 
-    fun getTransferArchive(): Archive? {
-        return archive
+    fun getTransferArchive(): Card? {
+        return archiveCard
     }
 }

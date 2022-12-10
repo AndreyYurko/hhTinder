@@ -23,7 +23,6 @@ class SignInFragment : Fragment(R.layout.fragment_sign_in) {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         viewModel = ViewModelProvider(this)[SignInViewModel::class.java]
-        tryLoginViaToken()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

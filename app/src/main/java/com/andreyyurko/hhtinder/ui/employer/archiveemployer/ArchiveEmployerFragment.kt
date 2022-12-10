@@ -7,9 +7,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.andreyyurko.hhtinder.R
 import com.andreyyurko.hhtinder.databinding.FragmentArchiveEmployerBinding
-import com.andreyyurko.hhtinder.structures.Archive
+import com.andreyyurko.hhtinder.structures.Card
 import com.andreyyurko.hhtinder.ui.employee.archiveemployee.ArchiveAdapterEmployee
-import com.andreyyurko.hhtinder.ui.employee.archiveemployee.ArchiveEmployee
 import com.andreyyurko.hhtinder.utils.network.ArchiveHandler
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -32,7 +31,7 @@ class ArchiveEmployerFragment : Fragment(R.layout.fragment_archive_employer), Co
     }
 
 
-    private suspend fun getArchiveList(): List<Archive> {
+    private suspend fun getArchiveList(): List<Card> {
         return ArchiveHandler().getArchiveList()
     }
 

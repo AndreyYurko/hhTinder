@@ -7,13 +7,12 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.andreyyurko.hhtinder.R
-import com.andreyyurko.hhtinder.structures.Archive
-import com.andreyyurko.hhtinder.ui.employee.archiveemployee.ArchiveEmployee
+import com.andreyyurko.hhtinder.structures.Card
 
-class ArchiveAdapterEmployer(archiveList: List<Archive>) :
+class ArchiveAdapterEmployer(archiveCardList: List<Card>) :
     RecyclerView.Adapter<ArchiveAdapterEmployer.ViewHolder>() {
 
-    var archiveList: List<Archive> = archiveList
+    var archiveCardList: List<Card> = archiveCardList
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val avatarImageView = itemView.findViewById<ImageView>(R.id.avatarImageView)
@@ -24,17 +23,17 @@ class ArchiveAdapterEmployer(archiveList: List<Archive>) :
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val itemView =
-            LayoutInflater.from(parent.context).inflate(R.layout.card_archive, parent, false)
+            LayoutInflater.from(parent.context).inflate(R.layout.card_archive_employer, parent, false)
         return ViewHolder(itemView)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.cardNameTextView.setText(archiveList.get(position).name)
-        holder.cardBodyTextView.setText(archiveList.get(position).content)
-        holder.avatarImageView.setImageDrawable(archiveList.get(position).image)
+        holder.cardNameTextView.setText(archiveCardList.get(position).name)
+        holder.cardBodyTextView.setText(archiveCardList.get(position).content)
+        holder.avatarImageView.setImageDrawable(archiveCardList.get(position).image)
     }
 
     override fun getItemCount(): Int {
-        return archiveList.size
+        return archiveCardList.size
     }
 }
