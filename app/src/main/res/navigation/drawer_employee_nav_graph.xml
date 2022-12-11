@@ -2,13 +2,17 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/drawer_employee_nav_graph"
-    app:startDestination="@+id/cv_employee_nav_graph">
+    app:startDestination="@+id/profileEmployeeFragment">
 
+    <fragment
+        android:id="@+id/profileEmployeeFragment"
+        android:name="com.andreyyurko.hhtinder.ui.employee.profileemployee.ProfileEmployeeFragment"
+        android:label="ProfileEmployeeFragment"/>
 
-    <include app:graph="@navigation/archive_employee_nav_graph" />
+    <include app:graph="@navigation/likes_employee_nav_graph" />
     <include app:graph="@navigation/cv_employee_nav_graph" />
     <include app:graph="@navigation/settings_employee_nav_graph" />
     <include app:graph="@navigation/message_employee_nav_graph" />
-    <include app:graph="@navigation/profile_employee_nav_graph" />
     <include app:graph="@navigation/vacancy_employee_nav_graph" />
+    <include app:graph="@navigation/matches_employee_nav_graph" />
 </navigation>

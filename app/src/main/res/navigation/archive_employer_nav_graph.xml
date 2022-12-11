@@ -2,15 +2,15 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/archive_employer_nav_graph"
-    app:startDestination="@id/archiveFragment">
+    app:startDestination="@id/likesFragment">
 
     <fragment
-        android:id="@+id/archiveFragment"
+        android:id="@+id/likesFragment"
         android:name="com.andreyyurko.hhtinder.ui.employer.archiveemployer.ArchiveEmployerFragment"
         android:label="ArchiveFragment">
         <action
-            android:id="@+id/action_archiveFragment_to_employeeArchiveCardFragment"
-            app:destination="@id/employeeArchiveCardFragment" />
+            android:id="@+id/action_archiveFragment_to_employerArchiveCardFragment"
+            app:destination="@id/employerArchiveCardFragment" />
     </fragment>
 
     <fragment

@@ -9,7 +9,6 @@ import com.andreyyurko.hhtinder.R
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.andreyyurko.hhtinder.databinding.FragmentMyCvsBinding
 import com.andreyyurko.hhtinder.structures.Card
-import com.andreyyurko.hhtinder.ui.employee.archiveemployee.ArchiveAdapterEmployee
 import com.andreyyurko.hhtinder.utils.network.ArchiveHandler
 import kotlinx.coroutines.launch
 
@@ -29,12 +28,18 @@ class MyCvsFragmentEmployee : Fragment(R.layout.fragment_my_cvs) {
         return ArchiveHandler().getArchiveList()
     }
 
-    private suspend fun setupRecyclerView(): ArchiveAdapterEmployee {
+    private suspend fun setupRecyclerView(): MyCvsAdapterEmployee {
         val recyclerView = viewBinding.recycleView
         recyclerView.layoutManager =
             LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
         // TODO: переделать с архивов на что-то нормальное
-        val adapter = ArchiveAdapterEmployee(getArchiveList())
+        val res = getArchiveList().toMutableList()
+        res.add(Card(
+            id = 10,
+            name = "Имя",
+            content = "Какой-то контент"
+        ))
+        val adapter = MyCvsAdapterEmployee(res)
         recyclerView.adapter = adapter
 
         return adapter

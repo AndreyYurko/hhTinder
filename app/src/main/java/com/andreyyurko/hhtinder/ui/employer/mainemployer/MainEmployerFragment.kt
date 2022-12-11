@@ -1,7 +1,9 @@
 package com.andreyyurko.hhtinder.ui.employer.mainemployer
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
+import androidx.activity.OnBackPressedCallback
 import androidx.core.view.GravityCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.NavHostFragment
@@ -35,6 +37,16 @@ class MainEmployerFragment : Fragment(R.layout.fragment_main_employer) {
         val navController =
             (childFragmentManager.findFragmentById(R.id.mainFragmentNavigationHost) as NavHostFragment).navController
         viewBinding.nvView.setupWithNavController(navController)
+
+        requireActivity().onBackPressedDispatcher.addCallback(
+            viewLifecycleOwner,
+            object : OnBackPressedCallback(true) {
+                override fun handleOnBackPressed() {
+                    Log.d("Vacan", navController.backQueue.size.toString())
+                    if (navController.backQueue.size > 4) navController.popBackStack()
+                }
+            }
+        )
 /*
         viewBinding.menuImageButton.setOnClickListener() {
             viewBinding.drawerLayout.openDrawer(GravityCompat.START)

@@ -23,7 +23,7 @@ class ArchiveAdapterEmployer(archiveCardList: List<Card>) :
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val itemView =
-            LayoutInflater.from(parent.context).inflate(R.layout.card_archive_employer, parent, false)
+            LayoutInflater.from(parent.context).inflate(R.layout.card_employer, parent, false)
         return ViewHolder(itemView)
     }
 

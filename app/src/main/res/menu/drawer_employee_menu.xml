@@ -1,15 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <group android:checkableBehavior="single">
-        <item
-            android:id="@+id/profile_employee_nav_graph"
-            android:icon="@drawable/ic_person_circle"
-            android:title="My Profile" />
 
         <item
-            android:id="@+id/vacancy_employee_nav_graph"
+            android:id="@+id/cv_employee_nav_graph"
             android:icon="@drawable/ic_factory"
-            android:title="My CV" />
+            android:title="My CVs" />
 
         <item
             android:id="@+id/message_employee_nav_graph"
@@ -17,19 +13,25 @@
             android:title="Message" />
 
         <item
-            android:id="@+id/archive_employee_nav_graph"
-            android:icon="@drawable/ic_archive"
-            android:title="Archive" />
+            android:id="@+id/likes_employee_nav_graph"
+            android:icon="@drawable/like"
+            android:title="Likes" />
+
+        <item
+            android:id="@+id/matches_employee_nav_graph"
+            android:icon="@drawable/shake_hands"
+            android:title="Matches" />
 
         <item
             android:id="@+id/settings_employee_nav_graph"
             android:icon="@drawable/ic_outline_setting"
-            android:title="Settings" />
+            android:title="Filters" />
 
         <item
-            android:id="@+id/cv_employee_nav_graph"
+            android:id="@+id/vacancy_employee_nav_graph"
             android:icon="@drawable/search_cv_and_vacancy"
             android:title="Vacancies" />
+
     </group>
 
 </menu>

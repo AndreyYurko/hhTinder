@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/likes_employee_nav_graph"
+    app:startDestination="@id/likesFragment">
+
+    <fragment
+        android:id="@+id/likesFragment"
+        android:name="com.andreyyurko.hhtinder.ui.employee.likesemployee.LikesEmployeeFragment"
+        android:label="LikesFragment">
+        <action
+            android:id="@+id/action_likesFragment_to_showVacancyFragment"
+            app:destination="@id/showVacancyFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/showVacancyFragment"
+        android:name="com.andreyyurko.hhtinder.ui.employee.showvacancy.ShowVacancyFragment"
+        android:label="showVanancyFragment" />
+
+</navigation>

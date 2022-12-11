@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.andreyyurko.hhtinder.R
 import com.andreyyurko.hhtinder.singleton.TransferSingleton
 import com.andreyyurko.hhtinder.structures.Card
-import com.andreyyurko.hhtinder.ui.employee.archiveemployee.ArchiveEmployeeFragment
+import com.andreyyurko.hhtinder.ui.employee.cvemployee.CVEmployeeFragment
 import com.google.android.material.card.MaterialCardView
 
 class MyCvsAdapterEmployee(private var cvsCardList: List<Card>) :
@@ -29,7 +29,7 @@ class MyCvsAdapterEmployee(private var cvsCardList: List<Card>) :
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val itemView =
-            LayoutInflater.from(parent.context).inflate(R.layout.card_archive_employee, parent, false)
+            LayoutInflater.from(parent.context).inflate(R.layout.card_employee, parent, false)
         return ViewHolder(itemView)
     }
 
@@ -39,8 +39,8 @@ class MyCvsAdapterEmployee(private var cvsCardList: List<Card>) :
         holder.avatarImageView.setImageDrawable(cvsCardList[position].image)
         holder.cardMain.setOnClickListener {
             TransferSingleton.instance.setTransferArchive(cvsCardList[position])
-            it.findNavController().navigate(R.id.action_archiveFragment_to_employeeArchiveCardFragment)
-            it.findFragment<ArchiveEmployeeFragment>().setFragmentResult(
+            it.findNavController().navigate(R.id.action_myCVsFragment_to_cvFragment)
+            it.findFragment<CVEmployeeFragment>().setFragmentResult(
                 "EmployeeInfo", bundleOf(
                     "jobName" to cvsCardList[position].name,
                     "id" to cvsCardList[position].id,

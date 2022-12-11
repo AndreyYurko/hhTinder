@@ -1,4 +1,4 @@
-package com.andreyyurko.hhtinder.ui.employee.archiveemployee
+package com.andreyyurko.hhtinder.ui.employee.likesemployee
 
 import android.view.LayoutInflater
 import android.view.View
@@ -13,10 +13,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.andreyyurko.hhtinder.R
 import com.andreyyurko.hhtinder.singleton.TransferSingleton
 import com.andreyyurko.hhtinder.structures.Card
+import com.andreyyurko.hhtinder.ui.employee.showvacancy.ShowVacancyFragment
 import com.google.android.material.card.MaterialCardView
 
-class ArchiveAdapterEmployee(private var archiveCardList: List<Card>) :
-    RecyclerView.Adapter<ArchiveAdapterEmployee.ViewHolder>() {
+class LikesAdapterEmployee(private var likesCardList: List<Card>) :
+    RecyclerView.Adapter<LikesAdapterEmployee.ViewHolder>() {
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val avatarImageView: ImageView = itemView.findViewById(R.id.avatarImageView)
@@ -28,28 +29,28 @@ class ArchiveAdapterEmployee(private var archiveCardList: List<Card>) :
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val itemView =
-            LayoutInflater.from(parent.context).inflate(R.layout.card_archive_employee, parent, false)
+            LayoutInflater.from(parent.context).inflate(R.layout.card_employer, parent, false)
         return ViewHolder(itemView)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.cardNameTextView.setText(archiveCardList.get(position).name)
-        holder.cardBodyTextView.setText(archiveCardList.get(position).content)
-        holder.avatarImageView.setImageDrawable(archiveCardList.get(position).image)
+        holder.cardNameTextView.setText(likesCardList.get(position).name)
+        holder.cardBodyTextView.setText(likesCardList.get(position).content)
+        holder.avatarImageView.setImageDrawable(likesCardList.get(position).image)
         holder.cardMain.setOnClickListener {
-            TransferSingleton.instance.setTransferArchive(archiveCardList.get(position))
-            it.findNavController().navigate(R.id.action_archiveFragment_to_employeeArchiveCardFragment)
-            it.findFragment<ArchiveEmployeeFragment>().setFragmentResult(
-                "EmployeeInfo", bundleOf(
-                    "jobName" to archiveCardList[position].name,
-                    "id" to archiveCardList[position].id,
-                    "content" to archiveCardList[position].content
+            TransferSingleton.instance.setTransferArchive(likesCardList.get(position))
+            it.findNavController().navigate(R.id.action_likesFragment_to_showVacancyFragment)
+            it.findFragment<ShowVacancyFragment>().setFragmentResult(
+                "CVInfo", bundleOf(
+                    "jobName" to likesCardList[position].name,
+                    "id" to likesCardList[position].id,
+                    "content" to likesCardList[position].content
                 )
             )
         }
     }
 
     override fun getItemCount(): Int {
-        return archiveCardList.size
+        return likesCardList.size
     }
 }

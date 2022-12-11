@@ -41,14 +41,6 @@
 
                 </com.google.android.material.card.MaterialCardView>
 
-                <ImageView
-                    android:id="@+id/avatarChangeImageView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="bottom|center"
-                    android:layout_marginLeft="65dp"
-                    app:srcCompat="@drawable/ic_pencil_orange" />
-
             </FrameLayout>
 
             <TextView
@@ -58,25 +50,32 @@
                 android:layout_marginTop="25dp"
                 android:text="@string/vacancy_name" />
 
-            <com.google.android.material.textfield.TextInputEditText
+            <TextView
                 android:id="@+id/iVacancyName"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content"
+                android:background="@drawable/rounded_text"
+                android:padding="10dp"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                />
 
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/iVacancyTextHolder"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            <TextView
+                android:id="@+id/vacancyText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="12dp">
+                android:layout_marginTop="25dp"
+                android:text="Vacancy text" />
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/iVacancyText"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/vacancy_text" />
-            </com.google.android.material.textfield.TextInputLayout>
+            <TextView
+                android:id="@+id/iVacancyText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:background="@drawable/rounded_text"
+                android:textColor="@color/black"
+                android:textSize="16sp"/>
 
             <TextView
                 android:id="@+id/vacancyDate"
@@ -85,14 +84,14 @@
                 android:layout_marginTop="25dp"
                 android:text="@string/date" />
 
-            <EditText
-                android:id="@+id/editTextDate"
+            <TextView
+                android:id="@+id/dataText"
                 android:layout_width="match_parent"
-                android:layout_height="48dp"
-                android:ems="10"
-                android:hint="@string/date"
-                android:inputType="date"
-                android:minHeight="48dp" />
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:background="@drawable/rounded_text"
+                android:textColor="@color/black"
+                android:textSize="16sp"/>
 
             <TextView
                 android:id="@+id/vacancyCategory"
@@ -101,19 +100,15 @@
                 android:layout_marginTop="25dp"
                 android:text="@string/category" />
 
-
-            <Spinner
-                android:id="@+id/categoriesList"
+            <TextView
+                android:id="@+id/categoryText"
                 android:layout_width="match_parent"
-                android:layout_height="48dp" />
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:background="@drawable/rounded_text"
+                android:textColor="@color/black"
+                android:textSize="16sp"/>
 
-            <Button
-                android:id="@+id/button"
-                android:layout_width="match_parent"
-                android:layout_height="64dp"
-                android:layout_marginTop="32dp"
-                android:text="@string/save"
-                android:textSize="23sp"/>
         </LinearLayout>
 
     </ScrollView>

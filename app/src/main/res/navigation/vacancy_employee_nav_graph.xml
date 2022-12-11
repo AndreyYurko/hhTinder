@@ -2,11 +2,11 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/vacancy_employee_nav_graph"
-    app:startDestination="@id/vacancyFragment">
+    app:startDestination="@id/vacancyFragmentEmployee">
 
     <fragment
-        android:id="@+id/vacancyFragment"
-        android:name="com.andreyyurko.hhtinder.ui.employee.cvemployee.CVEmployeeFragment"
+        android:id="@+id/vacancyFragmentEmployee"
+        android:name="com.andreyyurko.hhtinder.ui.employee.vacancyemployee.VacancyEmployeeFragment"
         android:label="VacancyFragment"/>
 
 </navigation>

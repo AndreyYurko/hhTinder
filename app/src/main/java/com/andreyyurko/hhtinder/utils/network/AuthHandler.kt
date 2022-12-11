@@ -2,10 +2,12 @@ package com.andreyyurko.hhtinder.utils.network
 
 import android.util.Log
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.andreyyurko.hhtinder.singleton.SharedPreferencesSingleton
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.launch
 import okhttp3.MediaType
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.OkHttpClient
@@ -119,6 +121,15 @@ class AuthHandler @Inject constructor() : ViewModel() {
                 _authStateFlow.emit(AuthState.Logged)
             }
         }
+    }
+
+    fun logOut() {
+        viewModelScope.launch {
+            SharedPreferencesSingleton.instance.getSharedPreferences()!!.edit()
+                .putString("token", "").apply()
+            _authStateFlow.emit(AuthState.NotLogged)
+        }
+
     }
 
     sealed class AuthState {

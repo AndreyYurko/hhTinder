@@ -2,12 +2,20 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/cv_employee_nav_graph"
-    app:startDestination="@id/cvFragment">
+    app:startDestination="@id/myCVsFragment">
+
+    <fragment
+        android:id="@+id/myCVsFragment"
+        android:name="com.andreyyurko.hhtinder.ui.employee.mycvs.MyCvsFragmentEmployee"
+        android:label="MyCvsFragment">
+        <action
+            android:id="@+id/action_myCVsFragment_to_cvFragment"
+            app:destination="@id/cvFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/cvFragment"
-        android:name="com.andreyyurko.hhtinder.ui.employee.vacancyemployee.VacancyEmployeeFragment"
-        android:label="CVFragment">
-    </fragment>
+        android:name="com.andreyyurko.hhtinder.ui.employee.cvemployee.CVEmployeeFragment"
+        android:label="CVFragment"/>
 
 </navigation>

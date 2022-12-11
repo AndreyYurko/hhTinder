@@ -3,17 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:id="@+id/menuChat"
-        android:icon="@drawable/ic_message"
-        android:iconifiedByDefault="false"
-        android:title="Chat"
-        app:actionViewClass="androidx.appcompat.widget.SearchView"
-        app:showAsAction="always" />
-
-    <item
-        android:id="@+id/menuProfile"
+        android:id="@+id/profile_employee_nav_graph"
         android:icon="@drawable/ic_person_circle"
-        android:title="Search"
+        android:title="Profile"
         app:showAsAction="always" />
 
     <!--

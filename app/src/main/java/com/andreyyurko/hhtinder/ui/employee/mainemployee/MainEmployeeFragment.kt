@@ -1,8 +1,11 @@
 package com.andreyyurko.hhtinder.ui.employee.mainemployee
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
+import androidx.activity.OnBackPressedCallback
 import androidx.core.view.GravityCompat
+import androidx.core.view.marginTop
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.NavHostFragment
@@ -28,18 +31,41 @@ class MainEmployeeFragment : Fragment(R.layout.fragment_main_employee) {
         super.onViewCreated(view, savedInstanceState)
 
         viewBinding.toolbar.setNavigationOnClickListener {
-            viewBinding.drawerLayout.openDrawer(
-                GravityCompat.START
-            )
+            if (viewBinding.drawerLayout.isOpen) {
+                viewBinding.drawerLayout.closeDrawer(GravityCompat.START)
+            }
+            else {
+                viewBinding.drawerLayout.openDrawer(
+                    GravityCompat.START
+                )
+            }
         }
 
-        viewBinding.mainFragmentNavigationHost.applyInsetter {
+        viewBinding.appbar.applyInsetter {
             type(statusBars = true) { margin() }
         }
+        viewBinding.drawerLayout.applyInsetter {
+            type(statusBars = true) { margin() }
+        }
+
         val navController =
             (childFragmentManager.findFragmentById(R.id.mainFragmentNavigationHost) as NavHostFragment).navController
         viewBinding.nvView.setupWithNavController(navController)
 
+        requireActivity().onBackPressedDispatcher.addCallback(
+            viewLifecycleOwner,
+            object : OnBackPressedCallback(true) {
+                override fun handleOnBackPressed() {
+                    Log.d("Vacan", navController.backQueue.size.toString())
+                    if (navController.backQueue.size > 4) navController.popBackStack()
+                }
+            }
+        )
+
+        viewBinding.toolbar.setOnMenuItemClickListener {
+            navController.navigate(R.id.profileEmployeeFragment)
+            true
+        }
 /*
         viewBinding.menuImageButton.setOnClickListener() {
             viewBinding.drawerLayout.openDrawer(GravityCompat.START)
