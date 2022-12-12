@@ -441,31 +441,35 @@ async def set_vacancies_filters(vac_id: int, salary: int, is_fulltime: bool, is_
     return {"status": "ok"}
 
 
-# Проблема с List[int] - недоступный тип, а как по-другому?
-
-# @app.get("/get_user_ids_by_filters/{salary}/{grade_id}/{languages_ids}")
-# def get_user_ids_by_filters(salary: int, grade_id: int, languages_ids: List[int], request: Request):
-#     token = request.headers.get('token')
-#     if hashlib.sha256(token.encode('utf8')).hexdigest() != getCert():
-#         return {"status": "unauthorized"}
-
-#     return get_users_by_filters(app.state.connection, salary, grade_id, languages_ids)
+class UserFilters(BaseModel):
+    salary: int
+    grade_id: int
+    languages_ids: List[int]
 
 
-# @app.post("/set_users_filters/{user_id}/{salary}/{grade_id}/{languages_ids}")
-# async def set_users_filters(user_id: int, salary: int, grade_id: int, languages_ids: List[int], request: Request):
-#     token = request.headers.get('token')
-#     if hashlib.sha256(token.encode('utf8')).hexdigest() != getCert():
-#         return {"status": "unauthorized"}
+@app.post("/get_user_ids_by_filters/")
+def get_user_ids_by_filters(user_filters: UserFilters, request: Request):
+    token = request.headers.get('token')
+    if hashlib.sha256(token.encode('utf8')).hexdigest() != getCert():
+        return {"status": "unauthorized"}
 
-#     await set_users_by_filters(
-#         app.state.connection,
-#         user_id,
-#         salary,
-#         grade_id, 
-#         languages_ids
-#     )
-#     return {"status": "ok"}
+    return get_users_by_filters(app.state.connection, user_filters.salary, user_filters.grade_id, user_filters.languages_ids)
+
+
+@app.post("/set_users_filters/{user_id}")
+async def set_users_filters(user_id: int, user_filters: UserFilters, request: Request):
+    token = request.headers.get('token')
+    if hashlib.sha256(token.encode('utf8')).hexdigest() != getCert():
+        return {"status": "unauthorized"}
+
+    await set_users_by_filters(
+        app.state.connection,
+        user_id,
+        user_filters.salary,
+        user_filters.grade_id, 
+        user_filters.languages_ids
+    )
+    return {"status": "ok"}
 
 
 def getCert():
