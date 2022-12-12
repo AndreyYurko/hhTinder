@@ -369,3 +369,29 @@ def insert_match(conn, user_id, vacancy_id):
     else:
         message_template_insert_match = Queries.INSERT_MATCH
         execute_sql_query(conn, message_template_insert_match.format(user_id=user_id, vacancy_id=vacancy_id), "commit")
+
+def get_language_by_id(conn, lang_id):
+    message_template_get_language_name = Queries.GET_LANGUAGE_BY_ID
+    name = execute_sql_query(conn, message_template_get_language_name.format(id=lang_id))
+    return name[0][0]
+
+def get_grade_by_id(conn, grade_id):
+    message_template_get_grade_name = Queries.GET_GRADE_BY_ID
+    name = execute_sql_query(conn, message_template_get_grade_name.format(id=grade_id))
+    return name[0][0]
+
+def get_gender_by_id(conn, gender_id):
+    message_template_get_gender_name = Queries.GET_GENDER_BY_ID
+    name = execute_sql_query(conn, message_template_get_gender_name.format(id=gender_id))
+    return name[0][0]
+
+def get_location_by_id(conn, location_id):
+    message_template_get_location_name = Queries.GET_LOCATION_BY_ID
+    name = execute_sql_query(conn, message_template_get_location_name.format(id=location_id))
+    return name[0][0]
+
+def get_job_category_by_id(conn, job_category_id):
+    message_template_get_location_name = Queries.GET_JOB_CATEGORY_BY_ID
+    name = execute_sql_query(conn, message_template_get_location_name.format(id=job_category_id))
+    return name[0][0]
+

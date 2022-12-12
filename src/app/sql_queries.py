@@ -218,3 +218,28 @@ class Queries():
         INSERT INTO matches(user_id, vacancy_id)
         VALUES ({user_id}, {vacancy_id})
     """
+
+    GET_LANGUAGE_BY_ID = """
+        SELECT name from voc_languages
+        WHERE id = {id}
+    """
+
+    GET_GRADE_BY_ID = """
+        SELECT name from voc_grade
+        WHERE id = {id}
+    """
+
+    GET_GENDER_BY_ID = """
+        SELECT name from voc_gender
+        WHERE id = {id}
+    """
+
+    GET_LOCATION_BY_ID = """
+        SELECT name from voc_locations
+        WHERE id = {id}
+    """
+
+    GET_JOB_CATEGORY_BY_ID = """
+        SELECT name from voc_job_category
+        WHERE id = {id}
+    """
