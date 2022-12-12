@@ -125,7 +125,7 @@ def get_users_by_filters(conn, user_salary = None, user_grade_id = None, user_la
     message_template_select_users_by_grade_id = Queries.GET_USERS_BY_IS_GRADE_ID
     message_template_select_users_by_languages_id = Queries.GET_USERS_BY_LANGUAGES_ID
 
-    message_template_select_vacancies = Queries.GET_VACANCY_IDS
+    message_template_select_vacancies = Queries.GET_USER_IDS
     vacancies = execute_sql_query(conn, message_template_select_vacancies)
     users_by_salary, users_by_grade_id, users_by_languages_id = vacancies, vacancies, vacancies
     if (user_salary != None):
