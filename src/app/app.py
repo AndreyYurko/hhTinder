@@ -414,17 +414,26 @@ async def add_match(user_id: int, vacancy_id: int, request: Request):
     return {"status": "ok"}
 
 
-@app.get("/get_vacancy_ids_by_filters/{salary}/{is_fulltime}/{is_distant}/{location_id}/{grade_id}")
-def get_vacancy_ids_by_filters(salary: int, is_fulltime: bool, is_distant: bool, location_id: int, grade_id: int, request: Request):
+class VacancyFilters(BaseModel):
+    salary: int | None
+    is_fulltime: bool | None
+    is_distant: bool | None
+    location_id: int | None
+    grade_id: int | None
+
+
+@app.post("/get_vacancy_ids_by_filters/")
+def get_vacancy_ids_by_filters(vacancy_filters: VacancyFilters, request: Request):
     token = request.headers.get('token')
     if hashlib.sha256(token.encode('utf8')).hexdigest() != getCert():
         return {"status": "unauthorized"}
 
-    return get_vacancies_by_filter(app.state.connection, salary, is_fulltime, is_distant, location_id, grade_id)
+    return get_vacancies_by_filter(app.state.connection, vacancy_filters.salary, vacancy_filters.is_fulltime, 
+        vacancy_filters.is_distant, vacancy_filters.location_id, vacancy_filters.grade_id)
 
 
-@app.post("/set_vacancy_filters/{vac_id}/{salary}/{is_fulltime}/{is_distant}/{location_id}/{grade_id}")
-async def set_vacancies_filters(vac_id: int, salary: int, is_fulltime: bool, is_distant: bool, location_id: int, grade_id: int, request: Request):
+@app.post("/set_vacancy_filters/{vac_id}")
+async def set_vacancies_filters(vac_id: int, vacancy_filters: VacancyFilters, request: Request):
     token = request.headers.get('token')
     if hashlib.sha256(token.encode('utf8')).hexdigest() != getCert():
         return {"status": "unauthorized"}
@@ -432,19 +441,19 @@ async def set_vacancies_filters(vac_id: int, salary: int, is_fulltime: bool, is_
     await set_vacancy_by_filters(
         app.state.connection,
         vac_id,
-        salary,
-        is_fulltime, 
-        is_distant,
-        location_id,
-        grade_id
+        vacancy_filters.salary, 
+        vacancy_filters.is_fulltime, 
+        vacancy_filters.is_distant, 
+        vacancy_filters.location_id, 
+        vacancy_filters.grade_id
     )
     return {"status": "ok"}
 
 
 class UserFilters(BaseModel):
-    salary: int
-    grade_id: int
-    languages_ids: List[int]
+    salary: int | None
+    grade_id: int | None
+    languages_ids: List[int] | None
 
 
 @app.post("/get_user_ids_by_filters/")
