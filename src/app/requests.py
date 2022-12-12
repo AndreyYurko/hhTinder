@@ -66,6 +66,30 @@ def get_next_vacancy(conn):
         return Vacancy()
     return get_vacancy(conn, random_id)
 
+def set_vacancy_filters(conn, vac_id, vac_salary = None, vac_is_fulltime = None, vac_is_distant = None, vac_location_id = None, vac_grade_id = None):
+    message_template_select_vacancy = Queries.GET_VACANCY_BY_ID_FROM_VACANCY_FILTERS
+    vacancy = execute_sql_query(conn, message_template_select_vacancy.format(id=vac_id))
+    if vacancy == []:
+        message_template_insert_vacancy = Queries.INSERT_VACANCY_INTO_VACANCY_FILTERS
+        execute_sql_query(conn, message_template_insert_vacancy.format(id=vac_id), "commit")
+
+    if vac_salary != None:
+        message_template_update_vacancy_salary = Queries.UPDATE_VACANCY_SALARY
+        execute_sql_query(conn, message_template_update_vacancy_salary.format(salary=vac_salary, id=vac_id), "commit")
+    if vac_is_fulltime != None:
+        message_template_update_vacancy_is_fulltime = Queries.UPDATE_VACANCY_IS_FULLTIME
+        execute_sql_query(conn, message_template_update_vacancy_is_fulltime.format(is_fulltime=vac_is_fulltime, id=vac_id), "commit")
+    if vac_is_distant != None:
+        message_template_update_vacancy_is_distant = Queries.UPDATE_VACANCY_IS_DISTANT
+        execute_sql_query(conn, message_template_update_vacancy_is_distant.format(is_distant=vac_is_distant, id=vac_id), "commit")
+    if vac_location_id != None:
+        message_template_update_vacancy_location_id = Queries.UPDATE_VACANCY_LOCATION_ID
+        execute_sql_query(conn, message_template_update_vacancy_location_id.format(location_id=vac_location_id, id=vac_id), "commit")
+    if vac_grade_id != None:
+        message_template_update_vacancy_grade_id = Queries.UPDATE_VACANCY_GRADE_ID
+        execute_sql_query(conn, message_template_update_vacancy_grade_id.format(grade_id=vac_grade_id, id=vac_id), "commit")
+    return
+
 
 def get_vacancies_by_filters(conn, vac_salary = None, vac_is_fulltime = None, vac_is_distant = None, vac_location_id = None, vac_grade_id = None):  #
     message_template_select_vacancies_by_salary = Queries.GET_VACANCIES_BY_SALARY

@@ -14,6 +14,36 @@ class Queries():
         SELECT * FROM vacancy WHERE id = {id}
     """
 
+    GET_VACANCY_BY_ID_FROM_VACANCY_FILTERS = """
+        SELECT vacancy_id FROM vacancy_filters WHERE
+            vacancy_id = {id}
+    """
+
+    INSERT_VACANCY_INTO_VACANCY_FILTERS = """
+        INSERT INTO vacancy_filters(vacancy_id)
+        VALUES ({id})
+    """
+
+    UPDATE_VACANCY_SALARY = """
+        UPDATE vacancy_filters SET salary={salary} WHERE vacancy_id={id}
+    """
+
+    UPDATE_VACANCY_IS_FULLTIME = """
+        UPDATE vacancy_filters SET is_fulltime={is_fulltime} WHERE vacancy_id={id}
+    """
+
+    UPDATE_VACANCY_IS_DISTANT = """
+        UPDATE vacancy_filters SET is_distant={is_distant} WHERE vacancy_id={id}
+    """
+
+    UPDATE_VACANCY_LOCATION_ID = """
+        UPDATE vacancy_filters SET location_id={location_id} WHERE vacancy_id={id}
+    """
+
+    UPDATE_VACANCY_GRADE_ID = """
+        UPDATE vacancy_filters SET grade_id={grade_id} WHERE vacancy_id={id}
+    """
+
     GET_VACANCIES_BY_SALARY = """
         SELECT vacancy_id FROM vacancy_filters WHERE 
             salary >= {salary}
