@@ -66,6 +66,7 @@ def get_next_vacancy(conn):
         return Vacancy()
     return get_vacancy(conn, random_id)
 
+# set/update vacancy filters 
 def set_vacancy_filters(conn, vac_id, vac_salary = None, vac_is_fulltime = None, vac_is_distant = None, vac_location_id = None, vac_grade_id = None):
     message_template_select_vacancy = Queries.GET_VACANCY_BY_ID_FROM_VACANCY_FILTERS
     vacancy = execute_sql_query(conn, message_template_select_vacancy.format(id=vac_id))
@@ -91,7 +92,8 @@ def set_vacancy_filters(conn, vac_id, vac_salary = None, vac_is_fulltime = None,
     return
 
 
-def get_vacancies_by_filters(conn, vac_salary = None, vac_is_fulltime = None, vac_is_distant = None, vac_location_id = None, vac_grade_id = None):  #
+# get vacancy ids by filters
+def get_vacancies_by_filters(conn, vac_salary = None, vac_is_fulltime = None, vac_is_distant = None, vac_location_id = None, vac_grade_id = None):
     message_template_select_vacancies_by_salary = Queries.GET_VACANCIES_BY_SALARY
     message_template_select_vacancies_by_is_fulltime = Queries.GET_VACANCIES_BY_IS_FULLTIME
     message_template_select_vacancies_by_is_distant = Queries.GET_VACANCIES_BY_IS_DISTANT
@@ -117,7 +119,7 @@ def get_vacancies_by_filters(conn, vac_salary = None, vac_is_fulltime = None, va
     ans = list(map(lambda item: item[0], ans))
     return ans
 
-# get filter by users
+# get user ids by filters
 def get_users_by_filters(conn, user_salary = None, user_grade_id = None, user_languages_id = None):
     message_template_select_users_by_salary = Queries.GET_USERS_BY_SALARY_NOT_LESS_THAN
     message_template_select_users_by_grade_id = Queries.GET_USERS_BY_IS_GRADE_ID
