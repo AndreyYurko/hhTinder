@@ -133,9 +133,12 @@ def get_users_by_filters(conn, user_salary = None, user_grade_id = None, user_la
     if (user_grade_id != None):
         users_by_grade_id = execute_sql_query(conn, message_template_select_users_by_grade_id.format(grade_id=user_grade_id))
     if (user_languages_id != None):
-        users_by_languages_id = execute_sql_query(conn, message_template_select_users_by_languages_id.format(languages_id=user_languages_id))
+        users_list = list()
+        for i in range(0, len(user_languages_id)):
+            users_by_languages_id = execute_sql_query(conn, message_template_select_users_by_languages_id.format(languages_id=user_languages_id[i]))
+            users_list += list(users_by_languages_id)
 
-    ans = list(set(vacancies) & set(users_by_salary) & set(users_by_grade_id) & set(users_by_languages_id))
+    ans = list(set(vacancies) & set(users_by_salary) & set(users_by_grade_id) & set(users_list))
     ans = list(map(lambda item: item[0], ans))
     return ans
 
