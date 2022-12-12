@@ -7,6 +7,7 @@ from pydantic import BaseModel
 from monitoring import instrumentator
 from fastapi.middleware.cors import CORSMiddleware
 import hashlib
+from typing import List
 
 app = FastAPI()
 app.type = "00"
@@ -197,6 +198,50 @@ def get_cv_preview(email: str, request: Request):
     return get_all_cv_preview(app.state.connection, email)
 
 
+@app.get("/get_language_name_by_id/{id}")
+def get_language_name_by_id(id: int, request: Request):
+    token = request.headers.get('token')
+    if hashlib.sha256(token.encode('utf8')).hexdigest() != getCert():
+        return {"status": "unauthorized"}
+
+    return get_language_by_id(app.state.connection, id)
+
+
+@app.get("/get_grade_name_by_id/{id}")
+def get_grade_name_by_id(id: int, request: Request):
+    token = request.headers.get('token')
+    if hashlib.sha256(token.encode('utf8')).hexdigest() != getCert():
+        return {"status": "unauthorized"}
+
+    return get_grade_by_id(app.state.connection, id)
+
+
+@app.get("/get_gender_name_by_id/{id}")
+def get_gender_name_by_id(id: int, request: Request):
+    token = request.headers.get('token')
+    if hashlib.sha256(token.encode('utf8')).hexdigest() != getCert():
+        return {"status": "unauthorized"}
+
+    return get_gender_by_id(app.state.connection, id)
+
+
+@app.get("/get_location_name_by_id/{id}")
+def get_location_name_by_id(id: int, request: Request):
+    token = request.headers.get('token')
+    if hashlib.sha256(token.encode('utf8')).hexdigest() != getCert():
+        return {"status": "unauthorized"}
+
+    return get_location_by_id(app.state.connection, id)
+
+
+@app.get("/get_job_category_name_by_id/{id}")
+def get_job_category_name_by_id(id: int, request: Request):
+    token = request.headers.get('token')
+    if hashlib.sha256(token.encode('utf8')).hexdigest() != getCert():
+        return {"status": "unauthorized"}
+
+    return get_job_category_by_id(app.state.connection, id)
+
 class CV(BaseModel):
     id: int
     cr_user: int
@@ -335,6 +380,92 @@ async def edit_profile(profile: Profile, request: Request):
 
 
     return {"status": "ok"}
+
+
+@app.get("/get_matched_users_for_vacancy/{id}")
+def get_matched_users_for_vacancy(id: int, request: Request):
+    token = request.headers.get('token')
+    if hashlib.sha256(token.encode('utf8')).hexdigest() != getCert():
+        return {"status": "unauthorized"}
+
+    return get_matches_for_vacancy(app.state.connection, id)
+
+
+@app.get("/get_matched_vacancies_for_user/{id}")
+def get_matched_vacancies_for_user(id: int, request: Request):
+    token = request.headers.get('token')
+    if hashlib.sha256(token.encode('utf8')).hexdigest() != getCert():
+        return {"status": "unauthorized"}
+
+    return get_matches_for_user(app.state.connection, id)
+
+
+@app.post("/add_match/{user_id}/{vacancy_id}")
+async def add_match(user_id: int, vacancy_id: int, request: Request):
+    token = request.headers.get('token')
+    if hashlib.sha256(token.encode('utf8')).hexdigest() != getCert():
+        return {"status": "unauthorized"}
+
+    await insert_match(
+        app.state.connection,
+        user_id,
+        vacancy_id
+    )
+    return {"status": "ok"}
+
+
+@app.get("/get_vacancy_ids_by_filters/{salary}/{is_fulltime}/{is_distant}/{location_id}/{grade_id}")
+def get_vacancy_ids_by_filters(salary: int, is_fulltime: bool, is_distant: bool, location_id: int, grade_id: int, request: Request):
+    token = request.headers.get('token')
+    if hashlib.sha256(token.encode('utf8')).hexdigest() != getCert():
+        return {"status": "unauthorized"}
+
+    return get_vacancies_by_filter(app.state.connection, salary, is_fulltime, is_distant, location_id, grade_id)
+
+
+@app.post("/set_vacancy_filters/{vac_id}/{salary}/{is_fulltime}/{is_distant}/{location_id}/{grade_id}")
+async def set_vacancies_filters(vac_id: int, salary: int, is_fulltime: bool, is_distant: bool, location_id: int, grade_id: int, request: Request):
+    token = request.headers.get('token')
+    if hashlib.sha256(token.encode('utf8')).hexdigest() != getCert():
+        return {"status": "unauthorized"}
+
+    await set_vacancy_by_filters(
+        app.state.connection,
+        vac_id,
+        salary,
+        is_fulltime, 
+        is_distant,
+        location_id,
+        grade_id
+    )
+    return {"status": "ok"}
+
+
+# Проблема с List[int] - недоступный тип, а как по-другому?
+
+# @app.get("/get_user_ids_by_filters/{salary}/{grade_id}/{languages_ids}")
+# def get_user_ids_by_filters(salary: int, grade_id: int, languages_ids: List[int], request: Request):
+#     token = request.headers.get('token')
+#     if hashlib.sha256(token.encode('utf8')).hexdigest() != getCert():
+#         return {"status": "unauthorized"}
+
+#     return get_users_by_filters(app.state.connection, salary, grade_id, languages_ids)
+
+
+# @app.post("/set_users_filters/{user_id}/{salary}/{grade_id}/{languages_ids}")
+# async def set_users_filters(user_id: int, salary: int, grade_id: int, languages_ids: List[int], request: Request):
+#     token = request.headers.get('token')
+#     if hashlib.sha256(token.encode('utf8')).hexdigest() != getCert():
+#         return {"status": "unauthorized"}
+
+#     await set_users_filters(
+#         app.state.connection,
+#         user_id,
+#         salary,
+#         grade_id, 
+#         languages_ids
+#     )
+#     return {"status": "ok"}
 
 
 def getCert():
