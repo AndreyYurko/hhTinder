@@ -67,7 +67,7 @@ def get_next_vacancy(conn):
     return get_vacancy(conn, random_id)
 
 # set/update vacancy filters 
-def set_vacancy_filters(conn, vac_id, vac_salary = None, vac_is_fulltime = None, vac_is_distant = None, vac_location_id = None, vac_grade_id = None):
+def set_vacancy_by_filters(conn, vac_id, vac_salary = None, vac_is_fulltime = None, vac_is_distant = None, vac_location_id = None, vac_grade_id = None):
     message_template_select_vacancy = Queries.GET_VACANCY_BY_ID_FROM_VACANCY_FILTERS
     vacancy = execute_sql_query(conn, message_template_select_vacancy.format(id=vac_id))
     if vacancy == []:
