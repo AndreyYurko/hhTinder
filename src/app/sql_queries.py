@@ -24,6 +24,11 @@ class Queries():
         VALUES ({id})
     """
 
+    INSERT_USER_INTO_USER_FILTERS = """
+            INSERT INTO user_filters(user_id)
+            VALUES ({id})
+        """
+
     UPDATE_VACANCY_SALARY = """
         UPDATE vacancy_filters SET salary={salary} 
         WHERE vacancy_id={id}
@@ -46,8 +51,28 @@ class Queries():
 
     UPDATE_VACANCY_GRADE_ID = """
         UPDATE vacancy_filters SET grade_id={grade_id} 
-        WHERE vacancy_id={id}
+        WHERE user_id={id}
     """
+
+    UPDATE_USER_SALARY = """
+            UPDATE user_filters SET salary_not_less_than={salary} 
+            WHERE user_id={id}
+        """
+
+    UPDATE_USER_GRADE_ID = """
+        UPDATE user_filters SET grade_id={grade_id} 
+        WHERE user_id={id}
+    """
+
+    UPDATE_USER_LANGUAGES = """
+        UPDATE user_filters SET languages_id='{languages}'
+        WHERE user_id={id}
+    """
+
+    GET_USER_BY_ID_FROM_USER_FILTERS = """
+           SELECT user_id FROM user_filters WHERE
+               user_id = {id}
+       """
 
     GET_VACANCIES_BY_SALARY = """
         SELECT vacancy_id FROM vacancy_filters WHERE 
