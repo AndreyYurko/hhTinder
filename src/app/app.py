@@ -428,7 +428,7 @@ def get_vacancy_ids_by_filters(vacancy_filters: VacancyFilters, request: Request
     if hashlib.sha256(token.encode('utf8')).hexdigest() != getCert():
         return {"status": "unauthorized"}
 
-    return get_vacancies_by_filter(app.state.connection, vacancy_filters.salary, vacancy_filters.is_fulltime, 
+    return get_vacancies_by_filters(app.state.connection, vacancy_filters.salary, vacancy_filters.is_fulltime, 
         vacancy_filters.is_distant, vacancy_filters.location_id, vacancy_filters.grade_id)
 
 
