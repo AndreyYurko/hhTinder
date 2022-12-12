@@ -213,3 +213,8 @@ class Queries():
     GET_MATCHES_FOR_USER = """
         SELECT vacancy_id from matches WHERE user_id = {id}
     """
+
+    INSERT_MATCH = """
+        INSERT INTO matches(user_id, vacancy_id)
+        VALUES ({user_id}, {vacancy_id})
+    """

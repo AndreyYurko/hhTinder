@@ -357,3 +357,12 @@ def get_matches_for_user(conn, user_id):
     vacancy_ids = execute_sql_query(conn, message_template_select_matches.format(id=user_id))
     vacancy_ids = list(map(lambda item: item[0], vacancy_ids))
     return vacancy_ids
+
+# insert match between user_id and vacancy_id if it's not there (if there is a match, do nothing)
+def insert_match(conn, user_id, vacancy_id):
+    vacancy_ids_for_current_user = get_matches_for_user(conn, user_id)
+    if vacancy_id in vacancy_ids_for_current_user:
+        return
+    else:
+        message_template_insert_match = Queries.INSERT_MATCH
+        execute_sql_query(conn, message_template_insert_match.format(user_id=user_id, vacancy_id=vacancy_id), "commit")
