@@ -343,3 +343,17 @@ def edit_profile_in_db(
             id,
         )
     )
+
+# get user ids with whom the given vacancy has a match
+def get_matches_for_vacancy(conn, vac_id):
+    message_template_select_matches = Queries.GET_MATCHES_FOR_VACANCY
+    user_ids = execute_sql_query(conn, message_template_select_matches.format(id=vac_id))
+    user_ids = list(map(lambda item: item[0], user_ids))
+    return user_ids
+
+# get vacancy ids with whom the given user has a match
+def get_matches_for_user(conn, user_id):
+    message_template_select_matches = Queries.GET_MATCHES_FOR_USER
+    vacancy_ids = execute_sql_query(conn, message_template_select_matches.format(id=user_id))
+    vacancy_ids = list(map(lambda item: item[0], vacancy_ids))
+    return vacancy_ids

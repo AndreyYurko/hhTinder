@@ -205,3 +205,11 @@ class Queries():
         SET {user_name}, {surname}, {age}, {gender_id}
         WHERE id = {id}
     """
+
+    GET_MATCHES_FOR_VACANCY = """
+        SELECT user_id from matches WHERE vacancy_id = {id}
+    """
+
+    GET_MATCHES_FOR_USER = """
+        SELECT vacancy_id from matches WHERE user_id = {id}
+    """
