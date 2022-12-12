@@ -420,7 +420,7 @@ def get_vacancy_ids_by_filters(salary: int, is_fulltime: bool, is_distant: bool,
     if hashlib.sha256(token.encode('utf8')).hexdigest() != getCert():
         return {"status": "unauthorized"}
 
-    return get_vacancies_by_filter(app.state.connection, salary, is_fulltime, is_distant, location_id, grade_id)
+    return get_vacancies_by_filters(app.state.connection, salary, is_fulltime, is_distant, location_id, grade_id)
 
 
 @app.post("/set_vacancy_filters/{vac_id}/{salary}/{is_fulltime}/{is_distant}/{location_id}/{grade_id}")
