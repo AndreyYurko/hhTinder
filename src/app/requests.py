@@ -121,7 +121,7 @@ def get_vacancies_by_filters(conn, vac_salary = None, vac_is_fulltime = None, va
 
 
 # set/update user filters 
-def set_users_filters(conn, user_id, user_salary=None, user_grade_id=None, user_languages_id=None):
+def set_users_by_filters(conn, user_id, user_salary=None, user_grade_id=None, user_languages_id=None):
     message_template_select_user = Queries.GET_USER_BY_ID_FROM_USER_FILTERS
     vacancy = execute_sql_query(conn, message_template_select_user.format(id=user_id))
     if vacancy == []:

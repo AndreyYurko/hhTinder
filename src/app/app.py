@@ -458,7 +458,7 @@ async def set_vacancies_filters(vac_id: int, salary: int, is_fulltime: bool, is_
 #     if hashlib.sha256(token.encode('utf8')).hexdigest() != getCert():
 #         return {"status": "unauthorized"}
 
-#     await set_users_filters(
+#     await set_users_by_filters(
 #         app.state.connection,
 #         user_id,
 #         salary,
