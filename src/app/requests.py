@@ -67,7 +67,7 @@ def get_next_vacancy(conn):
     return get_vacancy(conn, random_id)
 
 
-def get_vacancies_by_filters(conn, vac_salary = None, vac_is_fulltime = None, vac_is_distant = None, vac_location_id = None, vac_grade_id = None):
+def get_vacancies_by_filters(conn, vac_salary = None, vac_is_fulltime = None, vac_is_distant = None, vac_location_id = None, vac_grade_id = None):  #
     message_template_select_vacancies_by_salary = Queries.GET_VACANCIES_BY_SALARY
     message_template_select_vacancies_by_is_fulltime = Queries.GET_VACANCIES_BY_IS_FULLTIME
     message_template_select_vacancies_by_is_distant = Queries.GET_VACANCIES_BY_IS_DISTANT
@@ -90,6 +90,26 @@ def get_vacancies_by_filters(conn, vac_salary = None, vac_is_fulltime = None, va
 
     ans = list(set(vacancies) & set(vacancies_by_salary) & set(vacancies_by_is_fulltime) & set(vacancies_by_is_distant) & 
         set(vacancies_by_location_id) & set(vacancies_by_grade_id))
+    ans = list(map(lambda item: item[0], ans))
+    return ans
+
+# get filter by users
+def get_users_by_filters(conn, user_salary = None, user_grade_id = None, user_languages_id = None):
+    message_template_select_users_by_salary = Queries.GET_USERS_BY_SALARY_NOT_LESS_THAN
+    message_template_select_users_by_grade_id = Queries.GET_USERS_BY_IS_GRADE_ID
+    message_template_select_users_by_languages_id = Queries.GET_USERS_BY_LANGUAGES_ID
+
+    message_template_select_vacancies = Queries.GET_VACANCY_IDS
+    vacancies = execute_sql_query(conn, message_template_select_vacancies)
+    users_by_salary, users_by_grade_id, users_by_languages_id = vacancies, vacancies, vacancies
+    if (user_salary != None):
+        users_by_salary = execute_sql_query(conn, message_template_select_users_by_salary.format(salary_not_less_than=user_salary))
+    if (user_grade_id != None):
+        users_by_grade_id = execute_sql_query(conn, message_template_select_users_by_grade_id.format(grade_id=user_grade_id))
+    if (user_languages_id != None):
+        users_by_languages_id = execute_sql_query(conn, message_template_select_users_by_languages_id.format(languages_id=user_languages_id))
+
+    ans = list(set(vacancies) & set(users_by_salary) & set(users_by_grade_id) & set(users_by_languages_id))
     ans = list(map(lambda item: item[0], ans))
     return ans
 

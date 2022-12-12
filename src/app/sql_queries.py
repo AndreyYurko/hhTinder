@@ -39,6 +39,21 @@ class Queries():
             grade_id = {grade_id}
     """
 
+    GET_USERS_BY_SALARY_NOT_LESS_THAN = """
+            SELECT user_id FROM user_filters WHERE 
+                salary_not_less_than >= {salary_not_less_than}
+        """
+
+    GET_USERS_BY_IS_GRADE_ID = """
+            SELECT user_id FROM user_filters WHERE 
+                grade_id = {grade_id}
+        """
+
+    GET_USERS_BY_LANGUAGES_ID = """
+            SELECT user_id FROM user_filters WHERE 
+                languages_id = {languages_id}
+        """
+
     GET_LIKED_VACANCIES_ID_BY_USERID = """
         SELECT vacancy_id 
         FROM user_vac_match 
