@@ -119,8 +119,30 @@ def get_vacancies_by_filters(conn, vac_salary = None, vac_is_fulltime = None, va
     ans = list(map(lambda item: item[0], ans))
     return ans
 
+
+def set_users_filters(conn, user_id, user_salary=None, user_grade_id=None, user_languages_id=None):
+    message_template_select_user = Queries.GET_USER_BY_ID_FROM_USER_FILTERS
+    vacancy = execute_sql_query(conn, message_template_select_user.format(id=user_id))
+    if vacancy == []:
+        message_template_insert_user = Queries. INSERT_USER_INTO_USER_FILTERS
+        execute_sql_query(conn, message_template_insert_user.format(id=user_id), "commit")
+
+    if user_salary != None:
+        message_template_update_user_salary = Queries.UPDATE_USER_SALARY
+        execute_sql_query(conn, message_template_update_user_salary.format(salary=user_salary, id=user_id), "commit")
+    if user_grade_id != None:
+        message_template_update_user_grade_id = Queries.UPDATE_USER_GRADE_ID
+        execute_sql_query(conn, message_template_update_user_grade_id.format(grade_id=user_grade_id, id=user_id),
+                          "commit")
+    if user_languages_id != None:
+        message_template_update_user_language = Queries.UPDATE_USER_LANGUAGES
+        execute_sql_query(conn, message_template_update_user_language.format(languages=user_languages_id ,id=user_id), "commit")
+
+    return
+
+
 # get user ids by filters
-def get_users_by_filters(conn, user_salary = None, user_grade_id = None, user_languages_id = None):
+def get_users_by_filters(conn, user_salary=None, user_grade_id=None, user_languages_id=None):
     message_template_select_users_by_salary = Queries.GET_USERS_BY_SALARY_NOT_LESS_THAN
     message_template_select_users_by_grade_id = Queries.GET_USERS_BY_IS_GRADE_ID
     message_template_select_users_by_languages_id = Queries.GET_USERS_BY_LANGUAGES_ID
