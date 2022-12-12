@@ -67,6 +67,32 @@ def get_next_vacancy(conn):
     return get_vacancy(conn, random_id)
 
 
+def get_vacancies_by_filters(conn, vac_salary = None, vac_is_fulltime = None, vac_is_distant = None, vac_location_id = None, vac_grade_id = None):
+    message_template_select_vacancies_by_salary = Queries.GET_VACANCIES_BY_SALARY
+    message_template_select_vacancies_by_is_fulltime = Queries.GET_VACANCIES_BY_IS_FULLTIME
+    message_template_select_vacancies_by_is_distant = Queries.GET_VACANCIES_BY_IS_DISTANT
+    message_template_select_vacancies_by_location_id = Queries.GET_VACANCIES_BY_LOCATION_ID
+    message_template_select_vacancies_by_grade_id = Queries.GET_VACANCIES_BY_GRADE_ID
+
+    message_template_select_vacancies = Queries.GET_VACANCY_IDS
+    vacancies = execute_sql_query(conn, message_template_select_vacancies)
+    vacancies_by_salary, vacancies_by_is_fulltime, vacancies_by_is_distant, vacancies_by_location_id, vacancies_by_grade_id = vacancies, vacancies, vacancies, vacancies, vacancies
+    if (vac_salary != None):
+        vacancies_by_salary = execute_sql_query(conn, message_template_select_vacancies_by_salary.format(salary=vac_salary))
+    if (vac_is_fulltime != None):
+        vacancies_by_is_fulltime = execute_sql_query(conn, message_template_select_vacancies_by_is_fulltime.format(is_fulltime=vac_is_fulltime))
+    if (vac_is_distant != None): 
+        vacancies_by_is_distant = execute_sql_query(conn, message_template_select_vacancies_by_is_distant.format(is_distant=vac_is_distant))
+    if (vac_location_id != None):  
+        vacancies_by_location_id = execute_sql_query(conn, message_template_select_vacancies_by_location_id.format(location_id=vac_location_id))
+    if (vac_grade_id != None): 
+        vacancies_by_grade_id = execute_sql_query(conn, message_template_select_vacancies_by_grade_id.format(grade_id=vac_grade_id))
+
+    ans = list(set(vacancies) & set(vacancies_by_salary) & set(vacancies_by_is_fulltime) & set(vacancies_by_is_distant) & 
+        set(vacancies_by_location_id) & set(vacancies_by_grade_id))
+    ans = list(map(lambda item: item[0], ans))
+    return ans
+
 # get cv by id
 def get_cv(conn, cv_id):
     message_template_select_cv = Queries.GET_CV_BY_ID

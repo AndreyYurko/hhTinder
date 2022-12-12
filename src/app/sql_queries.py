@@ -9,8 +9,34 @@ class Queries():
     GET_VACANCY_IDS = """
         SELECT id FROM vacancy
     """
+
     GET_VACANCY_BY_ID = """
         SELECT * FROM vacancy WHERE id = {id}
+    """
+
+    GET_VACANCIES_BY_SALARY = """
+        SELECT vacancy_id FROM vacancy_filters WHERE 
+            salary >= {salary}
+    """
+
+    GET_VACANCIES_BY_IS_FULLTIME = """
+        SELECT vacancy_id FROM vacancy_filters WHERE 
+            is_fulltime = {is_fulltime}
+    """
+
+    GET_VACANCIES_BY_IS_DISTANT = """
+        SELECT vacancy_id FROM vacancy_filters WHERE 
+            is_distant = {is_distant}
+    """
+
+    GET_VACANCIES_BY_LOCATION_ID = """
+        SELECT vacancy_id FROM vacancy_filters WHERE 
+            location_id = {location_id}
+    """
+
+    GET_VACANCIES_BY_GRADE_ID = """
+        SELECT vacancy_id FROM vacancy_filters WHERE 
+            grade_id = {grade_id}
     """
 
     GET_LIKED_VACANCIES_ID_BY_USERID = """
