@@ -274,7 +274,7 @@ class Queries():
     """
 
     GET_PROFILES_BY_ID = """
-       select users.id,
+select users.id,
        email,
        users.name,
        passwd,
@@ -282,9 +282,12 @@ class Queries():
        ui.surname,
        age,
        gender_id,
-       role_id
+       role_id,
+       i.id,
+       i.extension
+
 from users
-         join user_info ui on users.id = ui.cr_user
-where users.id = {user_id}
+         join user_info ui on users.id = ui.cr_user join images i on ui.img_id = i.id
+where users.id = 1
 
     """
