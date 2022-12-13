@@ -242,6 +242,7 @@ def get_job_category_name_by_id(id: int, request: Request):
 
     return get_job_category_by_id(app.state.connection, id)
 
+
 class CV(BaseModel):
     id: int
     cr_user: int
@@ -347,6 +348,45 @@ async def edit_cv(cv: CV, request: Request):
     return {"status": "ok"}
 
 
+@app.get("/profiles/")
+async def get_profiles(request: Request):
+    token = request.headers.get('token')
+    if hashlib.sha256(token.encode('utf8')).hexdigest() != getCert():
+        return {"status": "unauthorized"}
+
+    profiles = get_profiles_json(app.state.connection)
+
+    res = {}
+
+    for el in profiles:
+        res[el[0]] = el[1]
+
+    return res
+
+
+@app.get("/profiles/{id}")
+async def get_profiles(id: int, request: Request):
+    token = request.headers.get('token')
+    if hashlib.sha256(token.encode('utf8')).hexdigest() != getCert():
+        return {"status": "unauthorized"}
+
+    arr = get_profile_by_id(app.state.connection, id)[0]
+
+    res = {}
+
+    res["id"] = arr[0]
+    res["email"] = arr[1]
+    res["login"] = arr[2]
+    res["password"] = arr[3]
+    res["name"] = arr[4]
+    res["surname"] = arr[5]
+    res["age"] = arr[6]
+    res["gender_id"] = arr[7]
+    res["role_id"] = arr[8]
+
+    return res
+
+
 @app.post("/add_profile/")
 async def add_profile(profile: Profile, request: Request):
     token = request.headers.get('token')
@@ -377,7 +417,6 @@ async def edit_profile(profile: Profile, request: Request):
         profile.gender_id,
         profile.id
     )
-
 
     return {"status": "ok"}
 
@@ -428,8 +467,8 @@ def get_vacancy_ids_by_filters(vacancy_filters: VacancyFilters, request: Request
     if hashlib.sha256(token.encode('utf8')).hexdigest() != getCert():
         return {"status": "unauthorized"}
 
-    return get_vacancies_by_filters(app.state.connection, vacancy_filters.salary, vacancy_filters.is_fulltime, 
-        vacancy_filters.is_distant, vacancy_filters.location_id, vacancy_filters.grade_id)
+    return get_vacancies_by_filters(app.state.connection, vacancy_filters.salary, vacancy_filters.is_fulltime,
+                                    vacancy_filters.is_distant, vacancy_filters.location_id, vacancy_filters.grade_id)
 
 
 @app.post("/set_vacancy_filters/{vac_id}")
@@ -441,10 +480,10 @@ async def set_vacancies_filters(vac_id: int, vacancy_filters: VacancyFilters, re
     await set_vacancy_by_filters(
         app.state.connection,
         vac_id,
-        vacancy_filters.salary, 
-        vacancy_filters.is_fulltime, 
-        vacancy_filters.is_distant, 
-        vacancy_filters.location_id, 
+        vacancy_filters.salary,
+        vacancy_filters.is_fulltime,
+        vacancy_filters.is_distant,
+        vacancy_filters.location_id,
         vacancy_filters.grade_id
     )
     return {"status": "ok"}
@@ -462,7 +501,8 @@ def get_user_ids_by_filters(user_filters: UserFilters, request: Request):
     if hashlib.sha256(token.encode('utf8')).hexdigest() != getCert():
         return {"status": "unauthorized"}
 
-    return get_users_by_filters(app.state.connection, user_filters.salary, user_filters.grade_id, user_filters.languages_ids)
+    return get_users_by_filters(app.state.connection, user_filters.salary, user_filters.grade_id,
+                                user_filters.languages_ids)
 
 
 @app.post("/set_users_filters/{user_id}")
@@ -475,7 +515,7 @@ async def set_users_filters(user_id: int, user_filters: UserFilters, request: Re
         app.state.connection,
         user_id,
         user_filters.salary,
-        user_filters.grade_id, 
+        user_filters.grade_id,
         user_filters.languages_ids
     )
     return {"status": "ok"}

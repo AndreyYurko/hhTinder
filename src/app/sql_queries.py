@@ -268,3 +268,23 @@ class Queries():
         SELECT name from voc_job_category
         WHERE id = {id}
     """
+
+    GET_PROFILES = """
+    select id, email from users
+    """
+
+    GET_PROFILES_BY_ID = """
+       select users.id,
+       email,
+       users.name,
+       passwd,
+       ui.name,
+       ui.surname,
+       age,
+       gender_id,
+       role_id
+from users
+         join user_info ui on users.id = ui.cr_user
+where users.id = {user_id}
+
+    """

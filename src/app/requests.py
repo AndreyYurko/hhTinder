@@ -66,8 +66,10 @@ def get_next_vacancy(conn):
         return Vacancy()
     return get_vacancy(conn, random_id)
 
-# set/update vacancy filters 
-def set_vacancy_by_filters(conn, vac_id, vac_salary = None, vac_is_fulltime = None, vac_is_distant = None, vac_location_id = None, vac_grade_id = None):
+
+# set/update vacancy filters
+def set_vacancy_by_filters(conn, vac_id, vac_salary=None, vac_is_fulltime=None, vac_is_distant=None,
+                           vac_location_id=None, vac_grade_id=None):
     message_template_select_vacancy = Queries.GET_VACANCY_BY_ID_FROM_VACANCY_FILTERS
     vacancy = execute_sql_query(conn, message_template_select_vacancy.format(id=vac_id))
     if vacancy == []:
@@ -79,21 +81,28 @@ def set_vacancy_by_filters(conn, vac_id, vac_salary = None, vac_is_fulltime = No
         execute_sql_query(conn, message_template_update_vacancy_salary.format(salary=vac_salary, id=vac_id), "commit")
     if vac_is_fulltime != None:
         message_template_update_vacancy_is_fulltime = Queries.UPDATE_VACANCY_IS_FULLTIME
-        execute_sql_query(conn, message_template_update_vacancy_is_fulltime.format(is_fulltime=vac_is_fulltime, id=vac_id), "commit")
+        execute_sql_query(conn,
+                          message_template_update_vacancy_is_fulltime.format(is_fulltime=vac_is_fulltime, id=vac_id),
+                          "commit")
     if vac_is_distant != None:
         message_template_update_vacancy_is_distant = Queries.UPDATE_VACANCY_IS_DISTANT
-        execute_sql_query(conn, message_template_update_vacancy_is_distant.format(is_distant=vac_is_distant, id=vac_id), "commit")
+        execute_sql_query(conn, message_template_update_vacancy_is_distant.format(is_distant=vac_is_distant, id=vac_id),
+                          "commit")
     if vac_location_id != None:
         message_template_update_vacancy_location_id = Queries.UPDATE_VACANCY_LOCATION_ID
-        execute_sql_query(conn, message_template_update_vacancy_location_id.format(location_id=vac_location_id, id=vac_id), "commit")
+        execute_sql_query(conn,
+                          message_template_update_vacancy_location_id.format(location_id=vac_location_id, id=vac_id),
+                          "commit")
     if vac_grade_id != None:
         message_template_update_vacancy_grade_id = Queries.UPDATE_VACANCY_GRADE_ID
-        execute_sql_query(conn, message_template_update_vacancy_grade_id.format(grade_id=vac_grade_id, id=vac_id), "commit")
+        execute_sql_query(conn, message_template_update_vacancy_grade_id.format(grade_id=vac_grade_id, id=vac_id),
+                          "commit")
     return
 
 
 # get vacancy ids by filters
-def get_vacancies_by_filters(conn, vac_salary = None, vac_is_fulltime = None, vac_is_distant = None, vac_location_id = None, vac_grade_id = None):
+def get_vacancies_by_filters(conn, vac_salary=None, vac_is_fulltime=None, vac_is_distant=None, vac_location_id=None,
+                             vac_grade_id=None):
     message_template_select_vacancies_by_salary = Queries.GET_VACANCIES_BY_SALARY
     message_template_select_vacancies_by_is_fulltime = Queries.GET_VACANCIES_BY_IS_FULLTIME
     message_template_select_vacancies_by_is_distant = Queries.GET_VACANCIES_BY_IS_DISTANT
@@ -104,17 +113,23 @@ def get_vacancies_by_filters(conn, vac_salary = None, vac_is_fulltime = None, va
     vacancies = execute_sql_query(conn, message_template_select_vacancies)
     vacancies_by_salary, vacancies_by_is_fulltime, vacancies_by_is_distant, vacancies_by_location_id, vacancies_by_grade_id = vacancies, vacancies, vacancies, vacancies, vacancies
     if (vac_salary != None):
-        vacancies_by_salary = execute_sql_query(conn, message_template_select_vacancies_by_salary.format(salary=vac_salary))
+        vacancies_by_salary = execute_sql_query(conn,
+                                                message_template_select_vacancies_by_salary.format(salary=vac_salary))
     if (vac_is_fulltime != None):
-        vacancies_by_is_fulltime = execute_sql_query(conn, message_template_select_vacancies_by_is_fulltime.format(is_fulltime=vac_is_fulltime))
-    if (vac_is_distant != None): 
-        vacancies_by_is_distant = execute_sql_query(conn, message_template_select_vacancies_by_is_distant.format(is_distant=vac_is_distant))
-    if (vac_location_id != None):  
-        vacancies_by_location_id = execute_sql_query(conn, message_template_select_vacancies_by_location_id.format(location_id=vac_location_id))
-    if (vac_grade_id != None): 
-        vacancies_by_grade_id = execute_sql_query(conn, message_template_select_vacancies_by_grade_id.format(grade_id=vac_grade_id))
+        vacancies_by_is_fulltime = execute_sql_query(conn, message_template_select_vacancies_by_is_fulltime.format(
+            is_fulltime=vac_is_fulltime))
+    if (vac_is_distant != None):
+        vacancies_by_is_distant = execute_sql_query(conn, message_template_select_vacancies_by_is_distant.format(
+            is_distant=vac_is_distant))
+    if (vac_location_id != None):
+        vacancies_by_location_id = execute_sql_query(conn, message_template_select_vacancies_by_location_id.format(
+            location_id=vac_location_id))
+    if (vac_grade_id != None):
+        vacancies_by_grade_id = execute_sql_query(conn, message_template_select_vacancies_by_grade_id.format(
+            grade_id=vac_grade_id))
 
-    ans = list(set(vacancies) & set(vacancies_by_salary) & set(vacancies_by_is_fulltime) & set(vacancies_by_is_distant) & 
+    ans = list(
+        set(vacancies) & set(vacancies_by_salary) & set(vacancies_by_is_fulltime) & set(vacancies_by_is_distant) &
         set(vacancies_by_location_id) & set(vacancies_by_grade_id))
     ans = list(map(lambda item: item[0], ans))
     return ans
@@ -125,7 +140,7 @@ def set_users_by_filters(conn, user_id, user_salary=None, user_grade_id=None, us
     message_template_select_user = Queries.GET_USER_BY_ID_FROM_USER_FILTERS
     vacancy = execute_sql_query(conn, message_template_select_user.format(id=user_id))
     if vacancy == []:
-        message_template_insert_user = Queries. INSERT_USER_INTO_USER_FILTERS
+        message_template_insert_user = Queries.INSERT_USER_INTO_USER_FILTERS
         execute_sql_query(conn, message_template_insert_user.format(id=user_id), "commit")
 
     if user_salary != None:
@@ -137,7 +152,8 @@ def set_users_by_filters(conn, user_id, user_salary=None, user_grade_id=None, us
                           "commit")
     if user_languages_id != None:
         message_template_update_user_language = Queries.UPDATE_USER_LANGUAGES
-        execute_sql_query(conn, message_template_update_user_language.format(languages=user_languages_id ,id=user_id), "commit")
+        execute_sql_query(conn, message_template_update_user_language.format(languages=user_languages_id, id=user_id),
+                          "commit")
 
     return
 
@@ -152,18 +168,22 @@ def get_users_by_filters(conn, user_salary=None, user_grade_id=None, user_langua
     vacancies = execute_sql_query(conn, message_template_select_vacancies)
     users_by_salary, users_by_grade_id, users_by_languages_id = vacancies, vacancies, vacancies
     if (user_salary != None):
-        users_by_salary = execute_sql_query(conn, message_template_select_users_by_salary.format(salary_not_less_than=user_salary))
+        users_by_salary = execute_sql_query(conn, message_template_select_users_by_salary.format(
+            salary_not_less_than=user_salary))
     if (user_grade_id != None):
-        users_by_grade_id = execute_sql_query(conn, message_template_select_users_by_grade_id.format(grade_id=user_grade_id))
+        users_by_grade_id = execute_sql_query(conn,
+                                              message_template_select_users_by_grade_id.format(grade_id=user_grade_id))
     if (user_languages_id != None):
         users_list = list()
         for i in range(0, len(user_languages_id)):
-            users_by_languages_id = execute_sql_query(conn, message_template_select_users_by_languages_id.format(languages_id=user_languages_id[i]))
+            users_by_languages_id = execute_sql_query(conn, message_template_select_users_by_languages_id.format(
+                languages_id=user_languages_id[i]))
             users_list += list(users_by_languages_id)
 
     ans = list(set(vacancies) & set(users_by_salary) & set(users_by_grade_id) & set(users_list))
     ans = list(map(lambda item: item[0], ans))
     return ans
+
 
 # get cv by id
 def get_cv(conn, cv_id):
@@ -301,14 +321,14 @@ def edit_vacancy_in_db(conn, vac_name, vac_text, cr_date, vac_category, id):
 
 
 def add_cv_to_db(
-    conn,
-    cv_name: str,
-    cv_text: str,
-    experience_content: str,
-    education_content: str,
-    salary: int,
-    cr_date: datetime.datetime,
-    cv_category: int,
+        conn,
+        cv_name: str,
+        cv_text: str,
+        experience_content: str,
+        education_content: str,
+        salary: int,
+        cr_date: datetime.datetime,
+        cv_category: int,
 ):
     execute_sql_query(
         conn,
@@ -317,15 +337,15 @@ def add_cv_to_db(
 
 
 def edit_cv_in_db(
-    conn,
-    cv_name: str,
-    cv_text: str,
-    experience_content: str,
-    education_content: str,
-    salary: int,
-    cr_date: datetime.datetime,
-    cv_category: int,
-    id: int,
+        conn,
+        cv_name: str,
+        cv_text: str,
+        experience_content: str,
+        education_content: str,
+        salary: int,
+        cr_date: datetime.datetime,
+        cv_category: int,
+        id: int,
 ):
     execute_sql_query(
         conn,
@@ -334,11 +354,11 @@ def edit_cv_in_db(
 
 
 def add_profile_to_db(
-    conn,
-    user_name,
-    surname,
-    age,
-    gender,
+        conn,
+        user_name,
+        surname,
+        age,
+        gender,
 ):
     execute_sql_query(
         conn,
@@ -352,12 +372,12 @@ def add_profile_to_db(
 
 
 def edit_profile_in_db(
-    conn,
-    user_name,
-    surname,
-    age,
-    gender,
-    id,
+        conn,
+        user_name,
+        surname,
+        age,
+        gender,
+        id,
 ):
     execute_sql_query(
         conn,
@@ -370,6 +390,7 @@ def edit_profile_in_db(
         )
     )
 
+
 # get user ids with whom the given vacancy has a match
 def get_matches_for_vacancy(conn, vac_id):
     message_template_select_matches = Queries.GET_MATCHES_FOR_VACANCY
@@ -377,12 +398,14 @@ def get_matches_for_vacancy(conn, vac_id):
     user_ids = list(map(lambda item: item[0], user_ids))
     return user_ids
 
+
 # get vacancy ids with whom the given user has a match
 def get_matches_for_user(conn, user_id):
     message_template_select_matches = Queries.GET_MATCHES_FOR_USER
     vacancy_ids = execute_sql_query(conn, message_template_select_matches.format(id=user_id))
     vacancy_ids = list(map(lambda item: item[0], vacancy_ids))
     return vacancy_ids
+
 
 # insert match between user_id and vacancy_id if it's not there (if there is a match, do nothing)
 def insert_match(conn, user_id, vacancy_id):
@@ -393,28 +416,41 @@ def insert_match(conn, user_id, vacancy_id):
         message_template_insert_match = Queries.INSERT_MATCH
         execute_sql_query(conn, message_template_insert_match.format(user_id=user_id, vacancy_id=vacancy_id), "commit")
 
+
 def get_language_by_id(conn, lang_id):
     message_template_get_language_name = Queries.GET_LANGUAGE_BY_ID
     name = execute_sql_query(conn, message_template_get_language_name.format(id=lang_id))
     return name[0][0]
+
 
 def get_grade_by_id(conn, grade_id):
     message_template_get_grade_name = Queries.GET_GRADE_BY_ID
     name = execute_sql_query(conn, message_template_get_grade_name.format(id=grade_id))
     return name[0][0]
 
+
 def get_gender_by_id(conn, gender_id):
     message_template_get_gender_name = Queries.GET_GENDER_BY_ID
     name = execute_sql_query(conn, message_template_get_gender_name.format(id=gender_id))
     return name[0][0]
+
 
 def get_location_by_id(conn, location_id):
     message_template_get_location_name = Queries.GET_LOCATION_BY_ID
     name = execute_sql_query(conn, message_template_get_location_name.format(id=location_id))
     return name[0][0]
 
+
 def get_job_category_by_id(conn, job_category_id):
     message_template_get_location_name = Queries.GET_JOB_CATEGORY_BY_ID
     name = execute_sql_query(conn, message_template_get_location_name.format(id=job_category_id))
     return name[0][0]
 
+
+def get_profiles_json(conn):
+    return execute_sql_query(conn, Queries.GET_PROFILES)
+
+
+def get_profile_by_id(conn, id):
+    sql = Queries.GET_PROFILES_BY_ID
+    return execute_sql_query(conn, sql.format(user_id=id))
