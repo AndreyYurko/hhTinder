@@ -22,15 +22,23 @@ class MainEmployerFragment : Fragment(R.layout.fragment_main_employer) {
         super.onViewCreated(view, savedInstanceState)
 
         viewBinding.toolbar.setNavigationOnClickListener {
-            viewBinding.drawerLayout.openDrawer(
-                GravityCompat.START
-            )
+            if (viewBinding.drawerLayout.isOpen) {
+                viewBinding.drawerLayout.closeDrawer(GravityCompat.START)
+            }
+            else {
+                viewBinding.drawerLayout.openDrawer(
+                    GravityCompat.START
+                )
+            }
         }
 
         viewBinding.toolbar.setBackgroundColor(resources.getColor(R.color.deep_blue))
         activity?.window?.statusBarColor = resources.getColor(R.color.deep_blue)
 
-        viewBinding.mainFragmentNavigationHost.applyInsetter {
+        viewBinding.appbar.applyInsetter {
+            type(statusBars = true) { margin() }
+        }
+        viewBinding.drawerLayout.applyInsetter {
             type(statusBars = true) { margin() }
         }
 
@@ -47,6 +55,11 @@ class MainEmployerFragment : Fragment(R.layout.fragment_main_employer) {
                 }
             }
         )
+
+        viewBinding.toolbar.setOnMenuItemClickListener {
+            navController.navigate(R.id.profileEmployerFragment)
+            true
+        }
 /*
         viewBinding.menuImageButton.setOnClickListener() {
             viewBinding.drawerLayout.openDrawer(GravityCompat.START)

@@ -10,10 +10,8 @@ import com.andreyyurko.hhtinder.R
 import com.andreyyurko.hhtinder.databinding.FragmentCardsEmployeeBinding
 import com.andreyyurko.hhtinder.structures.Card
 import com.andreyyurko.hhtinder.utils.network.ArchiveHandler
-import com.andreyyurko.hhtinder.utils.network.AuthHandler
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
-import javax.inject.Inject
 
 @AndroidEntryPoint
 class LikesEmployeeFragment : Fragment(R.layout.fragment_cards_employee) {

@@ -15,9 +15,9 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.andreyyurko.hhtinder.R
-import com.andreyyurko.hhtinder.databinding.FragmentCvEmployeeBinding
 import com.andreyyurko.hhtinder.databinding.FragmentVacancyEmployeeBinding
 import com.andreyyurko.hhtinder.structures.CV
+import com.andreyyurko.hhtinder.structures.Vacancy
 import com.andreyyurko.hhtinder.utils.commonui.GesturesHandler
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -56,8 +56,8 @@ class VacancyEmployeeFragment : Fragment(R.layout.fragment_vacancy_employee) {
                         is VacancyEmployeeViewModel.GetCVState.Ok -> {
                             //Log.d(LOG_TAG, "Loading complete!")
                             val index = viewModel.getIndex()
-                            setupShownCard(viewModel.getCV(index))
-                            setupNextCard(viewModel.getCV(index + 1))
+                            setupShownCard(viewModel.getVacancy(index))
+                            setupNextCard(viewModel.getVacancy(index + 1))
                             viewBinding.progressBar.isVisible = false
                             viewBinding.employeeCard.isVisible = true
                             viewBinding.employeeCardNext.isVisible = true
@@ -198,7 +198,7 @@ class VacancyEmployeeFragment : Fragment(R.layout.fragment_vacancy_employee) {
                         viewBinding.employeeCard.translationX = baseTranslationX
                         viewBinding.employeeCard.translationY = baseTranslationY
                         viewBinding.employeeCard.rotation = baseRotation
-                        setupShownCard(viewModel.getCV(viewModel.getIndex()))
+                        setupShownCard(viewModel.getVacancy(viewModel.getIndex()))
                         viewBinding.employeeCard.alpha = 1f
                         viewBinding.employeeCardNext.isVisible = false
                     }
@@ -207,10 +207,10 @@ class VacancyEmployeeFragment : Fragment(R.layout.fragment_vacancy_employee) {
                         viewBinding.employeeCard.translationX = baseTranslationX
                         viewBinding.employeeCard.translationY = baseTranslationY
                         viewBinding.employeeCard.rotation = baseRotation
-                        setupShownCard(viewModel.getCV(viewModel.getIndex()))
+                        setupShownCard(viewModel.getVacancy(viewModel.getIndex()))
                         viewBinding.employeeCard.alpha = 1f
                         viewBinding.employeeCardNext.alpha = 0f
-                        setupNextCard(viewModel.getCV(viewModel.getIndex() + 1))
+                        setupNextCard(viewModel.getVacancy(viewModel.getIndex() + 1))
                     }
                 }
             }
@@ -222,29 +222,23 @@ class VacancyEmployeeFragment : Fragment(R.layout.fragment_vacancy_employee) {
         return swipeAnimatorSet
     }
 
-    private fun setupShownCard(cv: CV) {
-        viewBinding.jobName.text = cv.name
-        if (cv.image != null) {
-            viewBinding.iconImageShown.setImageDrawable(cv.image)
-        }
-        viewBinding.employeeName.text = "${cv.userName} ${cv.userSurname}"
-        viewBinding.employeeSalary.text = "Salary: ${cv.salary} \$ / h"
-        viewBinding.employeeGenderAndAge.text = "${cv.userGender}, ${cv.userAge} years old"
-        viewBinding.educationInfo.text = cv.education
-        viewBinding.workInfo.text = cv.experience
-        viewBinding.projectsInfo.text = cv.content
+    private fun setupShownCard(vacancy: Vacancy) {
+        viewBinding.jobName.text = vacancy.name
+        viewBinding.employeeName.text = "${vacancy.userName} ${vacancy.userSurname}"
+        viewBinding.employeeSalary.text = "Salary: ${vacancy.salary} \$ / h"
+        viewBinding.employeeGenderAndAge.text = "${vacancy.userGender}, ${vacancy.userAge} years old"
+        viewBinding.educationInfo.text = vacancy.education
+        viewBinding.workInfo.text = vacancy.experience
+        viewBinding.projectsInfo.text = vacancy.content
     }
 
-    private fun setupNextCard(cv: CV) {
-        viewBinding.jobNameNext.text = cv.name
-        if (cv.image != null) {
-            viewBinding.iconImageShownNext.setImageDrawable(cv.image)
-        }
-        viewBinding.employeeNameNext.text = "${cv.userName} ${cv.userSurname}"
-        viewBinding.employeeSalaryNext.text = "Salary: ${cv.salary} \$ / h"
-        viewBinding.employeeGenderAndAgeNext.text = "${cv.userGender}, ${cv.userAge} years old"
-        viewBinding.educationInfoNext.text = cv.education
-        viewBinding.workInfoNext.text = cv.experience
-        viewBinding.projectsInfoNext.text = cv.content
+    private fun setupNextCard(vacancy: Vacancy) {
+        viewBinding.jobNameNext.text = vacancy.name
+        viewBinding.employeeNameNext.text = "${vacancy.userName} ${vacancy.userSurname}"
+        viewBinding.employeeSalaryNext.text = "Salary: ${vacancy.salary} \$ / h"
+        viewBinding.employeeGenderAndAgeNext.text = "${vacancy.userGender}, ${vacancy.userAge} years old"
+        viewBinding.educationInfoNext.text = vacancy.education
+        viewBinding.workInfoNext.text = vacancy.experience
+        viewBinding.projectsInfoNext.text = vacancy.content
     }
 }

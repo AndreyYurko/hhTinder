@@ -1,13 +1,15 @@
 package com.andreyyurko.hhtinder.utils.network
 
 import android.util.Log
+import androidx.lifecycle.ViewModel
 import com.andreyyurko.hhtinder.structures.Vacancy
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import org.json.JSONObject
 import ru.gildor.coroutines.okhttp.await
+import javax.inject.Inject
 
-class VacancyHandler {
+class VacancyHandler @Inject constructor() : ViewModel() {
 
     companion object {
         const val LOG_TAG = "VacancyHandler"

@@ -33,8 +33,9 @@ class ArchiveHandler {
         val response = client.newCall(request).await()
         val responseBody = response.body?.string() ?: ""
 
-        var jsonObj = JSONObject(responseBody)
+
         try {
+            var jsonObj = JSONObject(responseBody)
             jsonObj.keys().forEachRemaining {
                 val key = it
                 val archive = jsonObj.getJSONObject(key)

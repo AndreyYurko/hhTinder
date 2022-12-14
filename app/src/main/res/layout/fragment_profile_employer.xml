@@ -7,10 +7,22 @@
     android:paddingLeft="16dp"
     android:paddingRight="16dp">
 
+    <TextView
+        android:id="@+id/logOutButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end"
+        android:text="@string/profile_log_out"
+        android:textSize="20sp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="12dp"
+        android:textColor="@color/deep_orange"
+        android:clickable="true"
+        android:focusable="true" />
+
     <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="42dp">
+        android:layout_height="match_parent">
 
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/mess_card_view"

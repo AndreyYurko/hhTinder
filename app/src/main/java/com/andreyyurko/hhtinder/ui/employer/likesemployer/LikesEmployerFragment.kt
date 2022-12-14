@@ -1,49 +1,40 @@
-package com.andreyyurko.hhtinder.ui.employer.archiveemployer
+package com.andreyyurko.hhtinder.ui.employer.likesemployer
 
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.andreyyurko.hhtinder.R
-import com.andreyyurko.hhtinder.databinding.FragmentArchiveEmployerBinding
+import com.andreyyurko.hhtinder.databinding.FragmentCardsEmployeeBinding
 import com.andreyyurko.hhtinder.structures.Card
 import com.andreyyurko.hhtinder.utils.network.ArchiveHandler
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
-import kotlin.coroutines.CoroutineContext
 
-class ArchiveEmployerFragment : Fragment(R.layout.fragment_archive_employer), CoroutineScope {
+class LikesEmployerFragment : Fragment(R.layout.fragment_cards_employer) {
 
-    private val viewBinding by viewBinding(FragmentArchiveEmployerBinding::bind)
-
-    private var job: Job = Job()
+    private val viewBinding by viewBinding(FragmentCardsEmployeeBinding::bind)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        launch {
+        lifecycleScope.launch {
             setupRecyclerView()
         }
     }
-
 
     private suspend fun getArchiveList(): List<Card> {
         return ArchiveHandler().getArchiveList()
     }
 
-    private suspend fun setupRecyclerView(): ArchiveAdapterEmployer {
+    private suspend fun setupRecyclerView(): LikesEmployerAdapter {
         val recyclerView = viewBinding.recycleView
         recyclerView.layoutManager =
             LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
-        val adapter = ArchiveAdapterEmployer(getArchiveList())
+        val adapter = LikesEmployerAdapter(getArchiveList())
         recyclerView.adapter = adapter
 
         return adapter
     }
-
-    override val coroutineContext: CoroutineContext
-        get() = Dispatchers.Main + job
 }

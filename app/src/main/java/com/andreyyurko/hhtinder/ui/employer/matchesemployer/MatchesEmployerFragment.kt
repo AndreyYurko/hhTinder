@@ -1,4 +1,4 @@
-package com.andreyyurko.hhtinder.ui.employee.mycvs
+package com.andreyyurko.hhtinder.ui.employer.matchesemployer
 
 import android.os.Bundle
 import android.view.View
@@ -7,42 +7,36 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.andreyyurko.hhtinder.R
-import com.andreyyurko.hhtinder.databinding.FragmentMyCvsBinding
+import com.andreyyurko.hhtinder.databinding.FragmentCardsEmployeeBinding
 import com.andreyyurko.hhtinder.structures.Card
+import com.andreyyurko.hhtinder.ui.employer.likesemployer.LikesEmployerAdapter
 import com.andreyyurko.hhtinder.utils.network.ArchiveHandler
 import kotlinx.coroutines.launch
 
-class MyCvsFragmentEmployee : Fragment(R.layout.fragment_my_cvs) {
+class MatchesEmployerFragment : Fragment(R.layout.fragment_cards_employer) {
 
-    private val viewBinding by viewBinding(FragmentMyCvsBinding::bind)
+    private val viewBinding by viewBinding(FragmentCardsEmployeeBinding::bind)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewLifecycleOwner.lifecycleScope.launch {
+        lifecycleScope.launch {
             setupRecyclerView()
         }
     }
+
 
     private suspend fun getArchiveList(): List<Card> {
         return ArchiveHandler().getArchiveList()
     }
 
-    private suspend fun setupRecyclerView(): MyCvsAdapterEmployee {
+    private suspend fun setupRecyclerView(): MatchesEmployerAdapter {
         val recyclerView = viewBinding.recycleView
         recyclerView.layoutManager =
             LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
-        // TODO: переделать с архивов на что-то нормальное
-        val res = getArchiveList().toMutableList()
-        res.add(Card(
-            id = 10,
-            name = "Имя",
-            content = "Какой-то контент"
-        ))
-        val adapter = MyCvsAdapterEmployee(res)
+        val adapter = MatchesEmployerAdapter(getArchiveList())
         recyclerView.adapter = adapter
 
         return adapter
     }
-
 }

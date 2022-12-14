@@ -6,7 +6,6 @@ import androidx.fragment.app.Fragment
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.andreyyurko.hhtinder.R
 import com.andreyyurko.hhtinder.databinding.FragmentSettingsEmployeeBinding
-import com.andreyyurko.hhtinder.databinding.FragmentSettingsEmployerBinding
 import com.google.android.material.slider.RangeSlider
 import com.google.android.material.slider.Slider
 

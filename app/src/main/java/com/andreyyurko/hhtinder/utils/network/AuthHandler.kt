@@ -53,9 +53,13 @@ class AuthHandler @Inject constructor() : ViewModel() {
         val request = Request.Builder()
             .url(url)
             .post(body)
+            .addHeader("token", "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855")
             .build()
 
         val response = client.newCall(request).await()
+
+        Log.d(LOG_TAG, response.toString())
+
         val responseBody = response.body?.string() ?: ""
 
         var res = false
@@ -65,6 +69,8 @@ class AuthHandler @Inject constructor() : ViewModel() {
 
             if (type.equals("password")) {
                 var token = jsonObj.getString("token")
+
+                Log.d(LOG_TAG, token)
 
                 SharedPreferencesSingleton.instance.getSharedPreferences()!!.edit()
                     .putString("token", token).commit()
@@ -96,10 +102,13 @@ class AuthHandler @Inject constructor() : ViewModel() {
         val request = Request.Builder()
             .url(url)
             .get()
+            .addHeader("token", "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855")
             .build()
 
         val response = client.newCall(request).await()
         val responseBody = response.body?.string() ?: ""
+
+        Log.d(LOG_TAG, response.toString())
         var jsonObj = JSONObject(responseBody)
 
         try {
@@ -116,7 +125,13 @@ class AuthHandler @Inject constructor() : ViewModel() {
 
     suspend fun logIn(log: String?, pass: String?, token: String?) {
         if (log != null && pass != null && token != null) {
-            val res = send(log, pass, token)
+            var res = false
+            try {
+                res = send(log, pass, token)
+            }
+            catch (e: Exception) {
+
+            }
             if (res) {
                 _authStateFlow.emit(AuthState.Logged)
             }

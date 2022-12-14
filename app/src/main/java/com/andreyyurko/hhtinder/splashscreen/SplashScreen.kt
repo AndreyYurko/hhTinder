@@ -7,13 +7,13 @@ import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
+import by.kirich1409.viewbindingdelegate.viewBinding
 import com.andreyyurko.hhtinder.R
 import com.andreyyurko.hhtinder.databinding.ActivitySplashScreenBinding
-import dagger.hilt.android.AndroidEntryPoint
-import by.kirich1409.viewbindingdelegate.viewBinding
 import com.andreyyurko.hhtinder.singleton.SharedPreferencesSingleton
 import com.andreyyurko.hhtinder.singleton.VocabsSingleton
 import com.andreyyurko.hhtinder.ui.MainActivity
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint

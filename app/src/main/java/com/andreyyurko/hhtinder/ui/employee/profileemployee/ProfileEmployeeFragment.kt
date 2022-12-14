@@ -4,10 +4,10 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import com.andreyyurko.hhtinder.R
-import com.andreyyurko.hhtinder.utils.network.AuthHandler
 import by.kirich1409.viewbindingdelegate.viewBinding
+import com.andreyyurko.hhtinder.R
 import com.andreyyurko.hhtinder.databinding.FragmentProfileEmployeeBinding
+import com.andreyyurko.hhtinder.utils.network.AuthHandler
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 

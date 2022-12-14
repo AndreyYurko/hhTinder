@@ -1,10 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <group android:checkableBehavior="single">
-        <item
-            android:id="@+id/profile_employer_nav_graph"
-            android:icon="@drawable/ic_person_circle"
-            android:title="My Profile" />
 
         <item
             android:id="@+id/vacancy_employer_nav_graph"
@@ -17,9 +13,14 @@
             android:title="Message" />
 
         <item
-            android:id="@+id/archive_employer_nav_graph"
-            android:icon="@drawable/ic_archive"
-            android:title="Archive" />
+            android:id="@+id/likes_employer_nav_graph"
+            android:icon="@drawable/like"
+            android:title="Likes" />
+
+        <item
+            android:id="@+id/matches_employer_nav_graph"
+            android:icon="@drawable/shake_hands"
+            android:title="Matches"/>
 
         <item
             android:id="@+id/settings_employer_nav_graph"

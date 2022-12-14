@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/matches_employer_nav_graph"
+    app:startDestination="@id/matchesFragment">
+
+    <fragment
+        android:id="@+id/matchesFragment"
+        android:name="com.andreyyurko.hhtinder.ui.employer.matchesemployer.MatchesEmployerFragment"
+        android:label="MatchesFragment">
+        <action
+            android:id="@+id/action_matchesFragment_to_showCvFragment"
+            app:destination="@id/showCvFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/showCvFragment"
+        android:name="com.andreyyurko.hhtinder.ui.employer.showcv.ShowCvFragment"
+        android:label="ShowCvFragment"/>
+
+</navigation>

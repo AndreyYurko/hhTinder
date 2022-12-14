@@ -9,7 +9,8 @@
         android:name="com.andreyyurko.hhtinder.ui.employer.profileemployer.ProfileEmployerFragment"
         android:label="ProfileFragment"/>
 
-    <include app:graph="@navigation/archive_employer_nav_graph" />
+    <include app:graph="@navigation/likes_employer_nav_graph" />
+    <include app:graph="@navigation/matches_employer_nav_graph" />
     <include app:graph="@navigation/cv_employer_nav_graph" />
     <include app:graph="@navigation/settings_employer_nav_graph" />
     <include app:graph="@navigation/message_employer_nav_graph" />

@@ -13,11 +13,9 @@ import kotlinx.coroutines.launch
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import org.json.JSONObject
-import org.json.JSONTokener
 import ru.gildor.coroutines.okhttp.await
 import javax.inject.Inject
 import javax.inject.Singleton
-import java.net.URLEncoder.encode
 
 @Singleton
 class GetMatchesHandler @Inject constructor() : ViewModel() {

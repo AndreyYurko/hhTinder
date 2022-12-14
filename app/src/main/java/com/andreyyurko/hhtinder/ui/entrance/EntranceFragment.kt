@@ -17,6 +17,8 @@ class EntranceFragment : Fragment(R.layout.fragment_entrance) {
     companion object {
         const val LOG_TAG = "Entrance Fragment"
     }
+    private var token: String? = null
+    var login: String? = null
 
     private val viewBinding by viewBinding(FragmentEntranceBinding::bind)
     private lateinit var viewModel: EntranceViewModel
@@ -24,10 +26,9 @@ class EntranceFragment : Fragment(R.layout.fragment_entrance) {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         viewModel = ViewModelProvider(this)[EntranceViewModel::class.java]
-
+        activity?.window?.statusBarColor = resources.getColor(R.color.white)
         if (hasToken() && hasLogin()) {
-            val controller = findNavController()
-            controller.navigate(R.id.signInFragment)
+            viewModel.auth(login, "", token)
         }
     }
 
@@ -47,14 +48,13 @@ class EntranceFragment : Fragment(R.layout.fragment_entrance) {
 
     fun hasToken(): Boolean {
         SharedPreferencesSingleton.instance.setSingletonContext(this.requireContext())
-        var token =
-            SharedPreferencesSingleton.instance.getSharedPreferences()!!.getString("token", "")
+        token = SharedPreferencesSingleton.instance.getSharedPreferences()!!.getString("token", "")
         return !token.equals("")
     }
 
     fun hasLogin(): Boolean {
         SharedPreferencesSingleton.instance.setSingletonContext(this.requireContext())
-        var login =
+        login =
             SharedPreferencesSingleton.instance.getSharedPreferences()!!.getString("login", "")
         return !login.equals("")
     }

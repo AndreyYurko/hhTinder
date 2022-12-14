@@ -34,11 +34,11 @@ class CVEmployerFragment : Fragment(R.layout.fragment_cv_employer) {
     private var baseRotation = 0F
 
     private val viewBinding by viewBinding(FragmentCvEmployerBinding::bind)
-    private lateinit var viewModel : VacancyEmployeeViewModel
+    private lateinit var viewModel : CVEmployerViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        viewModel = ViewModelProvider(requireActivity())[VacancyEmployeeViewModel::class.java]
+        viewModel = ViewModelProvider(requireActivity())[CVEmployerViewModel::class.java]
     }
 
     @SuppressLint("ClickableViewAccessibility")
@@ -53,7 +53,7 @@ class CVEmployerFragment : Fragment(R.layout.fragment_cv_employer) {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.getCVState().collect { state ->
                     when (state) {
-                        is VacancyEmployeeViewModel.GetCVState.Ok -> {
+                        is CVEmployerViewModel.GetCVState.Ok -> {
                             //Log.d(LOG_TAG, "Loading complete!")
                             val index = viewModel.getIndex()
                             setupShownCard(viewModel.getCV(index))
@@ -64,10 +64,10 @@ class CVEmployerFragment : Fragment(R.layout.fragment_cv_employer) {
                             viewBinding.employeeCard.alpha = 1f
                             viewBinding.employeeCardNext.alpha = 0f
                         }
-                        is VacancyEmployeeViewModel.GetCVState.Error -> {
+                        is CVEmployerViewModel.GetCVState.Error -> {
                             // TODO: обработка ошибки получения CV
                         }
-                        is VacancyEmployeeViewModel.GetCVState.Loading -> {
+                        is CVEmployerViewModel.GetCVState.Loading -> {
                             //Log.d(LOG_TAG, "Loading!")
                             viewBinding.employeeCard.isVisible = false
                             viewBinding.employeeCardNext.isVisible = false

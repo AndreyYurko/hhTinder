@@ -5,7 +5,6 @@ import android.util.Log
 import android.view.View
 import androidx.activity.OnBackPressedCallback
 import androidx.core.view.GravityCompat
-import androidx.core.view.marginTop
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.NavHostFragment
@@ -47,6 +46,7 @@ class MainEmployeeFragment : Fragment(R.layout.fragment_main_employee) {
         viewBinding.drawerLayout.applyInsetter {
             type(statusBars = true) { margin() }
         }
+        activity?.window?.statusBarColor = resources.getColor(R.color.deep_orange)
 
         val navController =
             (childFragmentManager.findFragmentById(R.id.mainFragmentNavigationHost) as NavHostFragment).navController

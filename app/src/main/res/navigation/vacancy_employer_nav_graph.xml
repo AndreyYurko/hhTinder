@@ -2,7 +2,16 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/vacancy_employer_nav_graph"
-    app:startDestination="@id/vacancyFragment">
+    app:startDestination="@id/myVacanciesFragment">
+
+    <fragment
+        android:id="@+id/myVacanciesFragment"
+        android:name="com.andreyyurko.hhtinder.ui.employer.myvacancies.MyVacanciesFragment"
+        android:label="MyVacanciesFragment">
+        <action
+            android:id="@+id/action_myVacanciesFragment_to_vacancyFragment"
+            app:destination="@id/vacancyFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/vacancyFragment"
