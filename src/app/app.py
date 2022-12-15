@@ -8,6 +8,8 @@ from monitoring import instrumentator
 from fastapi.middleware.cors import CORSMiddleware
 import hashlib
 from typing import List
+import logging
+from logstash_async.handler import AsynchronousLogstashHandler
 
 app = FastAPI()
 app.type = "00"
@@ -20,6 +22,20 @@ app.state.connection = conn_
 #     return True
 
 tunnel, conn = connect_db()
+
+
+def get_logger():
+    host = 'localhost'
+    port = 5959
+
+    logger = logging.getLogger('python-logstash-logger')
+    logger.setLevel(logging.INFO)
+    logger.addHandler(AsynchronousLogstashHandler(host, port))
+
+    return logger
+
+
+logger = get_logger()
 
 
 #  метрики доступны по /metrics
