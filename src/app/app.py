@@ -392,6 +392,34 @@ async def get_profiles(id: int, request: Request):
     res["img_url"] = url
     return res
 
+@app.get("/profile/{name}")
+async def get_profile_by_name(name: str, request: Request):
+    token = request.headers.get('token')
+    if hashlib.sha256(token.encode('utf8')).hexdigest() != getCert():
+        return {"status": "unauthorized"}
+
+    arr = get_profile_with_name(app.state.connection, name)[0]
+
+    res = {}
+
+    res["id"] = arr[0]
+    res["email"] = arr[1]
+    res["login"] = arr[2]
+    res["password"] = arr[3]
+    res["name"] = arr[4]
+    res["surname"] = arr[5]
+    res["age"] = arr[6]
+    res["gender_id"] = arr[7]
+    res["role_id"] = arr[8]
+
+    imgID = arr[9]
+    imgExtension = arr[10]
+
+    url = "http://217.25.88.166/web_project/files/images/0/" + str(imgID) + "." + str(imgExtension)
+
+    res["img_url"] = url
+    return res
+
 
 @app.post("/add_profile/")
 async def add_profile(profile: Profile, request: Request):

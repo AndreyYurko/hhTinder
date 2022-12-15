@@ -454,3 +454,8 @@ def get_profiles_json(conn):
 def get_profile_by_id(conn, id):
     sql = Queries.GET_PROFILES_BY_ID
     return execute_sql_query(conn, sql.format(user_id=id))
+
+
+def get_profile_with_name(conn, name):
+    sql = Queries.GET_PROFILES_BY_EMAIL
+    return execute_sql_query(conn, sql.format(login=name))
