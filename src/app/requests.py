@@ -8,7 +8,6 @@ import utils, secrets
 def execute_sql_query(conn, query, type='default'):
     records = None
     try:
-        print("Executing SQL Query..")
         db_cursor = conn.cursor()
         db_cursor.execute(query)
         if type == 'default':
@@ -16,11 +15,10 @@ def execute_sql_query(conn, query, type='default'):
         else:
             conn.commit()
         db_cursor.close()
-        print("SUCCESS: Query was successful")
+
         return records
     except Exception as ex:
         print("FAILED: Wrong query")
-        print(ex)
 
 
 # get user by id
@@ -28,7 +26,6 @@ def get_user(conn, user_id):
     message_template_select_user = Queries.GET_USER_BY_ID
     user_data = execute_sql_query(conn, message_template_select_user.format(id=user_id))
     if len(user_data) == 0:
-        print("No user with id =", user_id)
         return None
     else:
         user = User(user_data[0])
@@ -48,7 +45,6 @@ def get_vacancy(conn, vac_id):
     vacancy_data = execute_sql_query(conn, message_template_select_vacancy.format(id=vac_id))
     try:
         if len(vacancy_data) == 0:
-            print("No vacancy with id =", vac_id)
             return None
         else:
             vacancy = Vacancy(vacancy_data[0])
@@ -191,7 +187,6 @@ def get_cv(conn, cv_id):
     cv_data = execute_sql_query(conn, message_template_select_cv.format(id=cv_id))
     try:
         if len(cv_data) == 0:
-            print("No vacancy with id =", cv_id)
             return None
         else:
             cv = CV(cv_data[0])
@@ -370,6 +365,7 @@ def add_profile_to_db(
         )
     )
 
+
 def add_user_to_bd(conn, login, password, name, role_id):
     execute_sql_query(
         conn,
@@ -381,6 +377,7 @@ def add_user_to_bd(conn, login, password, name, role_id):
         )
     )
 
+
 def edit_profile_in_db(
         conn,
         user_name,
@@ -389,15 +386,17 @@ def edit_profile_in_db(
         gender,
         id,
 ):
+    sql =  Queries.UPDATE_PROFILE.format(
+            user_name=user_name,
+            surname=surname,
+            age=age,
+            gender_id=gender,
+            id=id,
+        )
+
     execute_sql_query(
         conn,
-        Queries.UPDATE_PROFILE.format(
-            user_name,
-            surname,
-            age,
-            gender,
-            id,
-        )
+        sql
     )
 
 

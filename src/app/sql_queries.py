@@ -222,12 +222,12 @@ class Queries():
     ADD_PROFILE = """
         INSERT INTO user_info(user_name, surname, age, gender_id)
         VALUES 
-        ({user_name}, {surname}, {age}, {gender_id})
+        ('{user_name}', '{surname}', {age}, {gender_id})
     """
 
     UPDATE_PROFILE = """
         UPDATE user_info
-        SET {user_name}, {surname}, {age}, {gender_id}
+        SET name='{user_name}', surname='{surname}', age={age}, gender_id={gender_id}
         WHERE id = {id}
     """
 
