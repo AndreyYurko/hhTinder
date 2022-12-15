@@ -31,7 +31,10 @@ class CVHandler @Inject constructor() : ViewModel() {
             val request = Request.Builder()
                 .url(url)
                 .get()
-                .addHeader("token", "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855")
+                .addHeader(
+                    "token",
+                    "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+                )
                 .build()
             val response = client.newCall(request).await()
             val responseBody = response.body?.string() ?: ""
@@ -69,5 +72,15 @@ class CVHandler @Inject constructor() : ViewModel() {
             Log.d(VacancyHandler.LOG_TAG, e.toString())
         }
         return res
+    }
+
+    suspend fun saveCV(cv: CV) {
+        val url = "http://217.25.88.166:8000/cv/update"
+    }
+
+    suspend fun createCV(cv: CV): Int {
+        val url = "http://217.25.88.166:8000/cv/new"
+
+        return -1;
     }
 }

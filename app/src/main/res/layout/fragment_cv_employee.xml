@@ -47,8 +47,8 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="bottom|center"
                     android:layout_marginLeft="65dp"
-                    app:srcCompat="@drawable/ic_pencil_button"
-                    android:background="@color/white"/>
+                    android:background="@color/white"
+                    app:srcCompat="@drawable/ic_pencil_button" />
 
             </FrameLayout>
 
