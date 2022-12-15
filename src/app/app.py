@@ -1,4 +1,4 @@
-from requests import *
+from functionRequests import *
 from db_connection import *
 from typing import Union
 import uvicorn
@@ -66,6 +66,7 @@ class User(BaseModel):
     password: str
     name: str
     role_id: int
+
 
 @app.get("/")
 def read_root(request: Request):
@@ -317,7 +318,6 @@ def get_job_category_name_by_id(id: int, request: Request):
         return {"status": "unauthorized"}
 
     return get_job_category_by_id(app.state.connection, id)
-
 
 
 @app.post("/add_vacancy/")

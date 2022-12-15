@@ -18,7 +18,7 @@
 #     loop.close()
 #     print("HELLO WORLD")
 
-from requests import *
+from functionRequests import *
 from db_connection import *
 import asyncio
 
