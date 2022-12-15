@@ -12,19 +12,17 @@ import com.andreyyurko.hhtinder.singleton.TransferSingleton
 class ShowCvFragment : Fragment(R.layout.fragment_show_cv){
     private val viewBinding by viewBinding(FragmentShowCvBinding::bind)
 
-    private var vacancyId = 0
+    private var cvId = 0
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setFragmentResultListener("EmployeeInfo") { _, bundle ->
-            viewBinding.cvName.text = bundle.get("jobName").toString()
-            viewBinding.cvText.text = bundle.get("content").toString()
-            vacancyId = bundle.getInt("id")
-        }
         try {
+            viewBinding.cvName.text = TransferSingleton.instance.getTransferArchive()!!.name
+            viewBinding.cvText.text = TransferSingleton.instance.getTransferArchive()!!.content
+            cvId = TransferSingleton.instance.getTransferArchive()!!.id
             viewBinding.avatarImageView.setImageDrawable(TransferSingleton.instance.getTransferArchive()!!.image)
         } catch (e: Exception) {
-
+            e.stackTrace
         }
     }
 }
