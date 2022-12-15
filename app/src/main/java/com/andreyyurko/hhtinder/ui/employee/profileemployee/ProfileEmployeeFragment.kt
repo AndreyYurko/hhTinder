@@ -66,5 +66,9 @@ class ProfileEmployeeFragment : Fragment(R.layout.fragment_profile_employee) {
         viewBinding.surname.setText(profile!!.surname)
     }
 
+    private suspend fun saveProfile() {
+
+    }
+
 
 }
