@@ -25,6 +25,7 @@ class VacancyHandler @Inject constructor() : ViewModel() {
             val request = Request.Builder()
                 .url(url)
                 .get()
+                .addHeader("token", "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855")
                 .build()
             val response = client.newCall(request).await()
             val responseBody = response.body?.string() ?: ""
