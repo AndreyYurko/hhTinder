@@ -4,8 +4,10 @@ import android.graphics.drawable.Drawable
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import com.andreyyurko.hhtinder.structures.CV
+import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.OkHttpClient
 import okhttp3.Request
+import okhttp3.RequestBody.Companion.toRequestBody
 import org.json.JSONObject
 import ru.gildor.coroutines.okhttp.await
 import java.io.InputStream
@@ -80,6 +82,25 @@ class CVHandler @Inject constructor() : ViewModel() {
 
     suspend fun createCV(cv: CV): Int {
         val url = "http://217.25.88.166:8000/cv/new"
+
+        try {
+
+            val mediaType = "application/json; charset=utf-8".toMediaType()
+            val requestBody = cv.toJSON().toString().toRequestBody(mediaType)
+
+            val request = Request.Builder()
+                .url(url)
+                .post(requestBody)
+                .addHeader(
+                    "token",
+                    "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+                )
+                .build()
+
+            val response = client.newCall(request).await()
+        } catch (e: Exception) {
+            Log.d(VacancyHandler.LOG_TAG, e.toString())
+        }
 
         return -1;
     }
