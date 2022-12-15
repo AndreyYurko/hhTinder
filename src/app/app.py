@@ -201,7 +201,7 @@ def login_with_token(login: str, tok: str, request: Request):
     return {"login": res}
 
 
-@app.post("/vacancy/new/")
+@app.post("/vacancy/new")
 def create_new_vacancy(vacancy: Vacancy, request: Request):
     token = request.headers.get('token')
     if hashlib.sha256(token.encode('utf8')).hexdigest() != getCert():
@@ -210,7 +210,7 @@ def create_new_vacancy(vacancy: Vacancy, request: Request):
     createVacancy(app.state.connection, vacancy)
 
 
-@app.post("/cv/new/")
+@app.post("/cv/new")
 def create_new_vacancy(cv: CV, request: Request):
     token = request.headers.get('token')
     if hashlib.sha256(token.encode('utf8')).hexdigest() != getCert():
@@ -219,7 +219,7 @@ def create_new_vacancy(cv: CV, request: Request):
     createCV(app.state.connection, cv)
 
 
-@app.post("/vacancy/update/")
+@app.post("/vacancy/update")
 def create_new_vacancy(vacancy: Vacancy, request: Request):
     token = request.headers.get('token')
     if hashlib.sha256(token.encode('utf8')).hexdigest() != getCert():
@@ -228,7 +228,7 @@ def create_new_vacancy(vacancy: Vacancy, request: Request):
     updateVacancy(app.state.connection, vacancy)
 
 
-@app.post("/cv/update/")
+@app.post("/cv/update")
 def create_new_vacancy(cv: CV, request: Request):
     token = request.headers.get('token')
     if hashlib.sha256(token.encode('utf8')).hexdigest() != getCert():
