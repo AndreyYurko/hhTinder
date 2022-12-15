@@ -208,7 +208,7 @@ def create_new_vacancy(vacancy: Vacancy, request: Request):
     if hashlib.sha256(token.encode('utf8')).hexdigest() != getCert():
         return {"status": "unauthorized"}
 
-    createVacancy(app.state.connection, vacancy)
+    creat_vacancy(app.state.connection, vacancy)
 
 
 @app.post("/cv/new")
@@ -217,7 +217,7 @@ def create_new_vacancy(cv: CV, request: Request):
     if hashlib.sha256(token.encode('utf8')).hexdigest() != getCert():
         return {"status": "unauthorized"}
 
-    createCV(app.state.connection, cv)
+    create_cv(app.state.connection, cv)
 
 
 @app.post("/vacancy/update")
@@ -226,7 +226,7 @@ def create_new_vacancy(vacancy: Vacancy, request: Request):
     if hashlib.sha256(token.encode('utf8')).hexdigest() != getCert():
         return {"status": "unauthorized"}
 
-    updateVacancy(app.state.connection, vacancy)
+    update_vacancy(app.state.connection, vacancy)
 
 
 @app.post("/cv/update")
@@ -235,7 +235,7 @@ def create_new_vacancy(cv: CV, request: Request):
     if hashlib.sha256(token.encode('utf8')).hexdigest() != getCert():
         return {"status": "unauthorized"}
 
-    updateCV(app.state.connection, cv)
+    update_cv(app.state.connection, cv)
 
 
 @app.post("/login/password/{login}/{password}")

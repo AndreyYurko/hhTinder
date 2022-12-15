@@ -474,7 +474,7 @@ def get_profile_with_name(conn, name):
     return execute_sql_query(conn, sql.format(login=name))
 
 
-def createVacancy(conn, vac: Vacancy):
+def creat_vacancy(conn, vac: Vacancy):
     sql = Queries.ADD_VACANCY
     return execute_sql_query(conn,
                              sql.format(vac_name=vac.vac_name, vac_text=vac.vac_text, vac_category=vac.vac_category,
@@ -482,7 +482,7 @@ def createVacancy(conn, vac: Vacancy):
                              "post")
 
 
-def updateVacancy(conn, vac: Vacancy):
+def update_vacancy(conn, vac: Vacancy):
     sql = Queries.UPDATE_VACANCY
     return execute_sql_query(conn,
                              sql.format(vac_name=vac.vac_name, vac_text=vac.vac_text, vac_category=vac.vac_category,
@@ -490,7 +490,7 @@ def updateVacancy(conn, vac: Vacancy):
                              "post")
 
 
-def createCV(conn, cv: CV):
+def create_cv(conn, cv: CV):
     sql = Queries.ADD_CV
     return execute_sql_query(conn, sql.format(cv_name=cv.cv_name, cv_text=cv.cv_text,
                                               experience_content=cv.experience_content,
@@ -498,7 +498,7 @@ def createCV(conn, cv: CV):
                                               cv_category=cv.cv_category, cr_user=cv.cr_user), "post")
 
 
-def updateCV(conn, cv: CV):
+def update_cv(conn, cv: CV):
     sql = Queries.UPDATE_CV
     return execute_sql_query(conn, sql.format(cv_name=cv.cv_name, cv_text=cv.cv_text,
                                               experience_content=cv.experience_content,
