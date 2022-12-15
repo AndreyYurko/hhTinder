@@ -105,17 +105,17 @@ def next_vacancy(request: Request):
 
 
 @app.get("/cv/{cv_id}")
-def next_cv(cv_id: int, request: Request):
+def get_cv_by_id(cv_id: int, request: Request):
     token = request.headers.get('token')
     if hashlib.sha256(token.encode('utf8')).hexdigest() != getCert():
         return {"status": "unauthorized"}
 
-    cv = get_next_cv(app.state.connection)
+    cv = get_cv(app.state.connection, cv_id)
     return cv.to_json()
 
 
 @app.get("/vacancy/{vac_id}")
-def next_cv(vac_id: int, request: Request):
+def get_vacancy_by_id(vac_id: int, request: Request):
     token = request.headers.get('token')
     if hashlib.sha256(token.encode('utf8')).hexdigest() != getCert():
         return {"status": "unauthorized"}
