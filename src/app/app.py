@@ -124,7 +124,7 @@ def get_vacancy_by_id(vac_id: int, request: Request):
     return vac.to_json()
 
 
-@app.get("/history/vacancy/{job_id}")
+@app.get("/history/vacancy/{vacancy_id}")
 def liked_workers(vacancy_id: int, request: Request):
     token = request.headers.get('token')
     if hashlib.sha256(token.encode('utf8')).hexdigest() != getCert():
