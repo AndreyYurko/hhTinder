@@ -1,5 +1,6 @@
 package com.andreyyurko.hhtinder.ui.employer.myvacancies
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,8 +17,19 @@ import com.andreyyurko.hhtinder.structures.Card
 import com.andreyyurko.hhtinder.ui.employer.vacancyemployer.VacancyEmployerFragment
 import com.google.android.material.card.MaterialCardView
 
-class MyVacanciesAdapter(private var vacanciesCardList: List<Card>) :
+class MyVacanciesAdapter(private var vacanciesCardList: MutableList<Card>) :
     RecyclerView.Adapter<MyVacanciesAdapter.ViewHolder>() {
+
+    val TAG = "VacancyAdapter"
+
+    fun addCard(card: Card) {
+        vacanciesCardList.add(card)
+        Log.d(TAG, vacanciesCardList.size.toString())
+    }
+
+    fun getCards(): List<Card> {
+        return vacanciesCardList
+    }
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val avatarImageView: ImageView = itemView.findViewById(R.id.avatarImageView)

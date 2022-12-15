@@ -15,11 +15,20 @@ import kotlinx.coroutines.launch
 class MyVacanciesFragment : Fragment(R.layout.fragment_my_vacancies) {
     private val viewBinding by viewBinding(FragmentMyVacanciesBinding::bind)
 
+    var adapter: MyVacanciesAdapter? = null
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         viewLifecycleOwner.lifecycleScope.launch {
             setupRecyclerView()
+        }
+
+        viewBinding.btnCreateVac.setOnClickListener {
+            if (adapter != null) {
+                adapter!!.addCard(Card(-1, "Name", "Content"))
+                adapter!!.notifyDataSetChanged()
+            }
         }
     }
 
@@ -27,22 +36,13 @@ class MyVacanciesFragment : Fragment(R.layout.fragment_my_vacancies) {
         return ArchiveHandler().getArchiveList()
     }
 
-    private suspend fun setupRecyclerView(): MyVacanciesAdapter {
+    private suspend fun setupRecyclerView() {
         val recyclerView = viewBinding.recycleView
         recyclerView.layoutManager =
             LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
         // TODO: переделать с архивов на что-то нормальное
         val res = getArchiveList().toMutableList()
-        res.add(
-            Card(
-            id = 10,
-            name = "Имя",
-            content = "Какой-то контент"
-        )
-        )
-        val adapter = MyVacanciesAdapter(res)
+        adapter = MyVacanciesAdapter(res)
         recyclerView.adapter = adapter
-
-        return adapter
     }
 }
