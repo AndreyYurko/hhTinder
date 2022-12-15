@@ -43,6 +43,7 @@ class ProfileEmployeeFragment : Fragment(R.layout.fragment_profile_employee) {
                 "Ваш профиль сохранен! Откройте меню, чтобы начать.",
                 Toast.LENGTH_LONG
             ).show()
+            viewLifecycleOwner.lifecycleScope.launch { saveProfile() }
         }
 
 
@@ -67,7 +68,9 @@ class ProfileEmployeeFragment : Fragment(R.layout.fragment_profile_employee) {
     }
 
     private suspend fun saveProfile() {
-
+        val login = SharedPreferencesSingleton.instance.getSharedPreferences()!!
+            .getString("login", "admin");
+        profileHandler.saveProfile(login!!, profile!!)
     }
 
 

@@ -40,7 +40,8 @@ class ProfileHandler {
 
             var res = Profile()
 
-            res.id = jsonObj.getInt("id");
+            res.userID = jsonObj.getInt("id");
+            res.profileID = jsonObj.getInt("profile_id");
             res.email = jsonObj.getString("email")
             res.login = jsonObj.getString("login")
             res.password = jsonObj.getString("password")
@@ -50,6 +51,7 @@ class ProfileHandler {
             res.genderID = jsonObj.getInt("gender_id")
             res.roleID = jsonObj.getInt("role_id")
             res.imgURL = jsonObj.getString("img_url")
+            res.imgID = jsonObj.getInt("img_id")
 
             Log.d(VacancyHandler.LOG_TAG, responseBody)
 

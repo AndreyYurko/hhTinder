@@ -35,6 +35,7 @@ class ProfileEmployerFragment : Fragment(R.layout.fragment_profile_employer) {
 
         viewBinding.saveButton.setOnClickListener {
             Toast.makeText(requireContext(), "Ваш профиль сохранен! Откройте меню, чтобы начать.", Toast.LENGTH_LONG).show()
+            viewLifecycleOwner.lifecycleScope.launch { saveProfile() }
         }
         viewLifecycleOwner.lifecycleScope.launch { loadUserInfo() }
 
@@ -55,5 +56,11 @@ class ProfileEmployerFragment : Fragment(R.layout.fragment_profile_employer) {
         viewBinding.name.setText(profile!!.name)
         viewBinding.surname.setText(profile!!.surname)
 
+    }
+
+    private suspend fun saveProfile() {
+        val login = SharedPreferencesSingleton.instance.getSharedPreferences()!!
+            .getString("login", "admin");
+        profileHandler.saveProfile(login!!, profile!!)
     }
 }
