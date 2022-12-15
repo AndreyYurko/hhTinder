@@ -161,18 +161,18 @@ class Queries():
     LOGIN_BY_LOG_AND_PASS = """
         SELECT * 
         FROM users 
-        WHERE email LIKE '{email}' AND passwd LIKE '{passwd}' limit 1
+        WHERE email = '{email}' AND passwd = '{passwd}' limit 1
     """
     LOGIN_BY_LOG_AND_TOKEN = """
         SELECT * 
         FROM users 
-        WHERE email LIKE '{email}' AND un_key LIKE '{un_key}' limit 1
+        WHERE email = '{email}' AND un_key = '{un_key}' limit 1
     """
 
     PUSH_TOKEN_BY_LOG = """
         UPDATE users 
         SET un_key = '{un_key}' 
-        WHERE (email LIKE '{email}' AND passwd LIKE '{passwd}')
+        WHERE (email = '{email}' AND passwd = '{passwd}')
     """
 
     GET_USER_ROLE_BY_EMAIL = """

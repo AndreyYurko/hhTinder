@@ -151,13 +151,13 @@ def vacancy_categories(request: Request):
     return get_vacancy_categories(app.state.connection)
 
 
-@app.post("/login/token/{login}/{token}")
-def login_with_token(login: str, token: str, request: Request):
+@app.post("/login/token/{login}/{tok}")
+def login_with_token(login: str, tok: str, request: Request):
     token = request.headers.get('token')
     if hashlib.sha256(token.encode('utf8')).hexdigest() != getCert():
         return {"status": "unauthorized"}
 
-    res = check_token(app.state.connection, login, token)
+    res = check_token(app.state.connection, login, tok)
     return {"login": res}
 
 
