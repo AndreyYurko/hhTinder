@@ -395,6 +395,10 @@ async def get_profiles(id: int, request: Request):
     imgID = arr[9]
     imgExtension = arr[10]
 
+    res["cr_user"] = arr[11]
+    res["img_id"] = arr[9]
+    res["profile_id"] = arr[12]
+
     url = "http://217.25.88.166/web_project/files/images/0/" + str(imgID) + "." + str(imgExtension)
 
     res["img_url"] = url
@@ -423,6 +427,10 @@ async def get_profile_by_name(name: str, request: Request):
 
     imgID = arr[9]
     imgExtension = arr[10]
+
+    res["cr_user"] = arr[11]
+    res["img_id"] = arr[9]
+    res["profile_id"] = arr[12]
 
     url = "http://217.25.88.166/web_project/files/images/0/" + str(imgID) + "." + str(imgExtension)
 

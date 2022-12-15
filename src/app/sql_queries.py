@@ -284,7 +284,9 @@ select users.id,
        gender_id,
        role_id,
        i.id,
-       i.extension
+       i.extension,
+       ui.cr_user,
+       ui.id as info_id
 
 from users
          join user_info ui on users.id = ui.cr_user join images i on ui.img_id = i.id
@@ -303,7 +305,9 @@ where users.id = {user_id}
            gender_id,
            role_id,
            i.id,
-           i.extension
+           i.extension,
+           ui.cr_user,
+           ui.id as info_id
 
     from users
              join user_info ui on users.id = ui.cr_user join images i on ui.img_id = i.id
