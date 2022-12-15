@@ -307,8 +307,7 @@ where users.id = {user_id}
 
     from users
              join user_info ui on users.id = ui.cr_user join images i on ui.img_id = i.id
-    where email = {login}
-
+    where email = '{login}'
         """
 
 
