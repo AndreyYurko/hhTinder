@@ -1,15 +1,16 @@
-from functionRequests import *
-from db_connection import *
+import hashlib
+import logging
+from typing import List
 from typing import Union
+
 import uvicorn
 from fastapi import FastAPI, Request
-from pydantic import BaseModel
-from monitoring import instrumentator
 from fastapi.middleware.cors import CORSMiddleware
-import hashlib
-from typing import List
-import logging
 from logstash_async.handler import AsynchronousLogstashHandler
+
+from db_connection import *
+from functionRequests import *
+from monitoring import instrumentator
 
 app = FastAPI()
 app.type = "00"
@@ -42,46 +43,6 @@ logger = get_logger()
 # @app.on_event("startup")
 # async def startup():
 #     instrumentator.instrument(app).expose(app, endpoint="/metrics", include_in_schema=True, should_gzip=True)
-
-class CV(BaseModel):
-    id: int
-    cr_user: int
-    cv_name: str
-    cv_text: str
-    cr_date: datetime.datetime
-    img_id: int
-    cv_category: int
-    salary: int
-    experience_content: str
-    education_content: str
-
-
-class Vacancy(BaseModel):
-    id: int
-    cr_user: int
-    vac_name: str
-    vac_text: str
-    cr_date: datetime.datetime
-    vac_category: int
-    img_id: int
-
-
-class Profile(BaseModel):
-    id: int
-    name: str
-    surname: str
-    age: str
-    gender_id: int
-    img_id: int
-    cr_user: int
-
-
-class User(BaseModel):
-    id: int
-    login: str
-    password: str
-    name: str
-    role_id: int
 
 
 @app.get("/")
