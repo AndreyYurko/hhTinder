@@ -198,24 +198,24 @@ class Queries():
     """
 
     ADD_VACANCY = """
-        INSERT INTO vacancy(vac_name, vac_text, cr_date, vac_category)
+        INSERT INTO vacancy(vac_name, vac_text, vac_category, cr_user)
         VALUES
-        ({vac_name}. {vac_text}, {cr_date}, {vac_category})
+        ('{vac_name}', '{vac_text}', {vac_category}, {cr_user})
     """
     UPDATE_VACANCY = """
         UPDATE vacancy
-        SET {vac_name}, {vac_text}, {cr_date}, {vac_category}
+        SET vac_name='{vac_name}', vac_text='{vac_text}', vac_category={vac_category}
         WHERE id = {id} 
     """
 
     ADD_CV = """
-        INSERT INTO cv(cv_name, cv_text, experience_content, education_content, salary, cr_date, cv_category)
+        INSERT INTO cv(cv_name, cv_text, experience_content, education_content, salary, cv_category, cr_user)
         VALUES
-        ({cv_name}, {cv_text}, {experience_content}, {education_content}, {salary}, {cr_date}, {cv_category})
+        ('{cv_name}', '{cv_text}', '{experience_content}', '{education_content}', {salary}, {cv_category}, {cr_user})
     """
     UPDATE_CV = """
         UPDATE cv
-        SET {cv_name}, {cv_text}, {experience_content}, {education_content}, {salary}, {cr_date}, {cv_category}
+        SET cv_name='{cv_name}', cv_text='{cv_text}', experience_content='{experience_content}', education_content='{education_content}', salary={salary}, cv_category={cv_category}
         WHERE id = {id} 
     """
 

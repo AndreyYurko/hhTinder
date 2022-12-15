@@ -27,6 +27,46 @@ tunnel, conn = connect_db()
 # async def startup():
 #     instrumentator.instrument(app).expose(app, endpoint="/metrics", include_in_schema=True, should_gzip=True)
 
+class CV(BaseModel):
+    id: int
+    cr_user: int
+    cv_name: str
+    cv_text: str
+    cr_date: datetime.datetime
+    img_id: int
+    cv_category: int
+    salary: int
+    experience_content: str
+    education_content: str
+
+
+class Vacancy(BaseModel):
+    id: int
+    cr_user: int
+    vac_name: str
+    vac_text: str
+    cr_date: datetime.datetime
+    vac_category: int
+    img_id: int
+
+
+class Profile(BaseModel):
+    id: int
+    name: str
+    surname: str
+    age: str
+    gender_id: int
+    img_id: int
+    cr_user: int
+
+
+class User(BaseModel):
+    id: int
+    login: str
+    password: str
+    name: str
+    role_id: int
+
 @app.get("/")
 def read_root(request: Request):
     token = request.headers.get('token')
@@ -161,6 +201,42 @@ def login_with_token(login: str, tok: str, request: Request):
     return {"login": res}
 
 
+@app.post("/vacancy/new/")
+def create_new_vacancy(vacancy: Vacancy, request: Request):
+    token = request.headers.get('token')
+    if hashlib.sha256(token.encode('utf8')).hexdigest() != getCert():
+        return {"status": "unauthorized"}
+
+    createVacancy(app.state.connection, vacancy)
+
+
+@app.post("/cv/new/")
+def create_new_vacancy(cv: CV, request: Request):
+    token = request.headers.get('token')
+    if hashlib.sha256(token.encode('utf8')).hexdigest() != getCert():
+        return {"status": "unauthorized"}
+
+    createCV(app.state.connection, cv)
+
+
+@app.post("/vacancy/update/")
+def create_new_vacancy(vacancy: Vacancy, request: Request):
+    token = request.headers.get('token')
+    if hashlib.sha256(token.encode('utf8')).hexdigest() != getCert():
+        return {"status": "unauthorized"}
+
+    updateVacancy(app.state.connection, vacancy)
+
+
+@app.post("/cv/update/")
+def create_new_vacancy(cv: CV, request: Request):
+    token = request.headers.get('token')
+    if hashlib.sha256(token.encode('utf8')).hexdigest() != getCert():
+        return {"status": "unauthorized"}
+
+    updateCV(app.state.connection, cv)
+
+
 @app.post("/login/password/{login}/{password}")
 def login_with_password(login: str, password: str, request: Request):
     token = request.headers.get('token')
@@ -242,46 +318,6 @@ def get_job_category_name_by_id(id: int, request: Request):
 
     return get_job_category_by_id(app.state.connection, id)
 
-
-class CV(BaseModel):
-    id: int
-    cr_user: int
-    cv_name: str
-    cv_text: str
-    cr_date: datetime.datetime
-    img_id: int
-    cv_category: int
-    salary: int
-    experience_content: str
-    education_content: str
-
-
-class Vacancy(BaseModel):
-    id: int
-    cr_user: int
-    vac_name: str
-    vac_text: str
-    cr_date: datetime.datetime
-    vac_category: int
-    img_id: int
-
-
-class Profile(BaseModel):
-    id: int
-    name: str
-    surname: str
-    age: str
-    gender_id: int
-    img_id: int
-    cr_user: int
-
-
-class User(BaseModel):
-    id: int
-    login: str
-    password: str
-    name: str
-    role_id: int
 
 
 @app.post("/add_vacancy/")

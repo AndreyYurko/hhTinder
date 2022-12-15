@@ -1,6 +1,6 @@
 import datetime
 import random
-from models import *
+from app import CV, Vacancy, Profile, User
 from sql_queries import Queries
 import utils, secrets
 
@@ -472,3 +472,35 @@ def get_profile_by_id(conn, id):
 def get_profile_with_name(conn, name):
     sql = Queries.GET_PROFILES_BY_EMAIL
     return execute_sql_query(conn, sql.format(login=name))
+
+
+def createVacancy(conn, vac: Vacancy):
+    sql = Queries.ADD_VACANCY
+    return execute_sql_query(conn,
+                             sql.format(vac_name=vac.vac_name, vac_text=vac.vac_text, vac_category=vac.vac_category,
+                                        cr_user=vac.cr_user),
+                             "post")
+
+
+def updateVacancy(conn, vac: Vacancy):
+    sql = Queries.UPDATE_VACANCY
+    return execute_sql_query(conn,
+                             sql.format(vac_name=vac.vac_name, vac_text=vac.vac_text, vac_category=vac.vac_category,
+                                        id=vac.id),
+                             "post")
+
+
+def createCV(conn, cv: CV):
+    sql = Queries.ADD_CV
+    return execute_sql_query(conn, sql.format(cv_name=cv.cv_name, cv_text=cv.cv_text,
+                                              experience_content=cv.experience_content,
+                                              education_content=cv.education_content, salary=cv.salary,
+                                              cv_category=cv.cv_category, cr_user=cv.cr_user), "post")
+
+
+def updateCV(conn, cv: CV):
+    sql = Queries.UPDATE_CV
+    return execute_sql_query(conn, sql.format(cv_name=cv.cv_name, cv_text=cv.cv_text,
+                                              experience_content=cv.experience_content,
+                                              education_content=cv.education_content, salary=cv.salary,
+                                              cv_category=cv.cv_category, id=cv.id), "post")
