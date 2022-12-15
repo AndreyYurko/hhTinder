@@ -10,6 +10,7 @@ import by.kirich1409.viewbindingdelegate.viewBinding
 import com.andreyyurko.hhtinder.R
 import com.andreyyurko.hhtinder.databinding.FragmentProfileEmployeeBinding
 import com.andreyyurko.hhtinder.singleton.SharedPreferencesSingleton
+import com.andreyyurko.hhtinder.singleton.TransferSingleton
 import com.andreyyurko.hhtinder.structures.Card
 import com.andreyyurko.hhtinder.structures.Profile
 import com.andreyyurko.hhtinder.ui.employee.likesemployee.LikesAdapterEmployee
@@ -55,6 +56,7 @@ class ProfileEmployeeFragment : Fragment(R.layout.fragment_profile_employee) {
         val login = SharedPreferencesSingleton.instance.getSharedPreferences()!!
             .getString("login", "admin");
         profile = profileHandler.getUserInfo(login!!)
+        TransferSingleton.instance.setUserInfo(profile!!)
         drawUserInfo()
     }
 

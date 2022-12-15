@@ -54,6 +54,7 @@ class CVEmployeeFragment : Fragment(R.layout.fragment_cv_employee) {
         res.experience = viewBinding.experienceText.text.toString()
         res.category = viewBinding.categoriesList.selectedItemId.toString()
         res.salary = Integer.parseInt(viewBinding.salary.text.toString())
+        res.crUser = TransferSingleton.instance.getUserInfo()!!.userID
 
         return res
     }

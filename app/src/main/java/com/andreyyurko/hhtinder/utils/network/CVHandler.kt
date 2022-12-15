@@ -78,6 +78,25 @@ class CVHandler @Inject constructor() : ViewModel() {
 
     suspend fun saveCV(cv: CV) {
         val url = "http://217.25.88.166:8000/cv/update"
+
+        try {
+
+            val mediaType = "application/json; charset=utf-8".toMediaType()
+            val requestBody = cv.toJSON().toString().toRequestBody(mediaType)
+
+            val request = Request.Builder()
+                .url(url)
+                .post(requestBody)
+                .addHeader(
+                    "token",
+                    "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+                )
+                .build()
+
+            val response = client.newCall(request).await()
+        } catch (e: Exception) {
+            Log.d(VacancyHandler.LOG_TAG, e.toString())
+        }
     }
 
     suspend fun createCV(cv: CV): Int {
@@ -102,6 +121,7 @@ class CVHandler @Inject constructor() : ViewModel() {
             Log.d(VacancyHandler.LOG_TAG, e.toString())
         }
 
+        // TODO: Надо бы возвращать ID а не null. Вопрос к типам на backend
         return -1;
     }
 }
