@@ -1,8 +1,48 @@
 import datetime
 import random
-from app import CV, Vacancy, Profile, User
 from sql_queries import Queries
 import utils, secrets
+from pydantic import BaseModel
+
+class CV(BaseModel):
+    id: int
+    cr_user: int
+    cv_name: str
+    cv_text: str
+    cr_date: datetime.datetime
+    img_id: int
+    cv_category: int
+    salary: int
+    experience_content: str
+    education_content: str
+
+
+class Vacancy(BaseModel):
+    id: int
+    cr_user: int
+    vac_name: str
+    vac_text: str
+    cr_date: datetime.datetime
+    vac_category: int
+    img_id: int
+
+
+class Profile(BaseModel):
+    id: int
+    name: str
+    surname: str
+    age: str
+    gender_id: int
+    img_id: int
+    cr_user: int
+
+
+class User(BaseModel):
+    id: int
+    login: str
+    password: str
+    name: str
+    role_id: int
 
 
 def execute_sql_query(conn, query, type='default'):
