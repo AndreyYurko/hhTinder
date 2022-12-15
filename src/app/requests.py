@@ -16,9 +16,11 @@ def execute_sql_query(conn, query, type='default'):
             conn.commit()
         db_cursor.close()
 
+        print("SUCCESS: " + type)
         return records
     except Exception as ex:
         print("FAILED: Wrong query")
+        print(str(ex).encode('utf-8'))
 
 
 # get user by id
@@ -380,23 +382,25 @@ def add_user_to_bd(conn, login, password, name, role_id):
 
 def edit_profile_in_db(
         conn,
-        user_name,
+        name,
         surname,
         age,
         gender,
         id,
 ):
-    sql =  Queries.UPDATE_PROFILE.format(
-            user_name=user_name,
-            surname=surname,
-            age=age,
-            gender_id=gender,
-            id=id,
-        )
+    sql = Queries.UPDATE_PROFILE.format(
+        user_name=name,
+        surname=surname,
+        age=age,
+        gender_id=gender,
+        id=id,
+    )
+
+    print(sql.encode('utf-8'))
 
     execute_sql_query(
         conn,
-        sql
+        sql, type="post"
     )
 
 

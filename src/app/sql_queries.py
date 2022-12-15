@@ -225,11 +225,7 @@ class Queries():
         ('{user_name}', '{surname}', {age}, {gender_id})
     """
 
-    UPDATE_PROFILE = """
-        UPDATE user_info
-        SET name='{user_name}', surname='{surname}', age={age}, gender_id={gender_id}
-        WHERE id = {id}
-    """
+    UPDATE_PROFILE = "UPDATE user_info SET name='{user_name}', surname='{surname}', age={age}, gender_id={gender_id} WHERE id = {id}"
 
     GET_MATCHES_FOR_VACANCY = """
         SELECT user_id from matches WHERE vacancy_id = {id}

@@ -477,7 +477,7 @@ async def edit_profile(profile: Profile, request: Request):
     if hashlib.sha256(token.encode('utf8')).hexdigest() != getCert():
         return {"status": "unauthorized"}
 
-    await edit_profile_in_db(
+    edit_profile_in_db(
         app.state.connection,
         profile.name,
         profile.surname,
