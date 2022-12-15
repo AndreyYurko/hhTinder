@@ -370,6 +370,16 @@ def add_profile_to_db(
         )
     )
 
+def add_user_to_bd(conn, login, password, name, role_id):
+    execute_sql_query(
+        conn,
+        Queries.ADD_PROFILE.format(
+            login,
+            password,
+            name,
+            role_id,
+        )
+    )
 
 def edit_profile_in_db(
         conn,

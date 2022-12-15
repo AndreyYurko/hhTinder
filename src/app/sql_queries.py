@@ -310,3 +310,10 @@ where users.id = {user_id}
     where email = {login}
 
         """
+
+
+ADD_USER = """
+        INSERT INTO users(email, passwd, name, role_id)
+        VALUES 
+        ({email}, {passwd}, {name}, {role_id})
+    """

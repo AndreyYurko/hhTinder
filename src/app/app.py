@@ -276,6 +276,14 @@ class Profile(BaseModel):
     cr_user: int
 
 
+class User(BaseModel):
+    id: int
+    login: str
+    password: str
+    name: str
+    role_id: int
+
+
 @app.post("/add_vacancy/")
 async def add_vacancy(vacancy: Vacancy, request: Request):
     token = request.headers.get('token')
@@ -392,6 +400,7 @@ async def get_profiles(id: int, request: Request):
     res["img_url"] = url
     return res
 
+
 @app.get("/profile/{name}")
 async def get_profile_by_name(name: str, request: Request):
     token = request.headers.get('token')
@@ -419,6 +428,23 @@ async def get_profile_by_name(name: str, request: Request):
 
     res["img_url"] = url
     return res
+
+
+@app.post("/add_user/")
+async def add_user(user: User, request: Request):
+    token = request.headers.get('token')
+    if hashlib.sha256(token.encode('utf8')).hexdigest() != getCert():
+        return {"status": "unauthorized"}
+
+    await add_user_to_bd(
+        app.state.connection,
+        user.login,
+        user.password,
+        user.name,
+        user.role_id,
+    )
+
+    return {"status": "ok"}
 
 
 @app.post("/add_profile/")
