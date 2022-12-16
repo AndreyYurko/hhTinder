@@ -6,7 +6,6 @@ from typing import Union
 import uvicorn
 from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
-from logstash_async.handler import AsynchronousLogstashHandler
 
 from db_connection import *
 from functionRequests import *
@@ -31,7 +30,6 @@ def get_logger():
 
     logger = logging.getLogger('python-logstash-logger')
     logger.setLevel(logging.INFO)
-    logger.addHandler(AsynchronousLogstashHandler(host, port))
 
     return logger
 
@@ -91,6 +89,15 @@ def get_cv_by_id(cv_id: int, request: Request):
     return cv.to_json()
 
 
+@app.get("/cv/delete/{cv_id}")
+def get_cv_by_id(cv_id: int, request: Request):
+    token = request.headers.get('token')
+    if hashlib.sha256(token.encode('utf8')).hexdigest() != getCert():
+        return {"status": "unauthorized"}
+
+    delete_cv(app.state.connection, cv_id)
+
+
 @app.get("/vacancy/{vac_id}")
 def get_vacancy_by_id(vac_id: int, request: Request):
     token = request.headers.get('token')
@@ -99,6 +106,15 @@ def get_vacancy_by_id(vac_id: int, request: Request):
 
     vac = get_vacancy(app.state.connection, vac_id)
     return vac.to_json()
+
+
+@app.get("/vacancy/delete/{vac_id}")
+def get_vacancy_by_id(vac_id: int, request: Request):
+    token = request.headers.get('token')
+    if hashlib.sha256(token.encode('utf8')).hexdigest() != getCert():
+        return {"status": "unauthorized"}
+
+    delete_vacancy(app.state.connection, vac_id)
 
 
 @app.get("/history/vacancy/{vacancy_id}")

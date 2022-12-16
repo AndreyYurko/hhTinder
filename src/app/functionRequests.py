@@ -4,6 +4,7 @@ from sql_queries import Queries
 import utils, secrets
 from pydantic import BaseModel
 
+
 class CV(BaseModel):
     id: int
     cr_user: int
@@ -544,3 +545,13 @@ def update_cv(conn, cv: CV):
                                               experience_content=cv.experience_content,
                                               education_content=cv.education_content, salary=cv.salary,
                                               cv_category=cv.cv_category, id=cv.id), "post")
+
+
+def delete_cv(conn, id):
+    sql = Queries.DELETE_CV
+    return execute_sql_query(conn, sql.format(id=id), "delete")
+
+
+def delete_vacancy(conn, id):
+    sql = Queries.DELETE_VACANCY
+    return execute_sql_query(conn, sql.format(id=id), "delete")
