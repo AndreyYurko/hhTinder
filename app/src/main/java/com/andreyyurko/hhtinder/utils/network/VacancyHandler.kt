@@ -82,8 +82,12 @@ class VacancyHandler @Inject constructor() : ViewModel() {
 
         try {
 
+            vacancy.crDate = "2022-12-16T06:42:01.551Z"
+
             val mediaType = "application/json; charset=utf-8".toMediaType()
             val requestBody = vacancy.toJSON().toString().toRequestBody(mediaType)
+
+            Log.d(LOG_TAG, vacancy.toJSON().toString());
 
             val request = Request.Builder()
                 .url(url)

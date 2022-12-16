@@ -104,6 +104,8 @@ class CVHandler @Inject constructor() : ViewModel() {
 
         try {
 
+            cv.crDate = "2022-12-16T06:42:01.551Z"
+
             val mediaType = "application/json; charset=utf-8".toMediaType()
             val requestBody = cv.toJSON().toString().toRequestBody(mediaType)
 
