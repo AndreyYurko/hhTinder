@@ -47,15 +47,22 @@ class ArchiveHandler {
                 content = ""
                 var flag = false
                 parts.forEach {
-                    if(content.length > 15 && !flag){
+                    if (content.length > 15 && !flag) {
                         flag = true
                         content += it + "\n"
                     } else {
                         content += it + " "
                     }
                 }
+                var imgUrl = ""
+                try {
+                    imgUrl =
+                        "http://217.25.88.166/web_project/files/images/0/" + archive.getInt("image_id") + "." + archive.getString(
+                            "img_ext"
+                        )
+                } catch (e: Exception) {
 
-                var imgUrl = "http://217.25.88.166/web_project/files/images/0/" + archive.getInt("image_id") + "." + archive.getString("img_ext")
+                }
 
                 var arch = Card(key.toInt(), name, content)
 

@@ -38,6 +38,10 @@ class VacancyEmployerFragment : Fragment(R.layout.fragment_vacancy_employer) {
             viewLifecycleOwner.lifecycleScope.launch { saveVacancy() }
         }
 
+        viewBinding.btnDelete.setOnClickListener {
+            viewLifecycleOwner.lifecycleScope.launch { deleteVacancy() }
+        }
+
         initDatePicker()
         initCategoryPicker()
     }
@@ -52,9 +56,14 @@ class VacancyEmployerFragment : Fragment(R.layout.fragment_vacancy_employer) {
         return res
     }
 
+    suspend fun deleteVacancy() {
+        var vac = getVac()
+        vacancyHandler.deleteVacancy(vac)
+    }
+
     suspend fun saveVacancy() {
         var vac = getVac()
-        if(vac.id == -1){
+        if (vac.id == -1) {
             vacancyHandler.createVacancy(vac)
         } else {
             vacancyHandler.updateVacancy(vac)
